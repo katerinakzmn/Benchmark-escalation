@@ -1,0 +1,52 @@
+{
+  "tasks": [
+    {
+      "task_id": "T001",
+      "difficulty": "easy",
+      "outcome": "unknown",
+      "solved": false,
+      "total_iterations": 0,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "escalation_step": null,
+      "oracle_escalation": null,
+      "final_pass_rate": 0.0,
+      "avg_review_quality": 0.0,
+      "cost_score": 0.0,
+      "num_reviews": 0,
+      "num_test_runs": 0
+    },
+    {
+      "task_id": "T002",
+      "difficulty": "medium",
+      "outcome": "unknown",
+      "solved": false,
+      "total_iterations": 0,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "escalation_step": null,
+      "oracle_escalation": 1,
+      "final_pass_rate": 0.0,
+      "avg_review_quality": 0.0,
+      "cost_score": 0.0,
+      "num_reviews": 0,
+      "num_test_runs": 0
+    },
+    {
+      "task_id": "T003",
+      "difficulty": "hard",
+      "outcome": "unknown",
+      "solved": false,
+      "total_iterations": 0,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "escalation_step": null,
+      "oracle_escalation": 1,
+      "final_pass_rate": 0.0,
+      "avg_review_quality": 0.0,
+      "cost_score": 0.0,
+      "num_reviews": 0,
+      "num_test_runs": 0
+    }
+  ]
+}
