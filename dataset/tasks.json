@@ -1,0 +1,78 @@
+[
+  {
+    "instance_id": "T001",
+    "difficulty": "easy",
+    "problem_statement": "Bug: sum_positive пропускает последний элемент списка.\nПример: sum_positive([1, 2, 3]) возвращает 3 вместо 6.\nПроблема в range(len(numbers) - 1) — нужно range(len(numbers)).",
+    "original_code": "def sum_positive(numbers: list[int]) -> int:\n    \"\"\"Возвращает сумму положительных чисел из списка.\"\"\"\n    total = 0\n    for i in range(len(numbers) - 1):   # BUG: последний элемент не учитывается\n        if numbers[i] > 0:\n            total += numbers[i]\n    return total\n",
+    "tests": [
+      {
+        "name": "test_sum_basic",
+        "description": "Базовые случаи суммы положительных",
+        "assertions": [
+          {"custom": true, "code": "assert sum_positive([1, 2, 3]) == 6, f'[1,2,3] → ожидалось 6, получено {sum_positive([1,2,3])}'"},
+          {"custom": true, "code": "assert sum_positive([-1, 2, -3, 4]) == 6, f'[-1,2,-3,4] → ожидалось 6, получено {sum_positive([-1,2,-3,4])}'"},
+          {"custom": true, "code": "assert sum_positive([-1, -2]) == 0, f'[-1,-2] → ожидалось 0, получено {sum_positive([-1,-2])}'"}
+        ]
+      },
+      {
+        "name": "test_sum_edge",
+        "description": "Edge-cases: пустой список и один элемент",
+        "assertions": [
+          {"custom": true, "code": "assert sum_positive([]) == 0, f'[] → ожидалось 0, получено {sum_positive([])}'"},
+          {"custom": true, "code": "assert sum_positive([5]) == 5, f'[5] → ожидалось 5, получено {sum_positive([5])}'"}
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T002",
+    "difficulty": "medium",
+    "problem_statement": "Bug: TTLCache.get() неверно проверяет истечение записи.\nТекущий код: if ts < self.ttl — это сравнивает unix timestamp (~1700000000) с ttl (например, 60).\nВсегда False, поэтому записи никогда не истекают.\nНужно: if time.time() - ts > self.ttl",
+    "original_code": "import time\n\nclass TTLCache:\n    \"\"\"Кэш с временем жизни записей (TTL в секундах).\"\"\"\n\n    def __init__(self, ttl: int):\n        self.ttl = ttl\n        self.store = {}   # key -> (value, timestamp)\n\n    def set(self, key: str, value) -> None:\n        self.store[key] = (value, time.time())\n\n    def get(self, key: str):\n        if key not in self.store:\n            return None\n        value, ts = self.store[key]\n        # BUG: сравниваем не разницу времён, а сам timestamp с ttl\n        if ts < self.ttl:\n            del self.store[key]\n            return None\n        return value\n",
+    "tests": [
+      {
+        "name": "test_ttl_basic",
+        "description": "Свежая запись должна возвращаться",
+        "assertions": [
+          {"custom": true, "code": "cache = TTLCache(ttl=60)\ncache.set('x', 42)\nassert cache.get('x') == 42, f'свежая запись: ожидалось 42, получено {cache.get(\"x\")}'"}
+        ]
+      },
+      {
+        "name": "test_ttl_expired",
+        "description": "Запись с ttl=0 должна сразу истекать",
+        "assertions": [
+          {"custom": true, "code": "cache = TTLCache(ttl=0)\ncache.set('x', 42)\nassert cache.get('x') is None, f'истёкшая запись: ожидалось None, получено {cache.get(\"x\")}'"}
+        ]
+      },
+      {
+        "name": "test_ttl_miss",
+        "description": "Несуществующий ключ возвращает None",
+        "assertions": [
+          {"custom": true, "code": "cache = TTLCache(ttl=60)\nassert cache.get('nonexistent') is None"}
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T003",
+    "difficulty": "hard",
+    "problem_statement": "Bug: RateLimiter.is_allowed() работает неверно из-за двух ошибок:\n1. cutoff = now + self.window вместо now - self.window (окно смотрит в будущее)\n2. условие self.calls[0] > cutoff удаляет свежие вызовы вместо старых\nНужно: cutoff = now - self.window и while self.calls[0] < cutoff",
+    "original_code": "import time\nfrom collections import deque\n\nclass RateLimiter:\n    \"\"\"\n    Rate limiter со скользящим окном (sliding window).\n    Разрешает не более max_calls вызовов за последние window_seconds секунд.\n    \"\"\"\n\n    def __init__(self, max_calls: int, window_seconds: float):\n        self.max_calls = max_calls\n        self.window = window_seconds\n        self.calls = deque()   # хранит timestamps прошлых вызовов\n\n    def is_allowed(self) -> bool:\n        now = time.time()\n        # BUG 1: неверная граница окна — нужно (now - self.window), а не (now + self.window)\n        cutoff = now + self.window\n        # BUG 2: удаляем звонки ВНУТРИ окна вместо того чтобы удалять СТАРЫЕ\n        while self.calls and self.calls[0] > cutoff:\n            self.calls.popleft()\n        if len(self.calls) >= self.max_calls:\n            return False\n        self.calls.append(now)\n        return True\n",
+    "tests": [
+      {
+        "name": "test_ratelimiter_basic",
+        "description": "Первые N вызовов разрешены, N+1 — нет",
+        "assertions": [
+          {"custom": true, "code": "rl = RateLimiter(max_calls=3, window_seconds=10)\nresults = [rl.is_allowed() for _ in range(4)]\nassert results == [True, True, True, False], f'ожидалось [T,T,T,F], получено {results}'"}
+        ]
+      },
+      {
+        "name": "test_ratelimiter_window",
+        "description": "После истечения окна лимит сбрасывается",
+        "assertions": [
+          {"custom": true, "code": "import time as _time\nrl = RateLimiter(max_calls=2, window_seconds=0.1)\nassert rl.is_allowed() is True\nassert rl.is_allowed() is True\nassert rl.is_allowed() is False\n_time.sleep(0.15)\nassert rl.is_allowed() is True, 'после истечения окна вызов должен быть разрешён'"}
+        ]
+      }
+    ]
+  }
+]

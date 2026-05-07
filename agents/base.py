@@ -12,20 +12,18 @@ class AgentRole(str, Enum):
 
 
 class ModelTier(str, Enum):
-    """Уровень мощности модели, которую использует агент."""
-    WEAK   = "weak"    # маленькая/дешёвая модель
-    STRONG = "strong"  # большая/дорогая модель
+    WEAK   = "weak"
+    STRONG = "strong"
 
 
 @dataclass
 class Message:
     """
     Сообщение между агентами.
-    Аналог: задача в Jira, комментарий в pull request, письмо в чат команды.
     """
     sender: AgentRole
     recipient: AgentRole
-    content: dict          # произвольный payload — зависит от типа сообщения
+    content: dict
     step: int = 0          # номер шага итерации
 
 
