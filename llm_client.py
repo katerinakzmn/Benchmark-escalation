@@ -1,39 +1,48 @@
 """
-llm_client.py — обёртка над Gemini API.
+llm_client.py — обёртка над OpenAI API.
 
 Модели:
-  WEAK   = gemini-2.0-flash   (500 RPD)
-  STRONG = gemini-2.5-pro     (100 RPD)
-  REVIEW = gemini-2.0-flash
+  WEAK   = gpt-4o-mini  — дешёвый ($0.15/M input), быстрый
+  STRONG = gpt-4o       — умный ($2.50/M input)
+  REVIEW = gpt-4o-mini  — ревью не требует большой модели
 
+Как получить ключ:
+  1. Зайди на https://platform.openai.com/api-keys
+  2. Create new secret key
+  3. Создай файл benchmark/.env:
+     OPENAI_API_KEY=sk-...
+
+Стоимость одного прогона бенчмарка (3 задачи):
+  ~15-20 запросов × короткие промпты ≈ $0.01-0.05 (буквально копейки)
 """
 
 import os
-import google.generativeai as genai
+from openai import OpenAI
 from dotenv import load_dotenv
 
-# Загружаем .env если он есть рядом с этим файлом
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), ".env"))
 
-MODEL_WEAK   = "gemini-2.0-flash"     # weak developer + reviewer
-MODEL_STRONG = "gemini-2.5-pro"       # strong developer
-MODEL_REVIEW = "gemini-2.0-flash"     # reviewer
+# ── Имена моделей ─────────────────────────────────────────────────────────────
+MODEL_WEAK   = "gpt-4o-mini"   # weak developer + reviewer
+MODEL_STRONG = "gpt-4o"        # strong developer
+MODEL_REVIEW = "gpt-4o-mini"   # reviewer
 
-# Флаг инициализации
-_initialized = False
+_client: OpenAI | None = None
 
 
-def _ensure_init():
-    """Инициализирует Gemini API один раз при первом вызове."""
-    global _initialized
-    if _initialized:
-        return
-
-    api_key = os.getenv("GEMINI_API_KEY")
-    if not api_key:
-        raise RuntimeError("GEMINI_API_KEY не найден.")
-    genai.configure(api_key=api_key)
-    _initialized = True
+def get_client() -> OpenAI:
+    """Возвращает OpenAI клиент (ленивая инициализация)."""
+    global _client
+    if _client is None:
+        api_key = os.getenv("OPENAI_API_KEY")
+        if not api_key:
+            raise RuntimeError(
+                "OPENAI_API_KEY не найден.\n"
+                "Создай файл benchmark/.env с содержимым:\n"
+                "  OPENAI_API_KEY=sk-..."
+            )
+        _client = OpenAI(api_key=api_key)
+    return _client
 
 
 def chat(
@@ -44,20 +53,17 @@ def chat(
     max_tokens: int = 2048,
 ) -> str:
     """
-    Простой вызов Gemini.
-    Возвращает текст ответа.
-    temperature=0.2 — почти детерминированно, подходит для кода.
+    Вызов ChatCompletion. Возвращает текст ответа.
+    Интерфейс одинаков для всех агентов — провайдер скрыт здесь.
     """
-    _ensure_init()
-
-    gemini_model = genai.GenerativeModel(
-        model_name=model,
-        system_instruction=system_prompt,
-        generation_config=genai.GenerationConfig(
-            temperature=temperature,
-            max_output_tokens=max_tokens,
-        ),
+    client = get_client()
+    response = client.chat.completions.create(
+        model=model,
+        messages=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user",   "content": user_prompt},
+        ],
+        temperature=temperature,
+        max_tokens=max_tokens,
     )
-
-    response = gemini_model.generate_content(user_prompt)
-    return response.text.strip()
+    return response.choices[0].message.content.strip()
