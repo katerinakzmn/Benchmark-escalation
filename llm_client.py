@@ -1,20 +1,4 @@
-"""
-llm_client.py — обёртка над OpenAI API.
 
-Модели:
-  WEAK   = gpt-4o-mini  — дешёвый ($0.15/M input), быстрый
-  STRONG = gpt-4o       — умный ($2.50/M input)
-  REVIEW = gpt-4o-mini  — ревью не требует большой модели
-
-Как получить ключ:
-  1. Зайди на https://platform.openai.com/api-keys
-  2. Create new secret key
-  3. Создай файл benchmark/.env:
-     OPENAI_API_KEY=sk-...
-
-Стоимость одного прогона бенчмарка (3 задачи):
-  ~15-20 запросов × короткие промпты ≈ $0.01-0.05 (буквально копейки)
-"""
 
 import os
 from openai import OpenAI
