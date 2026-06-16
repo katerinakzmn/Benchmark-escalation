@@ -67,16 +67,22 @@ def _build_test_fn(test_spec: dict) -> Callable:
     full_test_code = "\n".join(lines)
 
     def test_fn(solution_code: str) -> dict:
-        ns = {}
+        # ограничиваем доступные builtins
+        ns = {"__builtins__": {"__import__": __import__, "len": len,
+                               "range": range, "print": print,
+                               "isinstance": isinstance, "type": type,
+                               "int": int, "str": str, "list": list,
+                               "dict": dict, "set": set, "sorted": sorted,
+                               "enumerate": enumerate, "zip": zip}}
         try:
-            exec(solution_code, ns)   # загружаем решение в namespace
-            exec(full_test_code, ns)  # запускаем тесты в том же namespace
+            exec(solution_code, ns)
+            exec(full_test_code, ns)
             return {"passed": True, "reason": "ok"}
         except AssertionError as e:
             return {"passed": False, "reason": str(e)}
         except Exception as e:
             return {"passed": False, "reason": f"ошибка выполнения: {e}"}
-
+        
     test_fn.__name__ = test_name
     test_fn.__doc__  = desc
     return test_fn

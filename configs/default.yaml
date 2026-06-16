@@ -1,0 +1,23 @@
+dataset: toy
+backend: mock   # переключи на openai для запуска c API-ключа
+
+policy:
+  name: retry_then_escalate
+  max_weak_attempts: 2
+  max_strong_attempts: 1
+  confidence_threshold: 0.30
+  zero_progress_limit: 2
+
+budget:
+  max_total_iterations: 7
+
+costs:
+  weak_call: 1
+  strong_call: 3
+  review_call: 1
+  test_run: 0.5
+  human_call: 10
+
+logging:
+  save_debug_log: true
+  save_trajectory_log: true

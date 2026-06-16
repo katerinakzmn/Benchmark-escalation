@@ -6,7 +6,7 @@ import sys, os, json
 sys.path.insert(0, os.path.dirname(__file__))
 
 from tasks import make_tasks
-from environment import Environment
+from environments.environment import Environment
 from agents.base import AgentRole, ModelTier, Message
 from agents.developer import DeveloperAgent
 from agents.reviewer import ReviewerAgent
@@ -319,7 +319,7 @@ if __name__ == "__main__":
           f"Ср. уверенность: {avg_conf:.2f}")
     print_sep("═")
 
-    traces_path = os.path.join(os.path.dirname(__file__), "mas_traces.json")
+    traces_path = os.path.join(os.path.dirname(__file__), "docs/mas_traces.json")
     with open(traces_path, "w", encoding="utf-8") as f:
         json.dump({"tasks": all_traces}, f, ensure_ascii=False, indent=2)
     print(f" Трассировки сохранены в mas_traces.json")

@@ -10,10 +10,9 @@ confidence (уверенность):
 import json
 import re
 from agents.base import AgentRole, ModelTier, Message
-from llm_client import chat, MODEL_WEAK, MODEL_STRONG
+from backends.llm_client import chat, MODEL_WEAK, MODEL_STRONG
 
 
-# ── Системный промпт ────────────────────────────────────────────────────────
 _SYSTEM_PROMPT = """\
 Ты опытный Python-разработчик. Тебе дают:
 1. Описание бага (issue)

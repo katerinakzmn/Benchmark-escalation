@@ -13,7 +13,7 @@ import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 from agents.base import AgentRole, Message
-from environment import Environment
+from environments.environment import Environment
 
 
 class TesterAgent:

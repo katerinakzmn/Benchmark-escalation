@@ -1,0 +1,16 @@
+mock_scenarios:
+  T001: {weak: solve,  strong: solve,  human: unused}
+  T002: {weak: fail,   strong: solve,  human: unused}
+  T003: {weak: fail,   strong: fail,   human: solve}
+  T004: {weak: fail,   strong: solve,  human: unused}
+  T005: {weak: solve,  strong: solve,  human: unused}
+  T006: {weak: fail,   strong: solve,  human: unused}
+  T007: {weak: fail,   strong: fail,   human: solve}
+  T008: {weak: solve,  strong: solve,  human: unused}
+  T009: {weak: fail,   strong: solve,  human: unused}
+  T010: {weak: fail,   strong: fail,   human: solve}
+  T011: {weak: fail,   strong: fail,   human: solve}
+  T012: {weak: fail,   strong: solve,  human: unused}
+  T013: {weak: fail,   strong: solve,  human: unused}
+  T014: {weak: fail,   strong: fail,   human: solve}
+  T015: {weak: fail,   strong: fail,   human: solve}

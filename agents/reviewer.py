@@ -16,7 +16,7 @@ reviewer.py — агент-ревьюер.
 import json
 import re
 from agents.base import AgentRole, Message
-from llm_client import chat, MODEL_REVIEW
+from backends.llm_client import chat, MODEL_REVIEW
 
 
 _SYSTEM_PROMPT = """\

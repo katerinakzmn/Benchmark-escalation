@@ -1,5 +1,5 @@
 """
-compute_oracle.py — офлайн вычисление оракула для бенчмарка.
+oracle.py — офлайн вычисление оракула для бенчмарка.
 
 "Когда нужно было эскалировать?"
   oracle_label:
@@ -15,12 +15,12 @@ import sys
 sys.path.insert(0, os.path.dirname(__file__))
 
 from tasks import make_tasks
-from environment import Environment
+from environments.environment import Environment
 from agents.developer import DeveloperAgent
 from agents.base import ModelTier
 
 
-_OUTPUT_PATH = os.path.join(os.path.dirname(__file__), "dataset", "oracle_labels.json")
+_OUTPUT_PATH = os.path.join(os.path.dirname(__file__), "../dataset", "oracle_labels.json")
 
 
 def run_single_attempt(task, tier: ModelTier) -> dict:
@@ -38,8 +38,7 @@ def run_single_attempt(task, tier: ModelTier) -> dict:
     )
     code = msg.content["code"]
 
-    # Запускаем тесты напрямую, минуя Reviewer
-    result = env.run_all_tests(code)
+    result = env.run(code, model_used=tier.value, step_number=1)
 
     return {
         "tier":        tier.value,
