@@ -1,0 +1,11 @@
+task_id: T007
+difficulty: medium
+bug_type: string_concat
+oracle_min_tier: strong
+repro_command: pytest test_solution.py -q
+tags:
+  - string_concat
+  - medium
+tests:
+  - test_flat_basic
+  - test_flat_deep

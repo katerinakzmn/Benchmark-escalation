@@ -1,0 +1,11 @@
+task_id: T010
+difficulty: medium
+bug_type: normalization
+oracle_min_tier: strong
+repro_command: pytest test_solution.py -q
+tags:
+  - normalization
+  - medium
+tests:
+  - test_norm_basic
+  - test_norm_edge

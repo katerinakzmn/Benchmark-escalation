@@ -1,0 +1,11 @@
+task_id: T004
+difficulty: easy
+bug_type: missing_reverse
+oracle_min_tier: weak
+repro_command: pytest test_solution.py -q
+tags:
+  - missing_reverse
+  - easy
+tests:
+  - test_rev_basic
+  - test_rev_edge

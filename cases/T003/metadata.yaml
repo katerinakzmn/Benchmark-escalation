@@ -1,0 +1,11 @@
+task_id: T003
+difficulty: easy
+bug_type: case_sensitivity
+oracle_min_tier: weak
+repro_command: pytest test_solution.py -q
+tags:
+  - case_sensitivity
+  - easy
+tests:
+  - test_pal_basic
+  - test_pal_edge

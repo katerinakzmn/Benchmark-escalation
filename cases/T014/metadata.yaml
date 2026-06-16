@@ -1,0 +1,11 @@
+task_id: T014
+difficulty: hard
+bug_type: increment_vs_decrement
+oracle_min_tier: strong
+repro_command: pytest test_solution.py -q
+tags:
+  - increment_vs_decrement
+  - hard
+tests:
+  - test_topo_basic
+  - test_topo_chain
