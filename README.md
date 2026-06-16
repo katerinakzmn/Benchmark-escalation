@@ -22,7 +22,6 @@
 - [Baseline Policies](#baseline-policies)
 - [Example Trajectory Artifact](#example-trajectory-artifact)
 - [Current Limitations](#current-limitations)
-- [README Style Upgrade](#readme-style-upgrade)
 
 ***
 
