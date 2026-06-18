@@ -1,5 +1,5 @@
-# auto-generated from dataset/tasks.json
-# pytest test_solution.py
+# Tests for the case implementation.
+from original_code import *
 
 def test_topo_basic():
     g={'A':['B','C'],'B':['D'],'C':['D'],'D':[]}

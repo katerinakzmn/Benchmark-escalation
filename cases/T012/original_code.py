@@ -1,4 +1,4 @@
-# T012 — original buggy code
+# T012 original buggy code
 
 from collections import OrderedDict
 class LRUCache:

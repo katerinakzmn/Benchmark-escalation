@@ -1,4 +1,4 @@
-# T001 — original buggy code
+# T001 original buggy code
 
 def sum_positive(numbers: list[int]) -> int:
     total = 0

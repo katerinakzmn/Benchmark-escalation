@@ -1,4 +1,4 @@
-# T010 — original buggy code
+# T010 original buggy code
 
 def normalize_scores(scores: list[float]) -> list[float]:
     if not scores:

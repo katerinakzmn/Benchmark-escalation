@@ -1,5 +1,5 @@
-# auto-generated from dataset/tasks.json
-# pytest test_solution.py
+# Tests for the case implementation.
+from original_code import *
 
 def test_rl_basic():
     rl = RateLimiter(max_calls=3, window_seconds=10); results=[rl.is_allowed() for _ in range(4)]; assert results == [True,True,True,False], results

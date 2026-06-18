@@ -1,4 +1,4 @@
-"""Генерирует cases/TXXX/ из dataset/tasks.json"""
+"""Generate cases/TXXX/ directories from dataset/tasks.json."""
 import json, os
 
 DATASET = os.path.join("dataset", "tasks.json")
@@ -23,8 +23,8 @@ BUG_TYPES = {
 
 def assertions_to_pytest(tests: list, task_id: str) -> str:
     lines = [
-        "# auto-generated from dataset/tasks.json",
-        "# pytest test_solution.py",
+        "# Tests for the case implementation.",
+        "from original_code import *",
         "",
     ]
     for test in tests:
@@ -54,7 +54,7 @@ for task in tasks:
 
     # original_code.py
     with open(os.path.join(out, "original_code.py"), "w", encoding="utf-8") as f:
-        f.write(f"# {tid} — original buggy code\n\n")
+        f.write(f"# {tid} original buggy code\n\n")
         f.write(task["original_code"])
 
     # test_solution.py
@@ -76,6 +76,6 @@ for task in tasks:
         for name in test_names:
             f.write(f"  - {name}\n")
 
-    print(f"  ✓ cases/{tid}/")
+    print(f"  wrote cases/{tid}/")
 
-print(f"\nДонe: {len(tasks)} задач → cases/")
+print(f"\nDone: {len(tasks)} tasks written to cases/")

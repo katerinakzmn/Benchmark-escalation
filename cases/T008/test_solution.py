@@ -1,5 +1,5 @@
-# auto-generated from dataset/tasks.json
-# pytest test_solution.py
+# Tests for the case implementation.
+from original_code import *
 
 def test_freq_basic():
     assert most_frequent([1,2,2,3]) == 2

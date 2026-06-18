@@ -1,17 +1,7 @@
-"""
-tasks.py — загрузчик задач бенчмарка.
+"""Utilities for loading benchmark tasks from ``dataset/tasks.json``.
 
-Структура JSON-записи:
-  instance_id          — уникальный ID (аналог SWE-bench instance_id)
-  difficulty           — easy / medium / hard
-  problem_statement    — текст issue (аналог SWE-bench problem_statement)
-  original_code        — код с багом (аналог base_commit + repo)
-  tests[]              — тесты для проверки исправления
-    name               — имя теста
-    description        — что проверяет
-    assertions[]       — список assert'ов
-      custom: true     — тест задан как произвольный Python-код в поле "code"
-      call/expected    — простая форма: вызов и ожидаемый результат
+The loader keeps compatibility with the original multi-agent runner
+(``task_id``) and the newer policy runner (``instance_id``).
 """
 
 import json
@@ -26,14 +16,26 @@ _DATASET_PATH = os.path.join(os.path.dirname(__file__), "dataset", "tasks.json")
 @dataclass
 class Task:
     task_id: str
-    issue_text: str        # problem_statement из JSON
-    original_code: str     # код с багом
-    difficulty: str        # easy / medium / hard
-    tests: List[Callable]  # список функций-тестов, генерируются из JSON
+    issue_text: str
+    original_code: str
+    difficulty: str
+    tests: List[Callable]
+    task_type: str = "bug_fix"
+    entry_point: str = ""
+    reference_solution: str = ""
+    oracle_label: str = ""
+
+    @property
+    def instance_id(self) -> str:
+        return self.task_id
+
+    @property
+    def problem_statement(self) -> str:
+        return self.issue_text
 
 
 def make_tasks(dataset_path: str = _DATASET_PATH) -> List[Task]:
-    """Загружает задачи из JSON-датасета."""
+    """Load tasks from a JSON dataset file."""
     with open(dataset_path, encoding="utf-8") as f:
         records = json.load(f)
 
@@ -46,19 +48,24 @@ def make_tasks(dataset_path: str = _DATASET_PATH) -> List[Task]:
             original_code = rec["original_code"],
             difficulty    = rec["difficulty"],
             tests         = test_fns,
+            task_type     = rec.get("task_type", "bug_fix"),
+            entry_point   = rec.get("entry_point", _infer_entry_point(rec["original_code"])),
+            reference_solution = rec.get("reference_solution", ""),
+            oracle_label  = rec.get("oracle_label", ""),
         ))
     return tasks
 
 
+def load_tasks(dataset_path: str = _DATASET_PATH) -> List[Task]:
+    """Alias used by the newer CLI runner."""
+    return make_tasks(dataset_path)
+
+
 def _build_test_fn(test_spec: dict) -> Callable:
-    """
-    Строит Python-функцию теста из JSON-спецификации.
-    Каждый assertion — это произвольный Python-код (custom: true).
-    """
+    """Build a Python test function from a JSON test specification."""
     test_name = test_spec.get("name", "unnamed_test")
     desc      = test_spec.get("description", "")
 
-    # Собираем все assertion'ы в одно тело теста
     lines = []
     for a in test_spec.get("assertions", []):
         if a.get("custom"):
@@ -67,7 +74,6 @@ def _build_test_fn(test_spec: dict) -> Callable:
     full_test_code = "\n".join(lines)
 
     def test_fn(solution_code: str) -> dict:
-        # ограничиваем доступные builtins
         ns = {"__builtins__": {"__import__": __import__, "len": len,
                                "range": range, "print": print,
                                "isinstance": isinstance, "type": type,
@@ -86,3 +92,13 @@ def _build_test_fn(test_spec: dict) -> Callable:
     test_fn.__name__ = test_name
     test_fn.__doc__  = desc
     return test_fn
+
+
+def _infer_entry_point(code: str) -> str:
+    for line in code.splitlines():
+        stripped = line.strip()
+        if stripped.startswith("def "):
+            return stripped.split("def ", 1)[1].split("(", 1)[0]
+        if stripped.startswith("class "):
+            return stripped.split("class ", 1)[1].split("(", 1)[0].split(":", 1)[0]
+    return ""

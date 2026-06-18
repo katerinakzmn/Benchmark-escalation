@@ -1,4 +1,4 @@
-# T006 — original buggy code
+# T006 original buggy code
 
 import time
 class TTLCache:

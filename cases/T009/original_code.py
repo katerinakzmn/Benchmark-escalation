@@ -1,4 +1,4 @@
-# T009 — original buggy code
+# T009 original buggy code
 
 def chunk_list(lst: list, size: int) -> list:
     if size <= 0:

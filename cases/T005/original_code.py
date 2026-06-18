@@ -1,4 +1,4 @@
-# T005 — original buggy code
+# T005 original buggy code
 
 def find_max(numbers: list[int]) -> int:
     if not numbers:

@@ -59,18 +59,18 @@ The project is designed for:
 
 ```text
 benchmark_escalation/
-├── agents/
-├── backends/
-├── dataset/
-├── cases/
-├── policies/
-├── runner/
-├── environments/
-├── evaluation/
-├── configs/
-├── runs/
-├── docs/
-└── reports/
+|-- agents/
+|-- backends/
+|-- dataset/
+|-- cases/
+|-- policies/
+|-- runner/
+|-- environments/
+|-- evaluation/
+|-- configs/
+|-- runs/
+|-- docs/
+`-- reports/
 ```
 
 ***
@@ -100,7 +100,7 @@ pip install -r requirements.txt
 Run the benchmark with the mock backend:
 
 ```bash
-python -m benchmark_escalation.runner.run_benchmark \
+python -m runner.run_benchmark \
   --dataset toy \
   --backend mock \
   --policy retry_then_escalate \
@@ -111,10 +111,10 @@ After execution, results are stored in a directory like this:
 
 ```text
 runs/run_YYYY_MM_DD_NNN/
-├── config.json
-├── traces.json
-├── metrics.json
-└── summary.md
+|-- config.json
+|-- traces.json
+|-- metrics.json
+`-- summary.md
 ```
 
 ***
@@ -133,7 +133,10 @@ At the first stage, the benchmark uses toy tasks in JSON format. Each task conta
 - `reference_solution`
 - `oracle_label`
 
-In future versions, the project may move to file-based cases with separate files such as `issue.md`, `solution.py`, `test_solution.py`, and `metadata.yaml`.
+The repository also contains an experimental `cases/TXXX/` layout with
+`issue.md`, `original_code.py`, `test_solution.py`, and `metadata.yaml`.
+This mirrors the planned file-based format, but the JSON dataset is still the
+source used by the current runner.
 
 ***
 

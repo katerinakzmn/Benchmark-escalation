@@ -1,4 +1,4 @@
-# T015 — original buggy code
+# T015 original buggy code
 
 from collections import deque
 def shortest_path_bfs(graph: dict, start: str, goal: str) -> int:

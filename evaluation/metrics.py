@@ -94,18 +94,18 @@ def compute_regret(policy_metrics: List[Dict], oracle_metrics: List[Dict]) -> Di
 def print_summary(summary: Dict[str, Any], policy_name: str = ""):
     """Печатает красивую таблицу метрик в stdout."""
     title = f"Metrics: {policy_name}" if policy_name else "Metrics"
-    print(f"\n{'─'*50}")
+    print(f"\n{'-'*50}")
     print(f"  {title}")
-    print(f"{'─'*50}")
+    print(f"{'-'*50}")
     print(f"  Solved         : {summary['solved_count']}/{summary['total_tasks']}"
           f" ({summary['solved_rate']*100:.0f}%)")
     print(f"  Avg pass rate  : {summary['avg_final_pass_rate']:.3f}")
     print(f"  Avg cost       : {summary['avg_cost']:.1f}")
     print(f"  Avg iterations : {summary['avg_iterations']:.1f}")
-    print(f"  Escal→strong   : {summary['escalation_to_strong_rate']*100:.0f}%")
-    print(f"  Escal→human    : {summary['escalation_to_human_rate']*100:.0f}%")
+    print(f"  Escal to strong: {summary['escalation_to_strong_rate']*100:.0f}%")
+    print(f"  Escal to human : {summary['escalation_to_human_rate']*100:.0f}%")
     print(f"\n  By difficulty:")
     for diff, bd in summary.get("by_difficulty", {}).items():
         print(f"    {diff:8s} : {bd['solved']}/{bd['count']} solved"
               f"  cost={bd['avg_cost']:.1f}  iters={bd['avg_iters']:.1f}")
-    print(f"{'─'*50}\n")
+    print(f"{'-'*50}\n")

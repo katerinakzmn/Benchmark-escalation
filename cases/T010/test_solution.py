@@ -1,5 +1,5 @@
-# auto-generated from dataset/tasks.json
-# pytest test_solution.py
+# Tests for the case implementation.
+from original_code import *
 
 def test_norm_basic():
     result = normalize_scores([10,20,30]); assert result == [0.0,0.5,1.0], result

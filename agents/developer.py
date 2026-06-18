@@ -1,7 +1,7 @@
 """
 developer.py — агент-разработчик.
 
-Роль: получить issue + оригинальный код → исправить баг → вернуть исправленный код.
+Роль: получить issue и оригинальный код, исправить баг, вернуть исправленный код.
 
 confidence (уверенность):
   Developer возвращает оценку уверенности в коде 0.0–1.0.
@@ -39,8 +39,8 @@ _SYSTEM_PROMPT = """\
 class DeveloperAgent:
     """
     Агент-разработчик.
-      WEAK:   gemini-2.0-flash
-      STRONG: gemini-2.5-pro
+    WEAK and STRONG are escalation tiers; concrete model names are configured
+    in the backend layer.
     """
 
     role = AgentRole.DEVELOPER
@@ -76,7 +76,6 @@ class DeveloperAgent:
             f"## Код с багом\n```python\n{original_code}\n```"
         )
 
-        # Если ревьюер дал подсказку — добавляем, она помогает переработать решение
         if reviewer_hint:
             user_prompt += f"\n\n## Замечания ревьюера (учти при исправлении)\n{reviewer_hint}"
 
@@ -86,7 +85,6 @@ class DeveloperAgent:
             user_prompt=user_prompt,
         )
 
-        # Парсим JSON-ответ
         code, confidence = _parse_developer_response(raw)
 
         return Message(
@@ -113,11 +111,10 @@ def _parse_developer_response(raw: str) -> tuple[str, float]:
 
     try:
         data = json.loads(raw)
-        code       = data.get("fixed_code", "")
+        code       = data.get("fixed_code") or data.get("code", "")
         confidence = float(data.get("confidence", 0.5))
         confidence = max(0.0, min(1.0, confidence))  # зажимаем в [0,1]
 
-        # Убираем экранированные переносы если модель их добавила
         code = code.replace("\\n", "\n").strip()
         return code, confidence
 
@@ -128,7 +125,7 @@ def _parse_developer_response(raw: str) -> tuple[str, float]:
     if match:
         try:
             data = json.loads(match.group())
-            code       = data.get("fixed_code", "").replace("\\n", "\n").strip()
+            code       = (data.get("fixed_code") or data.get("code", "")).replace("\\n", "\n").strip()
             confidence = float(data.get("confidence", 0.5))
             return code, max(0.0, min(1.0, confidence))
         except (json.JSONDecodeError, ValueError):

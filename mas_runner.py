@@ -73,7 +73,7 @@ def run_task(task, verbose=True) -> list[dict]:
         # Manager смотрит на confidence
         # Если confidence низкий — пропускаем Reviewer и Tester
         decision, reason = manager.decide_after_generate(dev_msg)
-        log("manager_decision", AgentRole.MANAGER.value, "→", {
+        log("manager_decision", AgentRole.MANAGER.value, "policy", {
             "decision": decision,
             "label":    MANAGER_DECISIONS.get(decision, decision),
             "reason":   reason,
@@ -104,7 +104,7 @@ def run_task(task, verbose=True) -> list[dict]:
 
         # Manager смотрит на заключение ревьюера
         decision, reason = manager.decide_after_review(review_msg)
-        log("manager_decision", AgentRole.MANAGER.value, "→", {
+        log("manager_decision", AgentRole.MANAGER.value, "policy", {
             "decision": decision,
             "label":    MANAGER_DECISIONS.get(decision, decision),
             "reason":   reason,
@@ -133,7 +133,7 @@ def run_task(task, verbose=True) -> list[dict]:
 
         # Manager смотрит на результат тестов
         decision, reason = manager.decide_after_test(test_msg)
-        log("manager_decision", AgentRole.MANAGER.value, "→", {
+        log("manager_decision", AgentRole.MANAGER.value, "policy", {
             "decision": decision,
             "label":    MANAGER_DECISIONS.get(decision, decision),
             "reason":   reason,
@@ -196,7 +196,7 @@ def _handle_decision(
 
 
 def _print_event(e: dict):
-    """Красивый вывод события в терминал."""
+    """Print one runner event."""
     evt = e["event"]
     frm = e.get("from", "")
     to  = e.get("to", "")
@@ -205,26 +205,23 @@ def _print_event(e: dict):
         tier = e["tier"].upper()
         att  = e["attempt"]
         conf = e.get("confidence", 1.0)
-        conf_bar = "█" * int(conf * 10) + "░" * (10 - int(conf * 10))
         cant = " cant_solve" if e.get("cant_solve") else ""
         hint = " + подсказка ревьюера" if e["hint_received"] else ""
-        print(f"\n  [{frm} → {to}] Developer ({tier}, попытка {att}){hint}{cant}")
-        print(f"                  confidence: {conf:.2f} [{conf_bar}] | {e['code_lines']} строк")
+        print(f"\n  [{frm} -> {to}] Developer ({tier}, попытка {att}){hint}{cant}")
+        print(f"                  confidence: {conf:.2f} | {e['code_lines']} строк")
 
     elif evt == "code_review":
         q   = e["quality_score"]
         iss = ", ".join(e["issues"]) if e["issues"] else "—"
         rec = e["recommendation"]
-        bar = "█" * int(q * 10) + "░" * (10 - int(q * 10))
-        print(f"  [{frm} → {to}] Ревью: {q:.2f} [{bar}] | {iss} | вердикт: {rec}")
+        print(f"  [{frm} -> {to}] Ревью: {q:.2f} | {iss} | вердикт: {rec}")
         if rec != "approve":
             print(f" {e.get('hint', '')[:80]}")
 
     elif evt == "run_tests":
         pr  = e["pass_rate"]
-        bar = "█" * int(pr * 10) + "░" * (10 - int(pr * 10))
-        fail = "; ".join(e["failures"][:2]) if e["failures"] else "—"
-        print(f"  [{frm} → {to}] Тесты: {e['tests_passed']}/{e['tests_total']} [{bar}] | {fail}")
+        fail = "; ".join(e["failures"][:2]) if e["failures"] else "none"
+        print(f"  [{frm} -> {to}] Тесты: {e['tests_passed']}/{e['tests_total']} | {fail}")
 
     elif evt == "manager_decision":
         phase = e.get("phase", "")
@@ -232,7 +229,7 @@ def _print_event(e: dict):
         print(f" {e['reason'][:70]}")
 
     elif evt == "escalation_event":
-        print(f"\n [{frm} → {to}] {e['message']}")
+        print(f"\n [{frm} -> {to}] {e['message']}")
 
 
 def compute_mas_metrics(task, trace: list[dict]) -> dict:
@@ -276,7 +273,7 @@ def compute_mas_metrics(task, trace: list[dict]) -> dict:
     }
 
 
-def print_sep(char="─", w=65):
+def print_sep(char="-", w=65):
     print(char * w)
 
 
@@ -286,7 +283,7 @@ if __name__ == "__main__":
     all_traces  = []
 
     for task in tasks:
-        print_sep("═")
+        print_sep("=")
         trace = run_task(task, verbose=True)
         m     = compute_mas_metrics(task, trace)
         all_metrics.append(m)
@@ -298,14 +295,14 @@ if __name__ == "__main__":
         })
 
     print("\n")
-    print_sep("═")
+    print_sep("=")
     print(" ИТОГОВЫЕ МЕТРИКИ")
-    print_sep("═")
+    print_sep("=")
     print(f"  {'Задача':<8} {'Сложность':<10} {'Итог':<22} "
           f"{'Итер.':<7} {'Цена':<8} {'Pass%':<8} {'Conf':<8} {'Эскалация'}")
     print_sep()
     for m in all_metrics:
-        esc = "→ strong" if m["escalated_to_strong"] else ("→ human" if m["escalated_to_human"] else "—")
+        esc = "strong" if m["escalated_to_strong"] else ("human" if m["escalated_to_human"] else "none")
         print(f"  {m['task_id']:<8} {m['difficulty']:<10} { m['outcome']:<22} "
               f"{m['total_iterations']:<7} {m['cost_score']:<8} "
               f"{m['final_pass_rate']:<8.0%} {m['avg_confidence']:<8.2f} {esc}")
@@ -317,10 +314,12 @@ if __name__ == "__main__":
     print(f"  Решено: {solved}/{len(all_metrics)} | "
           f"Ср. стоимость: {avg_cost:.1f} | "
           f"Ср. уверенность: {avg_conf:.2f}")
-    print_sep("═")
+    print_sep("=")
 
-    traces_path = os.path.join(os.path.dirname(__file__), "docs/mas_traces.json")
+    docs_dir = os.path.join(os.path.dirname(__file__), "docs")
+    os.makedirs(docs_dir, exist_ok=True)
+    traces_path = os.path.join(docs_dir, "mas_traces.json")
     with open(traces_path, "w", encoding="utf-8") as f:
         json.dump({"tasks": all_traces}, f, ensure_ascii=False, indent=2)
-    print(f" Трассировки сохранены в mas_traces.json")
-    print_sep("═")
+    print(f" Трассировки сохранены в {traces_path}")
+    print_sep("=")

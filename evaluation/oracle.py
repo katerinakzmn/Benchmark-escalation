@@ -12,9 +12,9 @@ import json
 import os
 import sys
 
-sys.path.insert(0, os.path.dirname(__file__))
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from tasks import make_tasks
+from tasks import load_tasks
 from environments.environment import Environment
 from agents.developer import DeveloperAgent
 from agents.base import ModelTier
@@ -54,17 +54,14 @@ def compute_oracle_for_task(task) -> dict:
     """
     print(f"  Задача {task.task_id} ({task.difficulty})...")
 
-    # Попытка 1: weak модель
-    print(f"    weak (gemini-2.0-flash)...", end=" ", flush=True)
+    print("    weak tier...", end=" ", flush=True)
     weak_result = run_single_attempt(task, ModelTier.WEAK)
     print(f"pass_rate={weak_result['pass_rate']:.0%}")
 
-    # Попытка 2: strong модель
-    print(f"    strong (gemini-2.5-pro)...", end=" ", flush=True)
+    print("    strong tier...", end=" ", flush=True)
     strong_result = run_single_attempt(task, ModelTier.STRONG)
     print(f"pass_rate={strong_result['pass_rate']:.0%}")
 
-    # Определяем метку оракула
     if weak_result["success"]:
         oracle_label = "no_escalation"
     elif strong_result["success"]:
@@ -84,7 +81,7 @@ def compute_oracle_for_task(task) -> dict:
 
 
 if __name__ == "__main__":
-    tasks = make_tasks()
+    tasks = load_tasks()
 
     print("=" * 60)
     print("  Вычисляем оракул для бенчмарка...")
@@ -95,10 +92,9 @@ if __name__ == "__main__":
     for task in tasks:
         label = compute_oracle_for_task(task)
         labels.append(label)
-        print(f"    → oracle_label: {label['oracle_label']}")
+        print(f"    oracle_label: {label['oracle_label']}")
         print()
 
-    # Сохраняем
     with open(_OUTPUT_PATH, "w", encoding="utf-8") as f:
         json.dump(labels, f, ensure_ascii=False, indent=2)
 

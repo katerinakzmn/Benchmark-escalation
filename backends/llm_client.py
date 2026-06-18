@@ -1,11 +1,11 @@
 """
-llm_client.py — клиент LLM.
+llm_client.py — legacy chat client for the original MAS runner.
 
-Backend через переменную окружения:
-  LLM_BACKEND=mock    — без API-ключа, для тестов
-  LLM_BACKEND=openai  — реальный OpenAI (по умолчанию)
+Backend through the LLM_BACKEND environment variable:
+  LLM_BACKEND=mock    - no API key, useful for local checks
+  LLM_BACKEND=openai  - OpenAI provider, used by default
 
-Если OPENAI_API_KEY не найден — автоматически переключается на mock.
+If OPENAI_API_KEY is missing, the client falls back to mock.
 """
 
 import os
@@ -19,7 +19,6 @@ MODEL_WEAK   = "gpt-4o-mini"
 MODEL_STRONG = "gpt-4o"
 MODEL_REVIEW = "gpt-4o-mini"
 
-# Единственная переменная окружения для выбора backend
 _BACKEND = os.getenv("LLM_BACKEND", "openai").lower()
 
 _client = None
@@ -49,10 +48,10 @@ def _mock_chat(model: str, system_prompt: str, user_prompt: str) -> str:
         confidence = 0.80 if model == MODEL_STRONG else 0.55
         confidence += random.uniform(-0.05, 0.05)
         return json.dumps({
-            "code":        _MOCK_CODE,
+            "fixed_code":  _MOCK_CODE,
             "confidence":  round(confidence, 2),
             "cant_solve":  False,
-            "explanation": "Mock developer: applied standard fix.",
+            "explanation": "Mock developer response.",
             "attempt":     1,
         }, ensure_ascii=False)
 
@@ -76,9 +75,8 @@ def chat(
 ) -> str:
     backend = _BACKEND
 
-    # Автопереключение на mock если нет ключа
     if backend == "openai" and not os.getenv("OPENAI_API_KEY"):
-        print("[llm_client] нет OPENAI_API_KEY — переключаемся на mock")
+        print("[llm_client] OPENAI_API_KEY is missing; using mock backend")
         backend = "mock"
 
     if backend == "mock":

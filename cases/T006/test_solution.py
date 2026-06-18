@@ -1,5 +1,5 @@
-# auto-generated from dataset/tasks.json
-# pytest test_solution.py
+# Tests for the case implementation.
+from original_code import *
 
 def test_ttl_basic():
     cache = TTLCache(ttl=60); cache.set('x',42); assert cache.get('x') == 42

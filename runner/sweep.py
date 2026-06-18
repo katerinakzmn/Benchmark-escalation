@@ -13,7 +13,7 @@ from datetime import datetime
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from tasks import make_tasks
+from tasks import load_tasks
 from backends import get_backend
 from policies.policies import get_policy
 from evaluation.metrics import compute_summary
@@ -26,6 +26,7 @@ POLICIES = [
     "confidence_threshold",
     "human_fallback",
     "random",
+    "oracle",
 ]
 
 DEFAULT_BUDGET = {"max_total_iterations": 7}
@@ -40,7 +41,7 @@ DEFAULT_POLICY_CFG = {
 
 
 def run_sweep(backend_name: str, task_ids: list = None) -> dict:
-    all_tasks = make_tasks()
+    all_tasks = load_tasks()
     if task_ids:
         all_tasks = [t for t in all_tasks if t.task_id in task_ids]
 
@@ -73,7 +74,7 @@ def build_report(results: dict, backend_name: str) -> str:
         f"**Backend:** `{backend_name}`  ",
         f"**Tasks:** {next(iter(results.values()))['total_tasks']}\n",
         "## Results\n",
-        "| Policy | Solved | Solved% | Avg Cost | Avg Iters | Escal→Strong | Escal→Human |",
+        "| Policy | Solved | Solved% | Avg Cost | Avg Iters | Escal to Strong | Escal to Human |",
         "|--------|--------|---------|----------|-----------|-------------|------------|",
     ]
 
