@@ -1,5 +1,5 @@
 """
-mas_runner.py — запуск мультиагентного бенчмарка.
+mas_runner.py - legacy multi-agent benchmark runner.
 """
 
 import sys, os, json
@@ -17,7 +17,7 @@ from agents.manager import ManagerAgent, ManagerPolicy, MANAGER_DECISIONS
 def run_task(task, verbose=True) -> list[dict]:
     """
     Запускает мультиагентный пайплайн для одной задачи.
-    Возвращает трассировку — список событий.
+    Возвращает трассировку как список событий.
     """
     trace  = []
     env    = Environment(task)
@@ -71,7 +71,7 @@ def run_task(task, verbose=True) -> list[dict]:
         })
 
         # Manager смотрит на confidence
-        # Если confidence низкий — пропускаем Reviewer и Tester
+        # Если confidence низкий, пропускаем Reviewer и Tester.
         decision, reason = manager.decide_after_generate(dev_msg)
         log("manager_decision", AgentRole.MANAGER.value, "policy", {
             "decision": decision,
@@ -80,7 +80,7 @@ def run_task(task, verbose=True) -> list[dict]:
             "phase":    "after_generate",
         })
 
-        # Если Manager решил не идти к Reviewer — обрабатываем сразу
+        # Если Manager решил не идти к Reviewer, обрабатываем сразу.
         if decision != "send_to_review":
             decision, final_decision, hint_for_dev = _handle_decision(
                 decision, dev_msg, None, hint_for_dev, log
@@ -212,7 +212,7 @@ def _print_event(e: dict):
 
     elif evt == "code_review":
         q   = e["quality_score"]
-        iss = ", ".join(e["issues"]) if e["issues"] else "—"
+        iss = ", ".join(e["issues"]) if e["issues"] else "none"
         rec = e["recommendation"]
         print(f"  [{frm} -> {to}] Ревью: {q:.2f} | {iss} | вердикт: {rec}")
         if rec != "approve":

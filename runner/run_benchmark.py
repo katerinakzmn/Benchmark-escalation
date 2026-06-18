@@ -39,7 +39,7 @@ def run_benchmark(args, config: dict):
     dataset_name = args.dataset or config.get("dataset", "toy")
     backend_name = args.backend or config.get("backend", "mock")
     policy_name  = args.policy  or config.get("policy", {}).get("name", "retry_then_escalate")
-    policy_cfg   = config.get("policy", {})
+    policy_cfg   = {**config.get("policy", {}), "seed": config.get("seed", 42)}
     budget_cfg   = config.get("budget", {"max_total_iterations": 7})
     costs_cfg    = config.get("costs",  {"weak_call": 1, "strong_call": 3,
                                           "review_call": 1, "test_run": 0.5, "human_call": 10})
@@ -72,6 +72,7 @@ def run_benchmark(args, config: dict):
     run_config = {
         "timestamp": datetime.now().isoformat(),
         "dataset": dataset_name,
+        "seed": config.get("seed", 42),
         "backend": backend_name,
         "policy": {"name": policy_name, **policy_cfg},
         "budget": budget_cfg,

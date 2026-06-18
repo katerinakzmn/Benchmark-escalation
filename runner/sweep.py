@@ -1,5 +1,5 @@
 """
-runner/sweep.py — прогон всех политик и генерация reports/baselines.md
+runner/sweep.py - run all policies and write reports/baselines.md
 
 Пример:
   python -m runner.sweep --backend mock
@@ -37,6 +37,7 @@ DEFAULT_POLICY_CFG = {
     "max_strong_attempts": 1,
     "confidence_threshold": 0.30,
     "zero_progress_limit": 2,
+    "seed": 42,
 }
 
 
@@ -116,7 +117,7 @@ def main():
     args = parser.parse_args()
 
     print(f"\n{'='*50}")
-    print(f"  Sweep: {len(POLICIES)} policies × backend={args.backend}")
+    print(f"  Sweep: {len(POLICIES)} policies, backend={args.backend}")
     print(f"{'='*50}\n")
 
     results = run_sweep(args.backend, args.tasks)

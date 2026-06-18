@@ -1,5 +1,5 @@
 """
-manager.py — агент-менеджер.
+manager.py - агент-менеджер.
 
 Pipeline:
 
@@ -31,11 +31,11 @@ from agents.base import AgentRole, ModelTier, Message, AgentMemory
 MANAGER_DECISIONS = {
     "send_to_review":    "Отправить на ревью",
     "send_to_test":      "Отправить на тестирование",
-    "request_changes":   "Вернуть разработчику — переписать",
+    "request_changes":   "Вернуть разработчику на доработку",
     "escalate_strong":   "Эскалировать сильной моделью",
     "escalate_human":    "Эскалировать человеком",
-    "accept":            "Принять — задача решена",
-    "stop":              "Остановиться — лимит исчерпан",
+    "accept":            "Принять: задача решена",
+    "stop":              "Остановиться: лимит исчерпан",
 }
 
 
@@ -90,10 +90,10 @@ class ManagerAgent:
         Manager смотрит на результат Developer до Reviewer.
 
         Возможные решения:
-          send_to_review   — confidence OK, идём к Reviewer
+          send_to_review   - confidence OK, идём к Reviewer
           request_changes  - confidence низкий, но есть ещё попытки на этом уровне
-          escalate_strong  — попытки weak исчерпаны
-          escalate_human   — все уровни исчерпаны
+          escalate_strong  - попытки weak исчерпаны
+          escalate_human   - все уровни исчерпаны
         """
         self.memory.add(dev_msg)
 
@@ -123,7 +123,7 @@ class ManagerAgent:
             return (
                 "request_changes",
                 f"Низкая уверенность (confidence={confidence:.2f}) | {tier}, "
-                f"попытка {attempts}/{max_att} — повторяем без ревью"
+                f"попытка {attempts}/{max_att}; повторяем без ревью"
             )
 
         # Попытки исчерпаны, эскалируем

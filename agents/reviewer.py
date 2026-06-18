@@ -1,5 +1,5 @@
 """
-reviewer.py — агент-ревьюер.
+reviewer.py - агент-ревьюер.
 
 Роль: получить оригинальный код и исправленный код, провести ревью, дать заключение.
 
@@ -7,9 +7,9 @@ reviewer.py — агент-ревьюер.
 структурированный JSON-ответ.
 
 Структура ответа:
-  quality_score:     float 0.0–1.0
-  issues_found:      list[str]  — краткие названия проблем
-  hint_for_developer: str        — конкретная подсказка что исправить
+  quality_score:     float 0.0-1.0
+  issues_found:      list[str]  - краткие названия проблем
+  hint_for_developer: str        - конкретная подсказка что исправить
   recommendation:    "approve" | "request_changes" | "escalate"
 """
 
@@ -34,9 +34,9 @@ _SYSTEM_PROMPT = """\
 }
 
 Правила для recommendation:
-  "approve"         — исправление правильное, можно запускать тесты (quality_score >= 0.8)
-  "request_changes" — есть ошибки, но разработчик может исправить сам (0.4 <= quality_score < 0.8)
-  "escalate"        — задача слишком сложная для текущей модели (quality_score < 0.4)
+  "approve"         - исправление правильное, можно запускать тесты (quality_score >= 0.8)
+  "request_changes" - есть ошибки, но разработчик может исправить сам (0.4 <= quality_score < 0.8)
+  "escalate"        - задача слишком сложная для текущей модели (quality_score < 0.4)
 
 Верни ТОЛЬКО JSON без объяснений и markdown.
 """
@@ -90,8 +90,8 @@ class ReviewerAgent:
 def _parse_review_json(raw: str) -> dict:
     """
     Парсит JSON-ответ ревьюера.
-    Если LLM всё-таки добавил markdown — вырезаем JSON из текста.
-    Если что-то пошло не так — возвращаем безопасные дефолты.
+    Если LLM добавил markdown, вырезаем JSON из текста.
+    Если что-то пошло не так, возвращаем безопасные дефолты.
     """
     try:
         # Пробуем прямой парсинг
@@ -107,7 +107,7 @@ def _parse_review_json(raw: str) -> dict:
         except json.JSONDecodeError:
             pass
 
-    # Полный фолбэк — что-то пошло совсем не так
+    # Полный фолбэк для неструктурированного ответа.
     return {
         "quality_score":      0.5,
         "issues_found":       ["не удалось распарсить ответ ревьюера"],

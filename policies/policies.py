@@ -309,7 +309,7 @@ class HumanFallbackPolicy(BasePolicy):
 
 # Random
 class RandomPolicy(BasePolicy):
-    """Случайный tier на каждом шаге — нижняя граница."""
+    """Random tier at each step; used as a lower-bound baseline."""
 
     def run_task(self, task, backend, budget_cfg, costs_cfg) -> dict:
         import random
@@ -318,9 +318,11 @@ class RandomPolicy(BasePolicy):
         tiers = ["weak", "strong", "human"]
         steps = []
         cost = 0.0
+        task_seed = sum(ord(char) for char in task.instance_id)
+        rng = random.Random(self.cfg.get("seed", 42) + task_seed)
 
         for i in range(1, max_iter + 1):
-            tier = random.choice(tiers)
+            tier = rng.choice(tiers)
             code = backend.generate(task.instance_id, tier)
             test_result = self._run_tests(task, code)
             cost_key = {"weak": "weak_call", "strong": "strong_call", "human": "human_call"}[tier]

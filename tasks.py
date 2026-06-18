@@ -74,12 +74,33 @@ def _build_test_fn(test_spec: dict) -> Callable:
     full_test_code = "\n".join(lines)
 
     def test_fn(solution_code: str) -> dict:
-        ns = {"__builtins__": {"__import__": __import__, "len": len,
-                               "range": range, "print": print,
-                               "isinstance": isinstance, "type": type,
-                               "int": int, "str": str, "list": list,
-                               "dict": dict, "set": set, "sorted": sorted,
-                               "enumerate": enumerate, "zip": zip}}
+        safe_builtins = {
+            "__build_class__": __build_class__,
+            "__import__": __import__,
+            "abs": abs,
+            "bool": bool,
+            "dict": dict,
+            "enumerate": enumerate,
+            "Exception": Exception,
+            "float": float,
+            "int": int,
+            "isinstance": isinstance,
+            "len": len,
+            "list": list,
+            "max": max,
+            "min": min,
+            "object": object,
+            "print": print,
+            "range": range,
+            "set": set,
+            "sorted": sorted,
+            "str": str,
+            "sum": sum,
+            "tuple": tuple,
+            "ValueError": ValueError,
+            "zip": zip,
+        }
+        ns = {"__builtins__": safe_builtins, "__name__": "__benchmark_case__"}
         try:
             exec(solution_code, ns)
             exec(full_test_code, ns)

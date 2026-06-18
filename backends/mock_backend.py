@@ -1,5 +1,5 @@
 """
-Mock backend — детерминированные ответы без API-ключа.
+Mock backend - deterministic responses without an API key.
 Сценарии берутся из configs/mock.yaml (или дефолтные).
 """
 import yaml

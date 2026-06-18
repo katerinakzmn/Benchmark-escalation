@@ -1,11 +1,11 @@
 """
-oracle.py — офлайн вычисление оракула для бенчмарка.
+oracle.py - офлайн вычисление оракула для бенчмарка.
 
 "Когда нужно было эскалировать?"
   oracle_label:
-    "no_escalation"— weak справилась сама
-    "escalate"— weak не справилась, strong справилась
-    "unsolvable"— ни weak, ни strong не справились
+    "no_escalation" - weak справилась сама
+    "escalate" - weak не справилась, strong справилась
+    "unsolvable" - ни weak, ни strong не справились
 """
 
 import json

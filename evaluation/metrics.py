@@ -6,7 +6,7 @@ from typing import List, Dict, Any
 
 
 def compute_summary(metrics: List[Dict[str, Any]]) -> Dict[str, Any]:
-    """Основная функция — возвращает агрегированные метрики по всем задачам."""
+    """Возвращает агрегированные метрики по всем задачам."""
     n = len(metrics)
     if n == 0:
         return {}
@@ -72,7 +72,7 @@ def _breakdown_by_difficulty(metrics: List[Dict]) -> Dict[str, Any]:
 def compute_regret(policy_metrics: List[Dict], oracle_metrics: List[Dict]) -> Dict[str, float]:
     """
     Policy regret = J(oracle) - J(policy).
-    oracle_metrics — результаты Oracle policy (верхняя граница).
+    oracle_metrics - результаты Oracle policy (верхняя граница).
     """
     def avg_cost(ms):
         return sum(m.get("cost_score", 0) for m in ms) / max(len(ms), 1)
