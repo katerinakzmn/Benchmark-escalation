@@ -1,0 +1,41 @@
+{
+  "timestamp": "2026-06-18T14:08:28.673680",
+  "dataset": "toy",
+  "seed": 42,
+  "backend": "mock",
+  "policy": {
+    "name": "retry_then_escalate",
+    "max_weak_attempts": 2,
+    "max_strong_attempts": 1,
+    "confidence_threshold": 0.3,
+    "zero_progress_limit": 2,
+    "seed": 42
+  },
+  "budget": {
+    "max_total_iterations": 7
+  },
+  "costs": {
+    "weak_call": 1,
+    "strong_call": 3,
+    "review_call": 1,
+    "test_run": 0.5,
+    "human_call": 10
+  },
+  "tasks": [
+    "T001",
+    "T002",
+    "T003",
+    "T004",
+    "T005",
+    "T006",
+    "T007",
+    "T008",
+    "T009",
+    "T010",
+    "T011",
+    "T012",
+    "T013",
+    "T014",
+    "T015"
+  ]
+}

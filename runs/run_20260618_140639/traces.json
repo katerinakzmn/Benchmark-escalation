@@ -1,0 +1,1496 @@
+[
+  {
+    "task_id": "T001",
+    "policy": "ProgressHeuristicPolicy",
+    "metrics": {
+      "task_id": "T001",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "pass_rate_prev": 1.0,
+          "stall_count": 0,
+          "cost_so_far": 1.5
+        },
+        "action": "solved",
+        "next_state": {
+          "tier": "weak",
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "episode_id": "T001_ep",
+        "task_id": "T001"
+      }
+    ]
+  },
+  {
+    "task_id": "T002",
+    "policy": "ProgressHeuristicPolicy",
+    "metrics": {
+      "task_id": "T002",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 4,
+      "escalated_to_strong": true,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 8.0
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "pass_rate_prev": 0.0,
+          "stall_count": 0,
+          "cost_so_far": 1.5
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "tier": "weak",
+          "pass_rate": 0.0
+        },
+        "reward": -0.3,
+        "done": false,
+        "episode_id": "T002_ep",
+        "task_id": "T002"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "weak",
+          "iteration": 2,
+          "pass_rate_prev": 0.0,
+          "stall_count": 1,
+          "cost_so_far": 3.0
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "tier": "weak",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T002_ep",
+        "task_id": "T002"
+      },
+      {
+        "step": 3,
+        "state": {
+          "tier": "weak",
+          "iteration": 3,
+          "pass_rate_prev": 0.0,
+          "stall_count": 0,
+          "cost_so_far": 4.5
+        },
+        "action": "escalate_to_strong",
+        "next_state": {
+          "tier": "strong",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T002_ep",
+        "task_id": "T002"
+      },
+      {
+        "step": 4,
+        "state": {
+          "tier": "strong",
+          "iteration": 4,
+          "pass_rate_prev": 1.0,
+          "stall_count": 0,
+          "cost_so_far": 8.0
+        },
+        "action": "solved",
+        "next_state": {
+          "tier": "strong",
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "episode_id": "T002_ep",
+        "task_id": "T002"
+      }
+    ]
+  },
+  {
+    "task_id": "T003",
+    "policy": "ProgressHeuristicPolicy",
+    "metrics": {
+      "task_id": "T003",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 6,
+      "escalated_to_strong": true,
+      "escalated_to_human": true,
+      "final_pass_rate": 1.0,
+      "cost_score": 22.0
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "pass_rate_prev": 0.0,
+          "stall_count": 0,
+          "cost_so_far": 1.5
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "tier": "weak",
+          "pass_rate": 0.0
+        },
+        "reward": -0.3,
+        "done": false,
+        "episode_id": "T003_ep",
+        "task_id": "T003"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "weak",
+          "iteration": 2,
+          "pass_rate_prev": 0.0,
+          "stall_count": 1,
+          "cost_so_far": 3.0
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "tier": "weak",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T003_ep",
+        "task_id": "T003"
+      },
+      {
+        "step": 3,
+        "state": {
+          "tier": "weak",
+          "iteration": 3,
+          "pass_rate_prev": 0.0,
+          "stall_count": 0,
+          "cost_so_far": 4.5
+        },
+        "action": "escalate_to_strong",
+        "next_state": {
+          "tier": "strong",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T003_ep",
+        "task_id": "T003"
+      },
+      {
+        "step": 4,
+        "state": {
+          "tier": "strong",
+          "iteration": 4,
+          "pass_rate_prev": 0.0,
+          "stall_count": 1,
+          "cost_so_far": 8.0
+        },
+        "action": "retry_strong",
+        "next_state": {
+          "tier": "strong",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T003_ep",
+        "task_id": "T003"
+      },
+      {
+        "step": 5,
+        "state": {
+          "tier": "strong",
+          "iteration": 5,
+          "pass_rate_prev": 0.0,
+          "stall_count": 0,
+          "cost_so_far": 11.5
+        },
+        "action": "escalate_to_human",
+        "next_state": {
+          "tier": "human",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T003_ep",
+        "task_id": "T003"
+      },
+      {
+        "step": 6,
+        "state": {
+          "tier": "human",
+          "iteration": 6,
+          "pass_rate_prev": 1.0,
+          "stall_count": 0,
+          "cost_so_far": 22.0
+        },
+        "action": "solved",
+        "next_state": {
+          "tier": "human",
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "episode_id": "T003_ep",
+        "task_id": "T003"
+      }
+    ]
+  },
+  {
+    "task_id": "T004",
+    "policy": "ProgressHeuristicPolicy",
+    "metrics": {
+      "task_id": "T004",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 4,
+      "escalated_to_strong": true,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 8.0
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "pass_rate_prev": 0.0,
+          "stall_count": 0,
+          "cost_so_far": 1.5
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "tier": "weak",
+          "pass_rate": 0.0
+        },
+        "reward": -0.3,
+        "done": false,
+        "episode_id": "T004_ep",
+        "task_id": "T004"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "weak",
+          "iteration": 2,
+          "pass_rate_prev": 0.0,
+          "stall_count": 1,
+          "cost_so_far": 3.0
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "tier": "weak",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T004_ep",
+        "task_id": "T004"
+      },
+      {
+        "step": 3,
+        "state": {
+          "tier": "weak",
+          "iteration": 3,
+          "pass_rate_prev": 0.0,
+          "stall_count": 0,
+          "cost_so_far": 4.5
+        },
+        "action": "escalate_to_strong",
+        "next_state": {
+          "tier": "strong",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T004_ep",
+        "task_id": "T004"
+      },
+      {
+        "step": 4,
+        "state": {
+          "tier": "strong",
+          "iteration": 4,
+          "pass_rate_prev": 1.0,
+          "stall_count": 0,
+          "cost_so_far": 8.0
+        },
+        "action": "solved",
+        "next_state": {
+          "tier": "strong",
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "episode_id": "T004_ep",
+        "task_id": "T004"
+      }
+    ]
+  },
+  {
+    "task_id": "T005",
+    "policy": "ProgressHeuristicPolicy",
+    "metrics": {
+      "task_id": "T005",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "pass_rate_prev": 1.0,
+          "stall_count": 0,
+          "cost_so_far": 1.5
+        },
+        "action": "solved",
+        "next_state": {
+          "tier": "weak",
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "episode_id": "T005_ep",
+        "task_id": "T005"
+      }
+    ]
+  },
+  {
+    "task_id": "T006",
+    "policy": "ProgressHeuristicPolicy",
+    "metrics": {
+      "task_id": "T006",
+      "difficulty": "medium",
+      "solved": false,
+      "total_iterations": 7,
+      "escalated_to_strong": true,
+      "escalated_to_human": true,
+      "final_pass_rate": 0.0,
+      "cost_score": 25.5
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "pass_rate_prev": 0.0,
+          "stall_count": 0,
+          "cost_so_far": 1.5
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "tier": "weak",
+          "pass_rate": 0.0
+        },
+        "reward": -0.3,
+        "done": false,
+        "episode_id": "T006_ep",
+        "task_id": "T006"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "weak",
+          "iteration": 2,
+          "pass_rate_prev": 0.0,
+          "stall_count": 1,
+          "cost_so_far": 3.0
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "tier": "weak",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T006_ep",
+        "task_id": "T006"
+      },
+      {
+        "step": 3,
+        "state": {
+          "tier": "weak",
+          "iteration": 3,
+          "pass_rate_prev": 0.0,
+          "stall_count": 0,
+          "cost_so_far": 4.5
+        },
+        "action": "escalate_to_strong",
+        "next_state": {
+          "tier": "strong",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T006_ep",
+        "task_id": "T006"
+      },
+      {
+        "step": 4,
+        "state": {
+          "tier": "strong",
+          "iteration": 4,
+          "pass_rate_prev": 0.5,
+          "stall_count": 0,
+          "cost_so_far": 8.0
+        },
+        "action": "retry_strong",
+        "next_state": {
+          "tier": "strong",
+          "pass_rate": 0.5
+        },
+        "reward": -0.3,
+        "done": false,
+        "episode_id": "T006_ep",
+        "task_id": "T006"
+      },
+      {
+        "step": 5,
+        "state": {
+          "tier": "strong",
+          "iteration": 5,
+          "pass_rate_prev": 0.5,
+          "stall_count": 1,
+          "cost_so_far": 11.5
+        },
+        "action": "retry_strong",
+        "next_state": {
+          "tier": "strong",
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T006_ep",
+        "task_id": "T006"
+      },
+      {
+        "step": 6,
+        "state": {
+          "tier": "strong",
+          "iteration": 6,
+          "pass_rate_prev": 0.5,
+          "stall_count": 0,
+          "cost_so_far": 15.0
+        },
+        "action": "escalate_to_human",
+        "next_state": {
+          "tier": "human",
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T006_ep",
+        "task_id": "T006"
+      },
+      {
+        "step": 7,
+        "state": {
+          "tier": "human",
+          "iteration": 7,
+          "pass_rate_prev": 0.0,
+          "stall_count": 1,
+          "cost_so_far": 25.5
+        },
+        "action": "retry_human",
+        "next_state": {
+          "tier": "human",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T006_ep",
+        "task_id": "T006"
+      }
+    ]
+  },
+  {
+    "task_id": "T007",
+    "policy": "ProgressHeuristicPolicy",
+    "metrics": {
+      "task_id": "T007",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 6,
+      "escalated_to_strong": true,
+      "escalated_to_human": true,
+      "final_pass_rate": 1.0,
+      "cost_score": 22.0
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "pass_rate_prev": 0.0,
+          "stall_count": 0,
+          "cost_so_far": 1.5
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "tier": "weak",
+          "pass_rate": 0.0
+        },
+        "reward": -0.3,
+        "done": false,
+        "episode_id": "T007_ep",
+        "task_id": "T007"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "weak",
+          "iteration": 2,
+          "pass_rate_prev": 0.0,
+          "stall_count": 1,
+          "cost_so_far": 3.0
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "tier": "weak",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T007_ep",
+        "task_id": "T007"
+      },
+      {
+        "step": 3,
+        "state": {
+          "tier": "weak",
+          "iteration": 3,
+          "pass_rate_prev": 0.0,
+          "stall_count": 0,
+          "cost_so_far": 4.5
+        },
+        "action": "escalate_to_strong",
+        "next_state": {
+          "tier": "strong",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T007_ep",
+        "task_id": "T007"
+      },
+      {
+        "step": 4,
+        "state": {
+          "tier": "strong",
+          "iteration": 4,
+          "pass_rate_prev": 0.0,
+          "stall_count": 1,
+          "cost_so_far": 8.0
+        },
+        "action": "retry_strong",
+        "next_state": {
+          "tier": "strong",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T007_ep",
+        "task_id": "T007"
+      },
+      {
+        "step": 5,
+        "state": {
+          "tier": "strong",
+          "iteration": 5,
+          "pass_rate_prev": 0.0,
+          "stall_count": 0,
+          "cost_so_far": 11.5
+        },
+        "action": "escalate_to_human",
+        "next_state": {
+          "tier": "human",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T007_ep",
+        "task_id": "T007"
+      },
+      {
+        "step": 6,
+        "state": {
+          "tier": "human",
+          "iteration": 6,
+          "pass_rate_prev": 1.0,
+          "stall_count": 0,
+          "cost_so_far": 22.0
+        },
+        "action": "solved",
+        "next_state": {
+          "tier": "human",
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "episode_id": "T007_ep",
+        "task_id": "T007"
+      }
+    ]
+  },
+  {
+    "task_id": "T008",
+    "policy": "ProgressHeuristicPolicy",
+    "metrics": {
+      "task_id": "T008",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "pass_rate_prev": 1.0,
+          "stall_count": 0,
+          "cost_so_far": 1.5
+        },
+        "action": "solved",
+        "next_state": {
+          "tier": "weak",
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "episode_id": "T008_ep",
+        "task_id": "T008"
+      }
+    ]
+  },
+  {
+    "task_id": "T009",
+    "policy": "ProgressHeuristicPolicy",
+    "metrics": {
+      "task_id": "T009",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 4,
+      "escalated_to_strong": true,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 8.0
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "pass_rate_prev": 0.0,
+          "stall_count": 0,
+          "cost_so_far": 1.5
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "tier": "weak",
+          "pass_rate": 0.0
+        },
+        "reward": -0.3,
+        "done": false,
+        "episode_id": "T009_ep",
+        "task_id": "T009"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "weak",
+          "iteration": 2,
+          "pass_rate_prev": 0.0,
+          "stall_count": 1,
+          "cost_so_far": 3.0
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "tier": "weak",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T009_ep",
+        "task_id": "T009"
+      },
+      {
+        "step": 3,
+        "state": {
+          "tier": "weak",
+          "iteration": 3,
+          "pass_rate_prev": 0.0,
+          "stall_count": 0,
+          "cost_so_far": 4.5
+        },
+        "action": "escalate_to_strong",
+        "next_state": {
+          "tier": "strong",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T009_ep",
+        "task_id": "T009"
+      },
+      {
+        "step": 4,
+        "state": {
+          "tier": "strong",
+          "iteration": 4,
+          "pass_rate_prev": 1.0,
+          "stall_count": 0,
+          "cost_so_far": 8.0
+        },
+        "action": "solved",
+        "next_state": {
+          "tier": "strong",
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "episode_id": "T009_ep",
+        "task_id": "T009"
+      }
+    ]
+  },
+  {
+    "task_id": "T010",
+    "policy": "ProgressHeuristicPolicy",
+    "metrics": {
+      "task_id": "T010",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 6,
+      "escalated_to_strong": true,
+      "escalated_to_human": true,
+      "final_pass_rate": 1.0,
+      "cost_score": 22.0
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "pass_rate_prev": 0.0,
+          "stall_count": 0,
+          "cost_so_far": 1.5
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "tier": "weak",
+          "pass_rate": 0.0
+        },
+        "reward": -0.3,
+        "done": false,
+        "episode_id": "T010_ep",
+        "task_id": "T010"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "weak",
+          "iteration": 2,
+          "pass_rate_prev": 0.0,
+          "stall_count": 1,
+          "cost_so_far": 3.0
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "tier": "weak",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T010_ep",
+        "task_id": "T010"
+      },
+      {
+        "step": 3,
+        "state": {
+          "tier": "weak",
+          "iteration": 3,
+          "pass_rate_prev": 0.0,
+          "stall_count": 0,
+          "cost_so_far": 4.5
+        },
+        "action": "escalate_to_strong",
+        "next_state": {
+          "tier": "strong",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T010_ep",
+        "task_id": "T010"
+      },
+      {
+        "step": 4,
+        "state": {
+          "tier": "strong",
+          "iteration": 4,
+          "pass_rate_prev": 0.0,
+          "stall_count": 1,
+          "cost_so_far": 8.0
+        },
+        "action": "retry_strong",
+        "next_state": {
+          "tier": "strong",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T010_ep",
+        "task_id": "T010"
+      },
+      {
+        "step": 5,
+        "state": {
+          "tier": "strong",
+          "iteration": 5,
+          "pass_rate_prev": 0.0,
+          "stall_count": 0,
+          "cost_so_far": 11.5
+        },
+        "action": "escalate_to_human",
+        "next_state": {
+          "tier": "human",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T010_ep",
+        "task_id": "T010"
+      },
+      {
+        "step": 6,
+        "state": {
+          "tier": "human",
+          "iteration": 6,
+          "pass_rate_prev": 1.0,
+          "stall_count": 0,
+          "cost_so_far": 22.0
+        },
+        "action": "solved",
+        "next_state": {
+          "tier": "human",
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "episode_id": "T010_ep",
+        "task_id": "T010"
+      }
+    ]
+  },
+  {
+    "task_id": "T011",
+    "policy": "ProgressHeuristicPolicy",
+    "metrics": {
+      "task_id": "T011",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 6,
+      "escalated_to_strong": true,
+      "escalated_to_human": true,
+      "final_pass_rate": 1.0,
+      "cost_score": 22.0
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "pass_rate_prev": 0.0,
+          "stall_count": 0,
+          "cost_so_far": 1.5
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "tier": "weak",
+          "pass_rate": 0.0
+        },
+        "reward": -0.3,
+        "done": false,
+        "episode_id": "T011_ep",
+        "task_id": "T011"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "weak",
+          "iteration": 2,
+          "pass_rate_prev": 0.0,
+          "stall_count": 1,
+          "cost_so_far": 3.0
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "tier": "weak",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T011_ep",
+        "task_id": "T011"
+      },
+      {
+        "step": 3,
+        "state": {
+          "tier": "weak",
+          "iteration": 3,
+          "pass_rate_prev": 0.0,
+          "stall_count": 0,
+          "cost_so_far": 4.5
+        },
+        "action": "escalate_to_strong",
+        "next_state": {
+          "tier": "strong",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T011_ep",
+        "task_id": "T011"
+      },
+      {
+        "step": 4,
+        "state": {
+          "tier": "strong",
+          "iteration": 4,
+          "pass_rate_prev": 0.0,
+          "stall_count": 1,
+          "cost_so_far": 8.0
+        },
+        "action": "retry_strong",
+        "next_state": {
+          "tier": "strong",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T011_ep",
+        "task_id": "T011"
+      },
+      {
+        "step": 5,
+        "state": {
+          "tier": "strong",
+          "iteration": 5,
+          "pass_rate_prev": 0.0,
+          "stall_count": 0,
+          "cost_so_far": 11.5
+        },
+        "action": "escalate_to_human",
+        "next_state": {
+          "tier": "human",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T011_ep",
+        "task_id": "T011"
+      },
+      {
+        "step": 6,
+        "state": {
+          "tier": "human",
+          "iteration": 6,
+          "pass_rate_prev": 1.0,
+          "stall_count": 0,
+          "cost_so_far": 22.0
+        },
+        "action": "solved",
+        "next_state": {
+          "tier": "human",
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "episode_id": "T011_ep",
+        "task_id": "T011"
+      }
+    ]
+  },
+  {
+    "task_id": "T012",
+    "policy": "ProgressHeuristicPolicy",
+    "metrics": {
+      "task_id": "T012",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 4,
+      "escalated_to_strong": true,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 8.0
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "pass_rate_prev": 0.0,
+          "stall_count": 0,
+          "cost_so_far": 1.5
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "tier": "weak",
+          "pass_rate": 0.0
+        },
+        "reward": -0.3,
+        "done": false,
+        "episode_id": "T012_ep",
+        "task_id": "T012"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "weak",
+          "iteration": 2,
+          "pass_rate_prev": 0.0,
+          "stall_count": 1,
+          "cost_so_far": 3.0
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "tier": "weak",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T012_ep",
+        "task_id": "T012"
+      },
+      {
+        "step": 3,
+        "state": {
+          "tier": "weak",
+          "iteration": 3,
+          "pass_rate_prev": 0.0,
+          "stall_count": 0,
+          "cost_so_far": 4.5
+        },
+        "action": "escalate_to_strong",
+        "next_state": {
+          "tier": "strong",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T012_ep",
+        "task_id": "T012"
+      },
+      {
+        "step": 4,
+        "state": {
+          "tier": "strong",
+          "iteration": 4,
+          "pass_rate_prev": 1.0,
+          "stall_count": 0,
+          "cost_so_far": 8.0
+        },
+        "action": "solved",
+        "next_state": {
+          "tier": "strong",
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "episode_id": "T012_ep",
+        "task_id": "T012"
+      }
+    ]
+  },
+  {
+    "task_id": "T013",
+    "policy": "ProgressHeuristicPolicy",
+    "metrics": {
+      "task_id": "T013",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 4,
+      "escalated_to_strong": true,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 8.0
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "pass_rate_prev": 0.0,
+          "stall_count": 0,
+          "cost_so_far": 1.5
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "tier": "weak",
+          "pass_rate": 0.0
+        },
+        "reward": -0.3,
+        "done": false,
+        "episode_id": "T013_ep",
+        "task_id": "T013"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "weak",
+          "iteration": 2,
+          "pass_rate_prev": 0.0,
+          "stall_count": 1,
+          "cost_so_far": 3.0
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "tier": "weak",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T013_ep",
+        "task_id": "T013"
+      },
+      {
+        "step": 3,
+        "state": {
+          "tier": "weak",
+          "iteration": 3,
+          "pass_rate_prev": 0.0,
+          "stall_count": 0,
+          "cost_so_far": 4.5
+        },
+        "action": "escalate_to_strong",
+        "next_state": {
+          "tier": "strong",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T013_ep",
+        "task_id": "T013"
+      },
+      {
+        "step": 4,
+        "state": {
+          "tier": "strong",
+          "iteration": 4,
+          "pass_rate_prev": 1.0,
+          "stall_count": 0,
+          "cost_so_far": 8.0
+        },
+        "action": "solved",
+        "next_state": {
+          "tier": "strong",
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "episode_id": "T013_ep",
+        "task_id": "T013"
+      }
+    ]
+  },
+  {
+    "task_id": "T014",
+    "policy": "ProgressHeuristicPolicy",
+    "metrics": {
+      "task_id": "T014",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 6,
+      "escalated_to_strong": true,
+      "escalated_to_human": true,
+      "final_pass_rate": 1.0,
+      "cost_score": 22.0
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "pass_rate_prev": 0.0,
+          "stall_count": 0,
+          "cost_so_far": 1.5
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "tier": "weak",
+          "pass_rate": 0.0
+        },
+        "reward": -0.3,
+        "done": false,
+        "episode_id": "T014_ep",
+        "task_id": "T014"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "weak",
+          "iteration": 2,
+          "pass_rate_prev": 0.0,
+          "stall_count": 1,
+          "cost_so_far": 3.0
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "tier": "weak",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T014_ep",
+        "task_id": "T014"
+      },
+      {
+        "step": 3,
+        "state": {
+          "tier": "weak",
+          "iteration": 3,
+          "pass_rate_prev": 0.0,
+          "stall_count": 0,
+          "cost_so_far": 4.5
+        },
+        "action": "escalate_to_strong",
+        "next_state": {
+          "tier": "strong",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T014_ep",
+        "task_id": "T014"
+      },
+      {
+        "step": 4,
+        "state": {
+          "tier": "strong",
+          "iteration": 4,
+          "pass_rate_prev": 0.0,
+          "stall_count": 1,
+          "cost_so_far": 8.0
+        },
+        "action": "retry_strong",
+        "next_state": {
+          "tier": "strong",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T014_ep",
+        "task_id": "T014"
+      },
+      {
+        "step": 5,
+        "state": {
+          "tier": "strong",
+          "iteration": 5,
+          "pass_rate_prev": 0.0,
+          "stall_count": 0,
+          "cost_so_far": 11.5
+        },
+        "action": "escalate_to_human",
+        "next_state": {
+          "tier": "human",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T014_ep",
+        "task_id": "T014"
+      },
+      {
+        "step": 6,
+        "state": {
+          "tier": "human",
+          "iteration": 6,
+          "pass_rate_prev": 1.0,
+          "stall_count": 0,
+          "cost_so_far": 22.0
+        },
+        "action": "solved",
+        "next_state": {
+          "tier": "human",
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "episode_id": "T014_ep",
+        "task_id": "T014"
+      }
+    ]
+  },
+  {
+    "task_id": "T015",
+    "policy": "ProgressHeuristicPolicy",
+    "metrics": {
+      "task_id": "T015",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 6,
+      "escalated_to_strong": true,
+      "escalated_to_human": true,
+      "final_pass_rate": 1.0,
+      "cost_score": 22.0
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "pass_rate_prev": 0.0,
+          "stall_count": 0,
+          "cost_so_far": 1.5
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "tier": "weak",
+          "pass_rate": 0.0
+        },
+        "reward": -0.3,
+        "done": false,
+        "episode_id": "T015_ep",
+        "task_id": "T015"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "weak",
+          "iteration": 2,
+          "pass_rate_prev": 0.0,
+          "stall_count": 1,
+          "cost_so_far": 3.0
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "tier": "weak",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T015_ep",
+        "task_id": "T015"
+      },
+      {
+        "step": 3,
+        "state": {
+          "tier": "weak",
+          "iteration": 3,
+          "pass_rate_prev": 0.0,
+          "stall_count": 0,
+          "cost_so_far": 4.5
+        },
+        "action": "escalate_to_strong",
+        "next_state": {
+          "tier": "strong",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T015_ep",
+        "task_id": "T015"
+      },
+      {
+        "step": 4,
+        "state": {
+          "tier": "strong",
+          "iteration": 4,
+          "pass_rate_prev": 0.0,
+          "stall_count": 1,
+          "cost_so_far": 8.0
+        },
+        "action": "retry_strong",
+        "next_state": {
+          "tier": "strong",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T015_ep",
+        "task_id": "T015"
+      },
+      {
+        "step": 5,
+        "state": {
+          "tier": "strong",
+          "iteration": 5,
+          "pass_rate_prev": 0.0,
+          "stall_count": 0,
+          "cost_so_far": 11.5
+        },
+        "action": "escalate_to_human",
+        "next_state": {
+          "tier": "human",
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T015_ep",
+        "task_id": "T015"
+      },
+      {
+        "step": 6,
+        "state": {
+          "tier": "human",
+          "iteration": 6,
+          "pass_rate_prev": 1.0,
+          "stall_count": 0,
+          "cost_so_far": 22.0
+        },
+        "action": "solved",
+        "next_state": {
+          "tier": "human",
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "episode_id": "T015_ep",
+        "task_id": "T015"
+      }
+    ]
+  }
+]

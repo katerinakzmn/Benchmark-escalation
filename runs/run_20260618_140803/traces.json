@@ -1,0 +1,786 @@
+[
+  {
+    "task_id": "T001",
+    "policy": "RetryThenEscalatePolicy",
+    "metrics": {
+      "task_id": "T001",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 1.5
+        },
+        "action": "use_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "episode_id": "T001_ep",
+        "task_id": "T001"
+      }
+    ]
+  },
+  {
+    "task_id": "T002",
+    "policy": "RetryThenEscalatePolicy",
+    "metrics": {
+      "task_id": "T002",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 2,
+      "escalated_to_strong": true,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 5.0
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 1.5
+        },
+        "action": "use_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T002_ep",
+        "task_id": "T002"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "strong",
+          "iteration": 2,
+          "cost_so_far": 5.0
+        },
+        "action": "use_strong",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "episode_id": "T002_ep",
+        "task_id": "T002"
+      }
+    ]
+  },
+  {
+    "task_id": "T003",
+    "policy": "RetryThenEscalatePolicy",
+    "metrics": {
+      "task_id": "T003",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 3,
+      "escalated_to_strong": true,
+      "escalated_to_human": true,
+      "final_pass_rate": 1.0,
+      "cost_score": 15.5
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 1.5
+        },
+        "action": "use_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T003_ep",
+        "task_id": "T003"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "strong",
+          "iteration": 2,
+          "cost_so_far": 5.0
+        },
+        "action": "use_strong",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T003_ep",
+        "task_id": "T003"
+      },
+      {
+        "step": 3,
+        "state": {
+          "tier": "human",
+          "iteration": 3,
+          "cost_so_far": 15.5
+        },
+        "action": "use_human",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "episode_id": "T003_ep",
+        "task_id": "T003"
+      }
+    ]
+  },
+  {
+    "task_id": "T004",
+    "policy": "RetryThenEscalatePolicy",
+    "metrics": {
+      "task_id": "T004",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 2,
+      "escalated_to_strong": true,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 5.0
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 1.5
+        },
+        "action": "use_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T004_ep",
+        "task_id": "T004"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "strong",
+          "iteration": 2,
+          "cost_so_far": 5.0
+        },
+        "action": "use_strong",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "episode_id": "T004_ep",
+        "task_id": "T004"
+      }
+    ]
+  },
+  {
+    "task_id": "T005",
+    "policy": "RetryThenEscalatePolicy",
+    "metrics": {
+      "task_id": "T005",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 1.5
+        },
+        "action": "use_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "episode_id": "T005_ep",
+        "task_id": "T005"
+      }
+    ]
+  },
+  {
+    "task_id": "T006",
+    "policy": "RetryThenEscalatePolicy",
+    "metrics": {
+      "task_id": "T006",
+      "difficulty": "medium",
+      "solved": false,
+      "total_iterations": 3,
+      "escalated_to_strong": true,
+      "escalated_to_human": true,
+      "final_pass_rate": 0.0,
+      "cost_score": 15.5
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 1.5
+        },
+        "action": "use_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T006_ep",
+        "task_id": "T006"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "strong",
+          "iteration": 2,
+          "cost_so_far": 5.0
+        },
+        "action": "use_strong",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T006_ep",
+        "task_id": "T006"
+      },
+      {
+        "step": 3,
+        "state": {
+          "tier": "human",
+          "iteration": 3,
+          "cost_so_far": 15.5
+        },
+        "action": "use_human",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T006_ep",
+        "task_id": "T006"
+      }
+    ]
+  },
+  {
+    "task_id": "T007",
+    "policy": "RetryThenEscalatePolicy",
+    "metrics": {
+      "task_id": "T007",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 3,
+      "escalated_to_strong": true,
+      "escalated_to_human": true,
+      "final_pass_rate": 1.0,
+      "cost_score": 15.5
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 1.5
+        },
+        "action": "use_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T007_ep",
+        "task_id": "T007"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "strong",
+          "iteration": 2,
+          "cost_so_far": 5.0
+        },
+        "action": "use_strong",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T007_ep",
+        "task_id": "T007"
+      },
+      {
+        "step": 3,
+        "state": {
+          "tier": "human",
+          "iteration": 3,
+          "cost_so_far": 15.5
+        },
+        "action": "use_human",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "episode_id": "T007_ep",
+        "task_id": "T007"
+      }
+    ]
+  },
+  {
+    "task_id": "T008",
+    "policy": "RetryThenEscalatePolicy",
+    "metrics": {
+      "task_id": "T008",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 1.5
+        },
+        "action": "use_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "episode_id": "T008_ep",
+        "task_id": "T008"
+      }
+    ]
+  },
+  {
+    "task_id": "T009",
+    "policy": "RetryThenEscalatePolicy",
+    "metrics": {
+      "task_id": "T009",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 2,
+      "escalated_to_strong": true,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 5.0
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 1.5
+        },
+        "action": "use_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T009_ep",
+        "task_id": "T009"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "strong",
+          "iteration": 2,
+          "cost_so_far": 5.0
+        },
+        "action": "use_strong",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "episode_id": "T009_ep",
+        "task_id": "T009"
+      }
+    ]
+  },
+  {
+    "task_id": "T010",
+    "policy": "RetryThenEscalatePolicy",
+    "metrics": {
+      "task_id": "T010",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 3,
+      "escalated_to_strong": true,
+      "escalated_to_human": true,
+      "final_pass_rate": 1.0,
+      "cost_score": 15.5
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 1.5
+        },
+        "action": "use_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T010_ep",
+        "task_id": "T010"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "strong",
+          "iteration": 2,
+          "cost_so_far": 5.0
+        },
+        "action": "use_strong",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T010_ep",
+        "task_id": "T010"
+      },
+      {
+        "step": 3,
+        "state": {
+          "tier": "human",
+          "iteration": 3,
+          "cost_so_far": 15.5
+        },
+        "action": "use_human",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "episode_id": "T010_ep",
+        "task_id": "T010"
+      }
+    ]
+  },
+  {
+    "task_id": "T011",
+    "policy": "RetryThenEscalatePolicy",
+    "metrics": {
+      "task_id": "T011",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 3,
+      "escalated_to_strong": true,
+      "escalated_to_human": true,
+      "final_pass_rate": 1.0,
+      "cost_score": 15.5
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 1.5
+        },
+        "action": "use_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T011_ep",
+        "task_id": "T011"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "strong",
+          "iteration": 2,
+          "cost_so_far": 5.0
+        },
+        "action": "use_strong",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T011_ep",
+        "task_id": "T011"
+      },
+      {
+        "step": 3,
+        "state": {
+          "tier": "human",
+          "iteration": 3,
+          "cost_so_far": 15.5
+        },
+        "action": "use_human",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "episode_id": "T011_ep",
+        "task_id": "T011"
+      }
+    ]
+  },
+  {
+    "task_id": "T012",
+    "policy": "RetryThenEscalatePolicy",
+    "metrics": {
+      "task_id": "T012",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 2,
+      "escalated_to_strong": true,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 5.0
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 1.5
+        },
+        "action": "use_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T012_ep",
+        "task_id": "T012"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "strong",
+          "iteration": 2,
+          "cost_so_far": 5.0
+        },
+        "action": "use_strong",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "episode_id": "T012_ep",
+        "task_id": "T012"
+      }
+    ]
+  },
+  {
+    "task_id": "T013",
+    "policy": "RetryThenEscalatePolicy",
+    "metrics": {
+      "task_id": "T013",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 2,
+      "escalated_to_strong": true,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 5.0
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 1.5
+        },
+        "action": "use_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T013_ep",
+        "task_id": "T013"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "strong",
+          "iteration": 2,
+          "cost_so_far": 5.0
+        },
+        "action": "use_strong",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "episode_id": "T013_ep",
+        "task_id": "T013"
+      }
+    ]
+  },
+  {
+    "task_id": "T014",
+    "policy": "RetryThenEscalatePolicy",
+    "metrics": {
+      "task_id": "T014",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 3,
+      "escalated_to_strong": true,
+      "escalated_to_human": true,
+      "final_pass_rate": 1.0,
+      "cost_score": 15.5
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 1.5
+        },
+        "action": "use_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T014_ep",
+        "task_id": "T014"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "strong",
+          "iteration": 2,
+          "cost_so_far": 5.0
+        },
+        "action": "use_strong",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T014_ep",
+        "task_id": "T014"
+      },
+      {
+        "step": 3,
+        "state": {
+          "tier": "human",
+          "iteration": 3,
+          "cost_so_far": 15.5
+        },
+        "action": "use_human",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "episode_id": "T014_ep",
+        "task_id": "T014"
+      }
+    ]
+  },
+  {
+    "task_id": "T015",
+    "policy": "RetryThenEscalatePolicy",
+    "metrics": {
+      "task_id": "T015",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 3,
+      "escalated_to_strong": true,
+      "escalated_to_human": true,
+      "final_pass_rate": 1.0,
+      "cost_score": 15.5
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 1.5
+        },
+        "action": "use_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T015_ep",
+        "task_id": "T015"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "strong",
+          "iteration": 2,
+          "cost_so_far": 5.0
+        },
+        "action": "use_strong",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "episode_id": "T015_ep",
+        "task_id": "T015"
+      },
+      {
+        "step": 3,
+        "state": {
+          "tier": "human",
+          "iteration": 3,
+          "cost_so_far": 15.5
+        },
+        "action": "use_human",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "episode_id": "T015_ep",
+        "task_id": "T015"
+      }
+    ]
+  }
+]
