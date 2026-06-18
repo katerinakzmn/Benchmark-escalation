@@ -1,5 +1,4 @@
-# auto-generated from dataset/tasks.json
-# pytest test_solution.py
+from original_code import *
 
 def test_flat_basic():
     assert flatten_dict({'a': {'b': 1}}) == {'a_b': 1}

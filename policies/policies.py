@@ -13,13 +13,14 @@ def get_policy(name: str, cfg: dict):
         "confidence_threshold":  ConfidenceThresholdPolicy,
         "human_fallback":        HumanFallbackPolicy,
         "random":                RandomPolicy,
+        "oracle":                OraclePolicy,
     }
     if name not in policies:
         raise ValueError(f"Unknown policy: {name}")
     return policies[name](cfg)
 
 
-# ── базовый класс ──────────────────────────────────────────────
+# Base policy
 class BasePolicy:
     def __init__(self, cfg: dict):
         self.cfg = cfg
@@ -47,7 +48,6 @@ class BasePolicy:
         return {"pass_rate": result.pass_rate, "success": result.success}
 
     def _make_trace_record(self, task_id: str, steps: list, metrics: dict) -> dict:
-        # добавляем episode_id и task_id в каждый шаг
         for step in steps:
             step["episode_id"] = f"{task_id}_ep"
             step["task_id"] = task_id
@@ -59,7 +59,7 @@ class BasePolicy:
         }
 
 
-# ── FixedWeak ──────────────────────────────────────────────────
+# FixedWeak
 class FixedWeakPolicy(BasePolicy):
     """Всегда использует только weak модель."""
 
@@ -95,7 +95,7 @@ class FixedWeakPolicy(BasePolicy):
             task.instance_id, steps, metrics)}
 
 
-# ── FixedStrong ────────────────────────────────────────────────
+# FixedStrong
 class FixedStrongPolicy(BasePolicy):
     """Всегда использует только strong модель."""
 
@@ -125,9 +125,9 @@ class FixedStrongPolicy(BasePolicy):
             task.instance_id, [step], metrics)}
 
 
-# ── RetryThenEscalate ──────────────────────────────────────────
+# RetryThenEscalate
 class RetryThenEscalatePolicy(BasePolicy):
-    """weak × N → strong × M → human."""
+    """Try weak N times, then strong M times, then human fallback."""
 
     def run_task(self, task, backend, budget_cfg, costs_cfg) -> dict:
         metrics = self._base_metrics(task.instance_id, task.difficulty)
@@ -178,7 +178,7 @@ class RetryThenEscalatePolicy(BasePolicy):
             task.instance_id, steps, metrics)}
 
 
-# ── ProgressHeuristic ──────────────────────────────────────────
+# ProgressHeuristic
 class ProgressHeuristicPolicy(BasePolicy):
     """Эскалирует если pass_rate не растёт K итераций подряд."""
 
@@ -202,7 +202,7 @@ class ProgressHeuristicPolicy(BasePolicy):
             stall_count = 0 if progress > 0.01 else stall_count + 1
             prev_pass_rate = test_result["pass_rate"]
 
-            # определяем следующее действие
+            state_tier = tier
             if test_result["success"]:
                 action = "solved"
             elif stall_count >= k and tier == "weak":
@@ -220,11 +220,11 @@ class ProgressHeuristicPolicy(BasePolicy):
 
             step = {
                 "step": i,
-                "state": {"tier": tier, "iteration": i,
+                "state": {"tier": state_tier, "iteration": i,
                           "pass_rate_prev": round(prev_pass_rate, 3),
                           "stall_count": stall_count, "cost_so_far": round(cost, 2)},
                 "action": action,
-                "next_state": {"pass_rate": test_result["pass_rate"]},
+                "next_state": {"tier": tier, "pass_rate": test_result["pass_rate"]},
                 "reward": 1.0 if test_result["success"] else (-0.3 if progress > 0 else -0.5),
                 "done": test_result["success"],
             }
@@ -241,7 +241,7 @@ class ProgressHeuristicPolicy(BasePolicy):
             task.instance_id, steps, metrics)}
 
 
-# ── ConfidenceThreshold ────────────────────────────────────────
+# ConfidenceThreshold
 class ConfidenceThresholdPolicy(BasePolicy):
     """Эскалирует если confidence reviewer'а < порога."""
 
@@ -262,6 +262,7 @@ class ConfidenceThresholdPolicy(BasePolicy):
 
             confidence = review.get("confidence", 0.5)
 
+            state_tier = tier
             if test_result["success"]:
                 action = "solved"
             elif confidence < threshold and tier == "weak":
@@ -277,9 +278,60 @@ class ConfidenceThresholdPolicy(BasePolicy):
 
             step = {
                 "step": i,
-                "state": {"tier": tier, "iteration": i, "confidence": confidence,
+                "state": {"tier": state_tier, "iteration": i, "confidence": confidence,
                           "cost_so_far": round(cost, 2)},
                 "action": action,
+                "next_state": {"tier": tier, "pass_rate": test_result["pass_rate"]},
+                "reward": 1.0 if test_result["success"] else -0.5,
+                "done": test_result["success"],
+            }
+            steps.append(step)
+
+            if test_result["success"]:
+                metrics["solved"] = True
+                metrics["final_pass_rate"] = test_result["pass_rate"]
+                break
+
+        metrics["total_iterations"] = len(steps)
+        metrics["cost_score"] = round(cost, 2)
+        return {"metrics": metrics, "trace_record": self._make_trace_record(
+            task.instance_id, steps, metrics)}
+
+
+# HumanFallback
+class HumanFallbackPolicy(BasePolicy):
+    """Weak, then strong, then human. One attempt per tier."""
+
+    def run_task(self, task, backend, budget_cfg, costs_cfg) -> dict:
+        cfg = {**self.cfg, "max_weak_attempts": 1, "max_strong_attempts": 1}
+        return RetryThenEscalatePolicy(cfg).run_task(task, backend, budget_cfg, costs_cfg)
+
+
+# Random
+class RandomPolicy(BasePolicy):
+    """Random tier at each step; used as a lower-bound baseline."""
+
+    def run_task(self, task, backend, budget_cfg, costs_cfg) -> dict:
+        import random
+        metrics = self._base_metrics(task.instance_id, task.difficulty)
+        max_iter = budget_cfg.get("max_total_iterations", 7)
+        tiers = ["weak", "strong", "human"]
+        steps = []
+        cost = 0.0
+        task_seed = sum(ord(char) for char in task.instance_id)
+        rng = random.Random(self.cfg.get("seed", 42) + task_seed)
+
+        for i in range(1, max_iter + 1):
+            tier = rng.choice(tiers)
+            code = backend.generate(task.instance_id, tier)
+            test_result = self._run_tests(task, code)
+            cost_key = {"weak": "weak_call", "strong": "strong_call", "human": "human_call"}[tier]
+            cost += costs_cfg.get(cost_key, 1) + costs_cfg.get("test_run", 0.5)
+
+            step = {
+                "step": i,
+                "state": {"tier": tier, "iteration": i, "cost_so_far": round(cost, 2)},
+                "action": f"random_{tier}",
                 "next_state": {"pass_rate": test_result["pass_rate"]},
                 "reward": 1.0 if test_result["success"] else -0.5,
                 "done": test_result["success"],
@@ -297,39 +349,31 @@ class ConfidenceThresholdPolicy(BasePolicy):
             task.instance_id, steps, metrics)}
 
 
-# ── HumanFallback ──────────────────────────────────────────────
-class HumanFallbackPolicy(BasePolicy):
-    """weak → strong → human. Аналог RetryThenEscalate с одной попыткой на tier."""
+# Oracle
+class OraclePolicy(BasePolicy):
+    """Offline upper-bound policy: use the first tier that solves the task."""
 
     def run_task(self, task, backend, budget_cfg, costs_cfg) -> dict:
-        cfg = {**self.cfg, "max_weak_attempts": 1, "max_strong_attempts": 1}
-        return RetryThenEscalatePolicy(cfg).run_task(task, backend, budget_cfg, costs_cfg)
-
-
-# ── Random ─────────────────────────────────────────────────────
-class RandomPolicy(BasePolicy):
-    """Случайный tier на каждом шаге — нижняя граница."""
-
-    def run_task(self, task, backend, budget_cfg, costs_cfg) -> dict:
-        import random
         metrics = self._base_metrics(task.instance_id, task.difficulty)
-        max_iter = budget_cfg.get("max_total_iterations", 7)
-        tiers = ["weak", "strong", "human"]
         steps = []
         cost = 0.0
 
-        for i in range(1, max_iter + 1):
-            tier = random.choice(tiers)
+        for i, tier in enumerate(["weak", "strong", "human"], start=1):
             code = backend.generate(task.instance_id, tier)
             test_result = self._run_tests(task, code)
             cost_key = {"weak": "weak_call", "strong": "strong_call", "human": "human_call"}[tier]
             cost += costs_cfg.get(cost_key, 1) + costs_cfg.get("test_run", 0.5)
 
+            if tier == "strong":
+                metrics["escalated_to_strong"] = True
+            if tier == "human":
+                metrics["escalated_to_human"] = True
+
             step = {
                 "step": i,
                 "state": {"tier": tier, "iteration": i, "cost_so_far": round(cost, 2)},
-                "action": f"random_{tier}",
-                "next_state": {"pass_rate": test_result["pass_rate"]},
+                "action": f"oracle_try_{tier}",
+                "next_state": {"tier": tier, "pass_rate": test_result["pass_rate"]},
                 "reward": 1.0 if test_result["success"] else -0.5,
                 "done": test_result["success"],
             }

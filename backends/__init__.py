@@ -1,10 +1,18 @@
+"""Backend registry for benchmark runners."""
+
+from backends.llm_backends import GeminiBackend, OpenAIBackend
 from backends.mock_backend import MockBackend
-from backends.openai_backend import OpenAIBackend
+
 
 def get_backend(name: str):
-    if name == "mock":
-        return MockBackend()
-    elif name == "openai":
-        return OpenAIBackend()
-    else:
-        raise ValueError(f"Unknown backend: {name}. Use 'mock' or 'openai'.")
+    backends = {
+        "mock": MockBackend,
+        "openai": OpenAIBackend,
+        "gemini": GeminiBackend,
+    }
+    try:
+        return backends[name]()
+    except KeyError as exc:
+        raise ValueError(
+            f"Unknown backend: {name}. Use 'mock', 'openai', or 'gemini'."
+        ) from exc

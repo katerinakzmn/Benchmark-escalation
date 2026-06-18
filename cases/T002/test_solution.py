@@ -1,5 +1,4 @@
-# auto-generated from dataset/tasks.json
-# pytest test_solution.py
+from original_code import *
 
 def test_vowels_basic():
     assert count_vowels('hello') == 2

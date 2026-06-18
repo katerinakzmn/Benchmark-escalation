@@ -30,7 +30,7 @@ class Message:
 @dataclass
 class AgentMemory:
     """
-    Память агента — история всех сообщений и решений.
+    Память агента: история всех сообщений и решений.
     Менеджер использует её для принятия решений об эскалации.
     """
     messages: list = field(default_factory=list)

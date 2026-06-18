@@ -1,5 +1,4 @@
-# auto-generated from dataset/tasks.json
-# pytest test_solution.py
+from original_code import *
 
 def test_pal_basic():
     assert is_palindrome('racecar') is True

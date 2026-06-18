@@ -1,5 +1,4 @@
-# auto-generated from dataset/tasks.json
-# pytest test_solution.py
+from original_code import *
 
 def test_topo_basic():
     g={'A':['B','C'],'B':['D'],'C':['D'],'D':[]}

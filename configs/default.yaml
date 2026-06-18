@@ -1,5 +1,6 @@
 dataset: toy
-backend: mock   # переключи на openai для запуска c API-ключа
+backend: mock   # use openai or gemini only when provider credentials are configured
+seed: 42
 
 policy:
   name: retry_then_escalate

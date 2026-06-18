@@ -1,5 +1,3 @@
-# T008 — original buggy code
-
 def most_frequent(items: list):
     if not items:
         return None

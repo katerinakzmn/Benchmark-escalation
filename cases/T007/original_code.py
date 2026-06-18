@@ -1,5 +1,3 @@
-# T007 — original buggy code
-
 def flatten_dict(d: dict, parent_key: str = '') -> dict:
     items = {}
     for k, v in d.items():

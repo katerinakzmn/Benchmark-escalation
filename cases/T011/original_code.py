@@ -1,5 +1,3 @@
-# T011 — original buggy code
-
 import time
 from collections import deque
 class RateLimiter:

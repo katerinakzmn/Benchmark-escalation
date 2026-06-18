@@ -1,5 +1,4 @@
-# auto-generated from dataset/tasks.json
-# pytest test_solution.py
+from original_code import *
 
 def test_chunk_basic():
     assert chunk_list([1,2,3],2) == [[1,2],[3]]

@@ -1,5 +1,4 @@
-# auto-generated from dataset/tasks.json
-# pytest test_solution.py
+from original_code import *
 
 def test_sum_basic():
     assert sum_positive([1,2,3]) == 6

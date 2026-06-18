@@ -1,5 +1,3 @@
-# T012 — original buggy code
-
 from collections import OrderedDict
 class LRUCache:
     def __init__(self, capacity: int):

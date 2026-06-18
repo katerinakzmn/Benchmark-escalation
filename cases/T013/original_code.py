@@ -1,5 +1,3 @@
-# T013 — original buggy code
-
 def merge_intervals(intervals: list[list[int]]) -> list[list[int]]:
     if not intervals:
         return []

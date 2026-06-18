@@ -13,7 +13,6 @@ import sys
 import yaml
 from datetime import datetime
 
-# ВАЖНО: sys.path до любых локальных импортов
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from tasks import load_tasks
@@ -37,14 +36,18 @@ def make_run_dir() -> str:
 
 
 def run_benchmark(args, config: dict):
+    dataset_name = args.dataset or config.get("dataset", "toy")
     backend_name = args.backend or config.get("backend", "mock")
     policy_name  = args.policy  or config.get("policy", {}).get("name", "retry_then_escalate")
-    policy_cfg   = config.get("policy", {})
+    policy_cfg   = {**config.get("policy", {}), "seed": config.get("seed", 42)}
     budget_cfg   = config.get("budget", {"max_total_iterations": 7})
     costs_cfg    = config.get("costs",  {"weak_call": 1, "strong_call": 3,
                                           "review_call": 1, "test_run": 0.5, "human_call": 10})
 
-    # --- загрузка задач ---
+    #  загрузка задач
+    if dataset_name != "toy":
+        raise ValueError("Only the toy dataset is available in this prototype.")
+
     all_tasks = load_tasks()
     if args.tasks:
         all_tasks = [t for t in all_tasks if t.instance_id in args.tasks]
@@ -52,11 +55,11 @@ def run_benchmark(args, config: dict):
         print("[ERROR] No tasks found. Check dataset/tasks.json or --tasks filter.")
         sys.exit(1)
 
-    # --- backend и policy ---
+    #  backend и policy
     backend = get_backend(backend_name)
     policy  = get_policy(policy_name, policy_cfg)
 
-    # --- создаём run директорию ---
+    #  создаём run директорию
     run_dir = make_run_dir()
     print(f"\n{'='*50}")
     print(f"  Benchmark run: {run_dir}")
@@ -65,9 +68,11 @@ def run_benchmark(args, config: dict):
     print(f"  Tasks   : {len(all_tasks)}")
     print(f"{'='*50}\n")
 
-    # --- сохраняем конфиг прогона ---
+    #  сохраняем конфиг прогона
     run_config = {
         "timestamp": datetime.now().isoformat(),
+        "dataset": dataset_name,
+        "seed": config.get("seed", 42),
         "backend": backend_name,
         "policy": {"name": policy_name, **policy_cfg},
         "budget": budget_cfg,
@@ -77,14 +82,14 @@ def run_benchmark(args, config: dict):
     with open(os.path.join(run_dir, "config.json"), "w", encoding="utf-8") as f:
         json.dump(run_config, f, indent=2, ensure_ascii=False)
 
-    # --- запуск задач ---
+    #  запуск задач
     all_traces  = []
     all_metrics = []
 
     for task in all_tasks:
         print(f"  Running {task.instance_id} [{task.difficulty}] ...", end=" ", flush=True)
         result = policy.run_task(task, backend, budget_cfg, costs_cfg)
-        status = "✓ solved" if result["metrics"]["solved"] else "✗ failed"
+        status = "solved" if result["metrics"]["solved"] else "failed"
         print(status)
         all_traces.append(result["trace_record"])
         all_metrics.append(result["metrics"])
@@ -125,7 +130,7 @@ def run_benchmark(args, config: dict):
         "|------|-----------|--------|-----------|------|",
     ]
     for m in all_metrics:
-        mark = "✓" if m["solved"] else "✗"
+        mark = "yes" if m["solved"] else "no"
         summary_lines.append(
             f"| {m['task_id']} | {m['difficulty']} | {mark} "
             f"| {m['total_iterations']} | {m['cost_score']:.1f} |"
@@ -140,11 +145,13 @@ def run_benchmark(args, config: dict):
 
 def main():
     parser = argparse.ArgumentParser(description="Benchmark escalation runner")
+    parser.add_argument("--dataset", choices=["toy"])
     parser.add_argument("--backend", choices=["mock", "openai", "gemini"])
     parser.add_argument("--policy",
                         choices=["fixed_weak", "fixed_strong",
                                  "retry_then_escalate", "progress_heuristic",
-                                 "confidence_threshold", "human_fallback", "random"])
+                                 "confidence_threshold", "human_fallback",
+                                 "random", "oracle"])
     parser.add_argument("--config", default="configs/default.yaml")
     parser.add_argument("--tasks", nargs="+")
     args = parser.parse_args()

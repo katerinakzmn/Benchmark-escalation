@@ -1,5 +1,4 @@
-# auto-generated from dataset/tasks.json
-# pytest test_solution.py
+from original_code import *
 
 def test_rev_basic():
     assert reverse_words('one two three') == 'three two one'

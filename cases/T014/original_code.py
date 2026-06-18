@@ -1,5 +1,3 @@
-# T014 — original buggy code
-
 from collections import deque
 def topological_sort(graph: dict) -> list:
     in_degree = {node: 0 for node in graph}

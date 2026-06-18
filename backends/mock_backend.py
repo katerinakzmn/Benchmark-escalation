@@ -1,5 +1,5 @@
 """
-Mock backend — детерминированные ответы без API-ключа.
+Mock backend - deterministic responses without an API key.
 Сценарии берутся из configs/mock.yaml (или дефолтные).
 """
 import yaml
@@ -24,7 +24,7 @@ _DEFAULT_SCENARIOS = {
     "T015": {"weak": "fail",   "strong": "fail",   "human": "solve"},
 }
 
-# Готовые фиксы для каждой задачи (correct code, который пройдёт тесты)
+# Готовые фиксы для каждой задачи
 _FIXES = {
     "T001": "def sum_positive(numbers):\n    return sum(x for x in numbers if x > 0)\n",
     "T002": "def count_vowels(text):\n    return sum(1 for c in text if c in 'aeiouAEIOU')\n",

@@ -1,5 +1,3 @@
-# T006 — original buggy code
-
 import time
 class TTLCache:
     def __init__(self, ttl: int):

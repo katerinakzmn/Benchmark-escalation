@@ -1,5 +1,3 @@
-# T002 — original buggy code
-
 def count_vowels(text: str) -> int:
     vowels = set('aeiouAEIOU')
     count = 0

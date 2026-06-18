@@ -1,5 +1,5 @@
 """
-runner/sweep.py — прогон всех политик и генерация reports/baselines.md
+runner/sweep.py - run all policies and write reports/baselines.md
 
 Пример:
   python -m runner.sweep --backend mock
@@ -13,7 +13,7 @@ from datetime import datetime
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from tasks import make_tasks
+from tasks import load_tasks
 from backends import get_backend
 from policies.policies import get_policy
 from evaluation.metrics import compute_summary
@@ -26,6 +26,7 @@ POLICIES = [
     "confidence_threshold",
     "human_fallback",
     "random",
+    "oracle",
 ]
 
 DEFAULT_BUDGET = {"max_total_iterations": 7}
@@ -36,11 +37,12 @@ DEFAULT_POLICY_CFG = {
     "max_strong_attempts": 1,
     "confidence_threshold": 0.30,
     "zero_progress_limit": 2,
+    "seed": 42,
 }
 
 
 def run_sweep(backend_name: str, task_ids: list = None) -> dict:
-    all_tasks = make_tasks()
+    all_tasks = load_tasks()
     if task_ids:
         all_tasks = [t for t in all_tasks if t.task_id in task_ids]
 
@@ -73,7 +75,7 @@ def build_report(results: dict, backend_name: str) -> str:
         f"**Backend:** `{backend_name}`  ",
         f"**Tasks:** {next(iter(results.values()))['total_tasks']}\n",
         "## Results\n",
-        "| Policy | Solved | Solved% | Avg Cost | Avg Iters | Escal→Strong | Escal→Human |",
+        "| Policy | Solved | Solved% | Avg Cost | Avg Iters | Escal to Strong | Escal to Human |",
         "|--------|--------|---------|----------|-----------|-------------|------------|",
     ]
 
@@ -115,7 +117,7 @@ def main():
     args = parser.parse_args()
 
     print(f"\n{'='*50}")
-    print(f"  Sweep: {len(POLICIES)} policies × backend={args.backend}")
+    print(f"  Sweep: {len(POLICIES)} policies, backend={args.backend}")
     print(f"{'='*50}\n")
 
     results = run_sweep(args.backend, args.tasks)

@@ -1,27 +1,26 @@
 """
-manager.py — агент-менеджер.
+manager.py - агент-менеджер.
 
-ПАЙПЛАЙН:
+Pipeline:
 
-  Developer → Manager.decide_after_generate()
-                ├── confidence OK (≥ threshold)  →  отправляем к Reviewer
-                └── cant_solve (confidence < 0.3) →  сразу эскалируем
-                                                      (Reviewer и Tester не вызываются)
+  Developer -> Manager.decide_after_generate()
+                confidence >= threshold: send to Reviewer
+                cant_solve: escalate without Reviewer or Tester
 
-  Reviewer  → Manager.decide_after_review()
-                ├── approve          →  отправляем к Tester
-                ├── request_changes  →  возвращаем Developer (тесты не запускаются)
-                └── escalate         →  эскалируем
+  Reviewer  -> Manager.decide_after_review()
+                approve: send to Tester
+                request_changes: return to Developer without tests
+                escalate: escalate
 
-  Tester    → Manager.decide_after_test()
-                ├── success          →  accept
-                ├── тесты упали      →  retry или эскалация
-                └── нет прогресса    →  быстрая эскалация к human
+  Tester    -> Manager.decide_after_test()
+                success: accept
+                failed tests: retry or escalate
+                no progress: escalate to human
 
 ЦЕПОЧКА ЭСКАЛАЦИИ:
-  1. WEAK   → попытки исчерпаны или cant_solve → ESCALATE
-  2. STRONG → попытки исчерпаны или cant_solve → ESCALATE
-  3. HUMAN  → финальный уровень
+  1. WEAK   -> attempts exhausted or cant_solve -> ESCALATE
+  2. STRONG -> attempts exhausted or cant_solve -> ESCALATE
+  3. HUMAN  -> final tier
 """
 
 from dataclasses import dataclass
@@ -32,11 +31,11 @@ from agents.base import AgentRole, ModelTier, Message, AgentMemory
 MANAGER_DECISIONS = {
     "send_to_review":    "Отправить на ревью",
     "send_to_test":      "Отправить на тестирование",
-    "request_changes":   "Вернуть разработчику — переписать",
+    "request_changes":   "Вернуть разработчику на доработку",
     "escalate_strong":   "Эскалировать сильной моделью",
     "escalate_human":    "Эскалировать человеком",
-    "accept":            "Принять — задача решена",
-    "stop":              "Остановиться — лимит исчерпан",
+    "accept":            "Принять: задача решена",
+    "stop":              "Остановиться: лимит исчерпан",
 }
 
 
@@ -46,11 +45,8 @@ class ManagerPolicy:
     Параметры политики эскалации.
     Примеры политик:
       Aggressive:   max_weak_attempts=1, confidence_threshold=0.8
-                    → быстро эскалирует при малейшей неуверенности
       Conservative: max_weak_attempts=3, confidence_threshold=0.3
-                    → даёт много попыток, эскалирует только если совсем не знает
       Strict:       pass_threshold=1.0
-                    → принимает только идеальный код
     """
 
     # Порог pass rate для успешного прохождения тестов
@@ -94,10 +90,10 @@ class ManagerAgent:
         Manager смотрит на результат Developer до Reviewer.
 
         Возможные решения:
-          send_to_review   — confidence OK, идём к Reviewer
+          send_to_review   - confidence OK, идём к Reviewer
           request_changes  - confidence низкий, но есть ещё попытки на этом уровне
-          escalate_strong  — попытки weak исчерпаны
-          escalate_human   — все уровни исчерпаны
+          escalate_strong  - попытки weak исчерпаны
+          escalate_human   - все уровни исчерпаны
         """
         self.memory.add(dev_msg)
 
@@ -114,7 +110,7 @@ class ManagerAgent:
         if confidence >= self.policy.confidence_threshold and not cant_solve:
             return (
                 "send_to_review",
-                f"Developer уверен (confidence={confidence:.2f}) → на ревью"
+                f"Developer уверен (confidence={confidence:.2f}); отправляем на ревью"
             )
 
         # Confidence низкий
@@ -127,7 +123,7 @@ class ManagerAgent:
             return (
                 "request_changes",
                 f"Низкая уверенность (confidence={confidence:.2f}) | {tier}, "
-                f"попытка {attempts}/{max_att} — повторяем без ревью"
+                f"попытка {attempts}/{max_att}; повторяем без ревью"
             )
 
         # Попытки исчерпаны, эскалируем
@@ -148,7 +144,7 @@ class ManagerAgent:
 
         # Ревьюер одобрил, отправляем на тест
         if rec == "approve":
-            return "send_to_test", f"Ревьюер одобрил (quality={quality:.2f}) → на тест"
+            return "send_to_test", f"Ревьюер одобрил (quality={quality:.2f}); отправляем на тест"
 
         # Ревьюер считает что нужна эскалация
         if rec == "escalate":
@@ -191,7 +187,7 @@ class ManagerAgent:
         if self._no_progress():
             return (
                 "escalate_human",
-                f"[БЫСТРАЯ ЭСКАЛАЦИЯ → human] нет прогресса: pass_rate=0 "
+                f"Эскалация к human: нет прогресса, pass_rate=0 "
                 f"последние {self.policy.zero_progress_limit} итерации подряд"
             )
 
@@ -223,17 +219,17 @@ class ManagerAgent:
 
 
     def _escalation_decision(self, reason: str) -> tuple[str, str]:
-        """Цепочка: weak → strong → human."""
+        """Escalation chain: weak -> strong -> human."""
         if self._iteration >= self.policy.max_total_iterations:
             return "stop", f"Лимит итераций ({self._iteration}) исчерпан"
 
         if self._current_tier == ModelTier.WEAK:
             self._current_tier = ModelTier.STRONG
             self._pass_rate_history.clear()
-            return "escalate_strong", f"[weak → strong] {reason}"
+            return "escalate_strong", f"weak -> strong: {reason}"
 
         if self._current_tier == ModelTier.STRONG:
-            return "escalate_human", f"[strong → human] {reason}"
+            return "escalate_human", f"strong -> human: {reason}"
 
         return "stop", f"Все уровни исчерпаны: {reason}"
 

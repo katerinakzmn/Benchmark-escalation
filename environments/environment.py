@@ -1,8 +1,3 @@
-"""
-environment.py — окружение бенчмарка.
-
-"""
-
 from dataclasses import dataclass
 from typing import List
 from tasks import Task
