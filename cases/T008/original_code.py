@@ -4,4 +4,4 @@ def most_frequent(items: list):
     counts = {}
     for item in items:
         counts[item] = counts.get(item, 0) + 1
-    return min(counts, key=counts.get)  # BUG
+    return min(counts, key=counts.get)

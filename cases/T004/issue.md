@@ -4,11 +4,10 @@
 
 ## Problem Statement
 
-Bug: reverse_words не разворачивает порядок слов.
+`reverse_words` does not produce the expected output.
 
 ## Steps to Reproduce
 
-Run the tests:
 ```bash
 pytest test_solution.py
 ```

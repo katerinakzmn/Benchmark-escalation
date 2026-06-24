@@ -4,11 +4,10 @@
 
 ## Problem Statement
 
-Bug: count_vowels считает согласные вместо гласных. Нужно if char in vowels.
+`count_vowels` returns wrong counts for strings containing vowels.
 
 ## Steps to Reproduce
 
-Run the tests:
 ```bash
 pytest test_solution.py
 ```

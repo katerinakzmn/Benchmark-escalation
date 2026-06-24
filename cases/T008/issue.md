@@ -4,11 +4,10 @@
 
 ## Problem Statement
 
-Bug: most_frequent использует min вместо max.
+`most_frequent` returns the wrong element from the list.
 
 ## Steps to Reproduce
 
-Run the tests:
 ```bash
 pytest test_solution.py
 ```

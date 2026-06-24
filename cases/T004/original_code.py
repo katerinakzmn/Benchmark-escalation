@@ -1,3 +1,3 @@
 def reverse_words(text: str) -> str:
     words = text.split()
-    return ' '.join(words)  # BUG
+    return ' '.join(words)
