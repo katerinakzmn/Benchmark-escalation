@@ -1,0 +1,298 @@
+{
+  "fixed_weak": {
+    "total_tasks": 15,
+    "solved_count": 3,
+    "solved_rate": 0.2,
+    "avg_final_pass_rate": 0.2,
+    "avg_pass_rate_solved": 1.0,
+    "avg_cost": 8.7,
+    "avg_cost_solved": 1.5,
+    "total_cost": 130.5,
+    "avg_iterations": 5.8,
+    "avg_iterations_solved": 1.0,
+    "escalation_to_strong_rate": 0.0,
+    "escalation_to_human_rate": 0.0,
+    "by_difficulty": {
+      "easy": {
+        "count": 5,
+        "solved": 2,
+        "solved_rate": 0.4,
+        "avg_cost": 6.9,
+        "avg_iters": 4.6
+      },
+      "medium": {
+        "count": 5,
+        "solved": 1,
+        "solved_rate": 0.2,
+        "avg_cost": 8.7,
+        "avg_iters": 5.8
+      },
+      "hard": {
+        "count": 5,
+        "solved": 0,
+        "solved_rate": 0.0,
+        "avg_cost": 10.5,
+        "avg_iters": 7.0
+      }
+    }
+  },
+  "fixed_strong": {
+    "total_tasks": 15,
+    "solved_count": 8,
+    "solved_rate": 0.533,
+    "avg_final_pass_rate": 0.567,
+    "avg_pass_rate_solved": 1.0,
+    "avg_cost": 3.5,
+    "avg_cost_solved": 3.5,
+    "total_cost": 52.5,
+    "avg_iterations": 1.0,
+    "avg_iterations_solved": 1.0,
+    "escalation_to_strong_rate": 1.0,
+    "escalation_to_human_rate": 0.0,
+    "by_difficulty": {
+      "easy": {
+        "count": 5,
+        "solved": 4,
+        "solved_rate": 0.8,
+        "avg_cost": 3.5,
+        "avg_iters": 1.0
+      },
+      "medium": {
+        "count": 5,
+        "solved": 2,
+        "solved_rate": 0.4,
+        "avg_cost": 3.5,
+        "avg_iters": 1.0
+      },
+      "hard": {
+        "count": 5,
+        "solved": 2,
+        "solved_rate": 0.4,
+        "avg_cost": 3.5,
+        "avg_iters": 1.0
+      }
+    }
+  },
+  "retry_then_escalate": {
+    "total_tasks": 15,
+    "solved_count": 14,
+    "solved_rate": 0.933,
+    "avg_final_pass_rate": 0.933,
+    "avg_pass_rate_solved": 1.0,
+    "avg_cost": 10.4,
+    "avg_cost_solved": 9.929,
+    "total_cost": 156.0,
+    "avg_iterations": 3.067,
+    "avg_iterations_solved": 3.0,
+    "escalation_to_strong_rate": 0.8,
+    "escalation_to_human_rate": 0.467,
+    "by_difficulty": {
+      "easy": {
+        "count": 5,
+        "solved": 5,
+        "solved_rate": 1.0,
+        "avg_cost": 6.6,
+        "avg_iters": 2.4
+      },
+      "medium": {
+        "count": 5,
+        "solved": 4,
+        "solved_rate": 0.8,
+        "avg_cost": 11.8,
+        "avg_iters": 3.2
+      },
+      "hard": {
+        "count": 5,
+        "solved": 5,
+        "solved_rate": 1.0,
+        "avg_cost": 12.8,
+        "avg_iters": 3.6
+      }
+    }
+  },
+  "progress_heuristic": {
+    "total_tasks": 15,
+    "solved_count": 14,
+    "solved_rate": 0.933,
+    "avg_final_pass_rate": 0.933,
+    "avg_pass_rate_solved": 1.0,
+    "avg_cost": 13.467,
+    "avg_cost_solved": 12.607,
+    "total_cost": 202.0,
+    "avg_iterations": 4.4,
+    "avg_iterations_solved": 4.214,
+    "escalation_to_strong_rate": 0.8,
+    "escalation_to_human_rate": 0.467,
+    "by_difficulty": {
+      "easy": {
+        "count": 5,
+        "solved": 5,
+        "solved_rate": 1.0,
+        "avg_cost": 8.2,
+        "avg_iters": 3.2
+      },
+      "medium": {
+        "count": 5,
+        "solved": 4,
+        "solved_rate": 0.8,
+        "avg_cost": 15.8,
+        "avg_iters": 4.8
+      },
+      "hard": {
+        "count": 5,
+        "solved": 5,
+        "solved_rate": 1.0,
+        "avg_cost": 16.4,
+        "avg_iters": 5.2
+      }
+    }
+  },
+  "confidence_threshold": {
+    "total_tasks": 15,
+    "solved_count": 3,
+    "solved_rate": 0.2,
+    "avg_final_pass_rate": 0.2,
+    "avg_pass_rate_solved": 1.0,
+    "avg_cost": 14.5,
+    "avg_cost_solved": 2.5,
+    "total_cost": 217.5,
+    "avg_iterations": 5.8,
+    "avg_iterations_solved": 1.0,
+    "escalation_to_strong_rate": 0.0,
+    "escalation_to_human_rate": 0.0,
+    "by_difficulty": {
+      "easy": {
+        "count": 5,
+        "solved": 2,
+        "solved_rate": 0.4,
+        "avg_cost": 11.5,
+        "avg_iters": 4.6
+      },
+      "medium": {
+        "count": 5,
+        "solved": 1,
+        "solved_rate": 0.2,
+        "avg_cost": 14.5,
+        "avg_iters": 5.8
+      },
+      "hard": {
+        "count": 5,
+        "solved": 0,
+        "solved_rate": 0.0,
+        "avg_cost": 17.5,
+        "avg_iters": 7.0
+      }
+    }
+  },
+  "human_fallback": {
+    "total_tasks": 15,
+    "solved_count": 14,
+    "solved_rate": 0.933,
+    "avg_final_pass_rate": 0.933,
+    "avg_pass_rate_solved": 1.0,
+    "avg_cost": 9.2,
+    "avg_cost_solved": 8.75,
+    "total_cost": 138.0,
+    "avg_iterations": 2.267,
+    "avg_iterations_solved": 2.214,
+    "escalation_to_strong_rate": 0.8,
+    "escalation_to_human_rate": 0.467,
+    "by_difficulty": {
+      "easy": {
+        "count": 5,
+        "solved": 5,
+        "solved_rate": 1.0,
+        "avg_cost": 5.7,
+        "avg_iters": 1.8
+      },
+      "medium": {
+        "count": 5,
+        "solved": 4,
+        "solved_rate": 0.8,
+        "avg_cost": 10.6,
+        "avg_iters": 2.4
+      },
+      "hard": {
+        "count": 5,
+        "solved": 5,
+        "solved_rate": 1.0,
+        "avg_cost": 11.3,
+        "avg_iters": 2.6
+      }
+    }
+  },
+  "random": {
+    "total_tasks": 15,
+    "solved_count": 13,
+    "solved_rate": 0.867,
+    "avg_final_pass_rate": 0.867,
+    "avg_pass_rate_solved": 1.0,
+    "avg_cost": 11.5,
+    "avg_cost_solved": 10.423,
+    "total_cost": 172.5,
+    "avg_iterations": 2.867,
+    "avg_iterations_solved": 2.231,
+    "escalation_to_strong_rate": 0.0,
+    "escalation_to_human_rate": 0.0,
+    "by_difficulty": {
+      "easy": {
+        "count": 5,
+        "solved": 5,
+        "solved_rate": 1.0,
+        "avg_cost": 5.1,
+        "avg_iters": 1.4
+      },
+      "medium": {
+        "count": 5,
+        "solved": 4,
+        "solved_rate": 0.8,
+        "avg_cost": 10.9,
+        "avg_iters": 3.0
+      },
+      "hard": {
+        "count": 5,
+        "solved": 4,
+        "solved_rate": 0.8,
+        "avg_cost": 18.5,
+        "avg_iters": 4.2
+      }
+    }
+  },
+  "oracle": {
+    "total_tasks": 15,
+    "solved_count": 14,
+    "solved_rate": 0.933,
+    "avg_final_pass_rate": 0.933,
+    "avg_pass_rate_solved": 1.0,
+    "avg_cost": 9.2,
+    "avg_cost_solved": 8.75,
+    "total_cost": 138.0,
+    "avg_iterations": 2.267,
+    "avg_iterations_solved": 2.214,
+    "escalation_to_strong_rate": 0.8,
+    "escalation_to_human_rate": 0.467,
+    "by_difficulty": {
+      "easy": {
+        "count": 5,
+        "solved": 5,
+        "solved_rate": 1.0,
+        "avg_cost": 5.7,
+        "avg_iters": 1.8
+      },
+      "medium": {
+        "count": 5,
+        "solved": 4,
+        "solved_rate": 0.8,
+        "avg_cost": 10.6,
+        "avg_iters": 2.4
+      },
+      "hard": {
+        "count": 5,
+        "solved": 5,
+        "solved_rate": 1.0,
+        "avg_cost": 11.3,
+        "avg_iters": 2.6
+      }
+    }
+  }
+}
