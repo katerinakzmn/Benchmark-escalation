@@ -4,7 +4,7 @@
 
 ## Problem Statement
 
-Bug: chunk_list пропускает последний chunk.
+`chunk_list` produces an incomplete result — some elements are missing from the output.
 
 ## Steps to Reproduce
 

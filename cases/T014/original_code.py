@@ -10,7 +10,7 @@ def topological_sort(graph: dict) -> list:
         node = q.popleft()
         order.append(node)
         for nei in graph.get(node, []):
-            in_degree[nei] += 1  # BUG: должно быть -= 1
+            in_degree[nei] += 1
             if in_degree[nei] == 0:
                 q.append(nei)
     return order

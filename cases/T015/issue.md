@@ -4,7 +4,7 @@
 
 ## Problem Statement
 
-Bug: shortest_path_bfs помечает вершину visited после извлечения, а не при добавлении в очередь.
+`shortest_path_bfs` returns incorrect distances or enters an infinite loop on certain graphs.
 
 ## Steps to Reproduce
 

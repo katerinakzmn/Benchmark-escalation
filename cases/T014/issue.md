@@ -4,7 +4,7 @@
 
 ## Problem Statement
 
-Bug: topological_sort увеличивает in_degree вместо уменьшения при обработке соседей.
+`topological_sort` returns an incorrect ordering — nodes appear in the wrong position or the result is incomplete.
 
 ## Steps to Reproduce
 

@@ -4,7 +4,7 @@
 
 ## Problem Statement
 
-Bug: find_max возвращает min(numbers) вместо max(numbers).
+`find_max` consistently returns an incorrect value.
 
 ## Steps to Reproduce
 

@@ -4,7 +4,7 @@
 
 ## Problem Statement
 
-Bug: RateLimiter.is_allowed() использует now + window (BUG1) и неправильное условие > cutoff вместо < cutoff (BUG2).
+`RateLimiter.is_allowed()` behaves incorrectly: it either blocks requests that should be allowed or allows requests that should be blocked. The sliding window logic appears to be broken.
 
 ## Steps to Reproduce
 

@@ -4,7 +4,7 @@
 
 ## Problem Statement
 
-Bug: LRUCache.get() не обновляет порядок использования ключа (нет move_to_end).
+`LRUCache` eviction policy is incorrect: it evicts the wrong entry when capacity is exceeded.
 
 ## Steps to Reproduce
 

@@ -4,7 +4,7 @@
 
 ## Problem Statement
 
-Bug: sum_positive пропускает последний элемент списка. Нужно range(len(numbers)) вместо range(len(numbers)-1).
+`sum_positive` returns incorrect results for most input lists.
 
 ## Steps to Reproduce
 

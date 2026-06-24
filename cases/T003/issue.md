@@ -4,7 +4,7 @@
 
 ## Problem Statement
 
-Bug: is_palindrome не игнорирует регистр. Нужно сравнивать lower() строку.
+`is_palindrome` incorrectly rejects valid palindromes in some cases.
 
 ## Steps to Reproduce
 

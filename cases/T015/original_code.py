@@ -6,7 +6,7 @@ def shortest_path_bfs(graph: dict, start: str, goal: str) -> int:
         node, dist = q.popleft()
         if node == goal:
             return dist
-        visited.add(node)  # BUG: должно быть перед добавлением в очередь
+        visited.add(node)
         for nei in graph.get(node, []):
             if nei not in visited:
                 q.append((nei, dist + 1))
