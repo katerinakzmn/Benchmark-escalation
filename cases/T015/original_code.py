@@ -1,4 +1,5 @@
 from collections import deque
+
 def shortest_path_bfs(graph: dict, start: str, goal: str) -> int:
     q = deque([(start, 0)])
     visited = set()

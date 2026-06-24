@@ -8,7 +8,6 @@
 
 ## Steps to Reproduce
 
-Run the tests:
 ```bash
 pytest test_solution.py
 ```
