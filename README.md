@@ -81,7 +81,7 @@ benchmark_escalation/
 
 - Python 3.10+
 - pip
-- virtualenv (recommended)
+
 
 ### Install dependencies
 
