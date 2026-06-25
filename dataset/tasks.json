@@ -272,7 +272,7 @@
     "instance_id": "T011",
     "difficulty": "hard",
     "problem_statement": "RateLimiter.is_allowed() behaves incorrectly: it either blocks requests that should be allowed or allows requests that should be blocked. The sliding window logic appears to be broken.",
-    "original_code": "import time\nfrom collections import deque\nclass RateLimiter:\n    def __init__(self, max_calls: int, window_seconds: float):\n        self.max_calls = max_calls\n        self.window = window_seconds\n        self.calls = deque()\n    def is_allowed(self) -> bool:\n        now = time.time()\n        cutoff = now + self.window\n        while self.calls and self.calls[0] > cutoff:\n            self.calls.popleft()\n        if len(self.calls) >= self.max_calls:\n            return False\n        self.calls.append(now)\n        return True\n",
+    "original_code": "import time\n\nclass RateLimiter:\n    def __init__(self, max_calls: int, window_seconds: float):\n        self.max_calls = max_calls\n        self.window = window_seconds\n        self.calls = []  # должен быть deque\n\n    def is_allowed(self) -> bool:\n        now = time.time()\n        cutoff = now + self.window  # неверное направление окна\n        self.calls = [t for t in self.calls if t > cutoff]  # неверное условие\n        if len(self.calls) >= self.max_calls:\n            return False\n        self.calls.append(now)\n        return True\n",
     "tests": [
       {
         "name": "test_rl_basic",
@@ -298,7 +298,7 @@
     "instance_id": "T012",
     "difficulty": "hard",
     "problem_statement": "LRUCache eviction policy is incorrect: it evicts the wrong entry when capacity is exceeded.",
-    "original_code": "from collections import OrderedDict\nclass LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = OrderedDict()\n    def get(self, key: int) -> int:\n        if key not in self.cache:\n            return -1\n        return self.cache[key]\n    def put(self, key: int, value: int) -> None:\n        if key in self.cache:\n            self.cache.move_to_end(key)\n        self.cache[key] = value\n        if len(self.cache) > self.capacity:\n            self.cache.popitem(last=False)\n",
+    "original_code": "from collections import OrderedDict\n\nclass LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = OrderedDict()\n\n    def get(self, key: int) -> int:\n        if key not in self.cache:\n            return -1\n        # нет move_to_end → LRU-порядок не обновляется\n        return self.cache[key]\n\n    def put(self, key: int, value: int) -> None:\n        if key in self.cache:\n            del self.cache[key]\n        self.cache[key] = value\n        if len(self.cache) > self.capacity:\n            self.cache.popitem(last=True)  # удаляет ПОСЛЕДНИЙ вместо первого\n",
     "tests": [
       {
         "name": "test_lru_basic",
@@ -324,7 +324,7 @@
     "instance_id": "T013",
     "difficulty": "hard",
     "problem_statement": "merge_intervals fails when intervals are not given in sorted order.",
-    "original_code": "def merge_intervals(intervals: list[list[int]]) -> list[list[int]]:\n    if not intervals:\n        return []\n    merged = [intervals[0]]\n    for start, end in intervals[1:]:\n        last = merged[-1]\n        if start <= last[1]:\n            last[1] = max(last[1], end)\n        else:\n            merged.append([start, end])\n    return merged\n",
+    "original_code": "def merge_intervals(intervals: list[list[int]]) -> list[list[int]]:\n    if not intervals:\n        return []\n    # интервалы не сортируются\n    merged = [intervals[0]]\n    for start, end in intervals[1:]:\n        last = merged[-1]\n        if start < last[1]:  # неверное условие: < вместо <=\n            last[1] = max(last[1], end)\n        else:\n            merged.append([start, end])\n    return merged\n",
     "tests": [
       {
         "name": "test_merge_sorted",
@@ -350,7 +350,7 @@
     "instance_id": "T014",
     "difficulty": "hard",
     "problem_statement": "topological_sort returns an incorrect ordering — nodes appear in the wrong position or the result is incomplete.",
-    "original_code": "from collections import deque\ndef topological_sort(graph: dict) -> list:\n    in_degree = {node: 0 for node in graph}\n    for node in graph:\n        for nei in graph[node]:\n            in_degree[nei] = in_degree.get(nei, 0) + 1\n    q = deque([n for n, deg in in_degree.items() if deg == 0])\n    order = []\n    while q:\n        node = q.popleft()\n        order.append(node)\n        for nei in graph.get(node, []):\n            in_degree[nei] += 1\n            if in_degree[nei] == 0:\n                q.append(nei)\n    return order\n",
+    "original_code": "from collections import deque\n\ndef topological_sort(graph: dict) -> list:\n    in_degree = {}\n    for node in graph:\n        if node not in in_degree:\n            in_degree[node] = 0\n        for nei in graph[node]:\n            in_degree[nei] = in_degree.get(nei, 0) + 1\n\n    # стартуем с узлов у которых in_degree > 0 — неверно\n    q = deque([n for n, deg in in_degree.items() if deg > 0])\n    order = []\n    while q:\n        node = q.popleft()\n        order.append(node)\n        for nei in graph.get(node, []):\n            in_degree[nei] += 1  # неверно: нужно -= 1\n            if in_degree[nei] == 0:\n                q.append(nei)\n    return order\n",
     "tests": [
       {
         "name": "test_topo_basic",
@@ -376,7 +376,7 @@
     "instance_id": "T015",
     "difficulty": "hard",
     "problem_statement": "shortest_path_bfs returns incorrect distances or enters an infinite loop on certain graphs.",
-    "original_code": "from collections import deque\ndef shortest_path_bfs(graph: dict, start: str, goal: str) -> int:\n    q = deque([(start, 0)])\n    visited = set()\n    while q:\n        node, dist = q.popleft()\n        if node == goal:\n            return dist\n        visited.add(node)\n        for nei in graph.get(node, []):\n            if nei not in visited:\n                q.append((nei, dist + 1))\n    return -1\n",
+    "original_code": "from collections import deque\n\ndef shortest_path_bfs(graph: dict, start: str, goal: str) -> int:\n    q = deque([(start, 0)])\n    visited = set()\n    while q:\n        node, dist = q.popleft()\n        if node in visited:  # проверяем после извлечения — слишком поздно\n            continue\n        visited.add(node)\n        if node == goal:\n            return dist\n        for nei in graph.get(node, []):\n            # не проверяем visited перед добавлением → дубли в очереди\n            q.append((nei, dist + 1))\n    return -1\n",
     "tests": [
       {
         "name": "test_bfs_basic",
