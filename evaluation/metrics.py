@@ -9,7 +9,15 @@ def compute_summary(metrics: List[Dict[str, Any]]) -> Dict[str, Any]:
     """Возвращает агрегированные метрики по всем задачам."""
     n = len(metrics)
     if n == 0:
-        return {}
+        # Правка 0.7: возвращаем нули вместо {} — print_summary не упадёт
+        return {
+            "total_tasks": 0, "solved_count": 0, "solved_rate": 0.0,
+            "avg_final_pass_rate": 0.0, "avg_pass_rate_solved": 0.0,
+            "avg_cost": 0.0, "avg_cost_solved": 0.0, "total_cost": 0.0,
+            "avg_iterations": 0.0, "avg_iterations_solved": 0.0,
+            "escalation_to_strong_rate": 0.0, "escalation_to_human_rate": 0.0,
+            "by_difficulty": {},
+        }
 
     solved = [m for m in metrics if m.get("solved")]
     escalated_strong = [m for m in metrics if m.get("escalated_to_strong")]
@@ -48,11 +56,11 @@ def compute_summary(metrics: List[Dict[str, Any]]) -> Dict[str, Any]:
 
 def _breakdown_by_difficulty(metrics: List[Dict]) -> Dict[str, Any]:
     """Разбивка solved_rate и avg_cost по easy/medium/hard."""
-    groups: Dict[str, List] = {"easy": [], "medium": [], "hard": []}
+    from collections import defaultdict
+    groups: Dict[str, List] = defaultdict(list)
     for m in metrics:
         d = m.get("difficulty", "unknown")
-        if d in groups:
-            groups[d].append(m)
+        groups[d].append(m)
 
     result = {}
     for diff, group in groups.items():
