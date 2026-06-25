@@ -12,3 +12,5 @@ docs/mas_traces.json
 # IDE
 .vscode/
 .idea/
+# Артефакты прогонов — регенерируются командой
+runs/

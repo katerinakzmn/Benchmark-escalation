@@ -5,10 +5,12 @@ def shortest_path_bfs(graph: dict, start: str, goal: str) -> int:
     visited = set()
     while q:
         node, dist = q.popleft()
+        if node in visited:  # проверяем после извлечения — слишком поздно
+            continue
+        visited.add(node)
         if node == goal:
             return dist
-        visited.add(node)
         for nei in graph.get(node, []):
-            if nei not in visited:
-                q.append((nei, dist + 1))
+            # не проверяем visited перед добавлением → дубли в очереди
+            q.append((nei, dist + 1))
     return -1

@@ -29,7 +29,7 @@ def load_config(path: str) -> dict:
 
 
 def make_run_dir() -> str:
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S_%f")
     run_dir = os.path.join("runs", f"run_{timestamp}")
     os.makedirs(run_dir, exist_ok=True)
     return run_dir
@@ -74,7 +74,7 @@ def run_benchmark(args, config: dict):
         "dataset": dataset_name,
         "seed": config.get("seed", 42),
         "backend": backend_name,
-        "policy": {"name": policy_name, **policy_cfg},
+        "policy": {**policy_cfg, "name": policy_name},
         "budget": budget_cfg,
         "costs": costs_cfg,
         "tasks": [t.instance_id for t in all_tasks],

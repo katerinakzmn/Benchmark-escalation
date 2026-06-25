@@ -1,27 +1,34 @@
 """
-Mock backend - deterministic responses without an API key.
+Mock backend — детерминированные ответы без API-ключа.
 Сценарии берутся из configs/mock.yaml (или дефолтные).
+
+ВАЖНАЯ ОГОВОРКА (для текста НИР):
+  Это детерминированная таблица решаемости, а не модель.
+  Для каждой задачи и тира заранее задано, решит он её или нет.
+  Значит на mock измеряется эффективность порядка эскалации
+  против известной карты решаемости, а не реальная способность моделей.
 """
 import yaml
 import os
 
-# дефолтные сценарии если mock.yaml не найден
+# Сценарии: какой тир решает какую задачу
+# human всегда решает — он дорогой надёжный фоллбэк (правка 0.1)
 _DEFAULT_SCENARIOS = {
-    "T001": {"weak": "solve",  "strong": "solve",  "human": "unused"},
-    "T002": {"weak": "fail",   "strong": "solve",  "human": "unused"},
-    "T003": {"weak": "fail",   "strong": "fail",   "human": "solve"},
-    "T004": {"weak": "fail",   "strong": "solve",  "human": "unused"},
-    "T005": {"weak": "solve",  "strong": "solve",  "human": "unused"},
-    "T006": {"weak": "fail",   "strong": "solve",  "human": "unused"},
-    "T007": {"weak": "fail",   "strong": "fail",   "human": "solve"},
-    "T008": {"weak": "solve",  "strong": "solve",  "human": "unused"},
-    "T009": {"weak": "fail",   "strong": "solve",  "human": "unused"},
-    "T010": {"weak": "fail",   "strong": "fail",   "human": "solve"},
-    "T011": {"weak": "fail",   "strong": "fail",   "human": "solve"},
-    "T012": {"weak": "fail",   "strong": "solve",  "human": "unused"},
-    "T013": {"weak": "fail",   "strong": "solve",  "human": "unused"},
-    "T014": {"weak": "fail",   "strong": "fail",   "human": "solve"},
-    "T015": {"weak": "fail",   "strong": "fail",   "human": "solve"},
+    "T001": {"weak": "solve",  "strong": "solve"},
+    "T002": {"weak": "fail",   "strong": "solve"},
+    "T003": {"weak": "fail",   "strong": "fail"},
+    "T004": {"weak": "fail",   "strong": "solve"},
+    "T005": {"weak": "solve",  "strong": "solve"},
+    "T006": {"weak": "fail",   "strong": "solve"},
+    "T007": {"weak": "fail",   "strong": "fail"},
+    "T008": {"weak": "solve",  "strong": "solve"},
+    "T009": {"weak": "fail",   "strong": "solve"},
+    "T010": {"weak": "fail",   "strong": "fail"},
+    "T011": {"weak": "fail",   "strong": "fail"},
+    "T012": {"weak": "fail",   "strong": "solve"},
+    "T013": {"weak": "fail",   "strong": "solve"},
+    "T014": {"weak": "fail",   "strong": "fail"},
+    "T015": {"weak": "fail",   "strong": "fail"},
 }
 
 # Готовые фиксы для каждой задачи
@@ -59,7 +66,14 @@ class MockBackend:
         """
         Возвращает корректный код если сценарий 'solve', иначе broken code.
         tier: 'weak' | 'strong' | 'human'
+
+        Правка 0.1: human — гарантированный решатель.
+        Человек — дорогой надёжный фоллбэк; стоимость отражена в human_call=10.
         """
+        # Правка 0.1: human всегда решает
+        if tier == "human":
+            return _FIXES.get(task_id, _BROKEN_CODE)
+
         scenario = self.scenarios.get(task_id, {})
         outcome = scenario.get(tier, "fail")
         if outcome == "solve":
@@ -67,7 +81,11 @@ class MockBackend:
         return _BROKEN_CODE
 
     def review(self, task_id: str, code: str, tier: str = "weak") -> dict:
-        """Возвращает детерминированный review в зависимости от tier."""
+        """Детерминированный review в зависимости от tier."""
+        # Правка 0.1: human всегда даёт высокий confidence
+        if tier == "human":
+            return {"issues": [], "confidence": 1.0, "approved": True}
+
         scenario = self.scenarios.get(task_id, {})
         outcome = scenario.get(tier, "fail")
         if outcome == "solve":
