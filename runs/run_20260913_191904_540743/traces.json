@@ -1,0 +1,6060 @@
+[
+  {
+    "task_id": "T001",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T001",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.006859,
+      "total_input_tokens": 113,
+      "total_output_tokens": 66,
+      "status": "solved",
+      "domain": "strings",
+      "defect_type": "off_by_one",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.006859
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.006859,
+        "episode_id": "T001_ep",
+        "task_id": "T001"
+      }
+    ]
+  },
+  {
+    "task_id": "T002",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T002",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.007368,
+      "total_input_tokens": 117,
+      "total_output_tokens": 72,
+      "status": "solved",
+      "domain": "strings",
+      "defect_type": "wrong_condition",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.007368
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.007368,
+        "episode_id": "T002_ep",
+        "task_id": "T002"
+      }
+    ]
+  },
+  {
+    "task_id": "T003",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T003",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.005731,
+      "total_input_tokens": 87,
+      "total_output_tokens": 57,
+      "status": "solved",
+      "domain": "strings",
+      "defect_type": "specification",
+      "structure": "single_function",
+      "reasoning_type": "specification",
+      "min_tier": "weak",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.005731
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.005731,
+        "episode_id": "T003_ep",
+        "task_id": "T003"
+      }
+    ]
+  },
+  {
+    "task_id": "T004",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T004",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.004858,
+      "total_input_tokens": 87,
+      "total_output_tokens": 45,
+      "status": "solved",
+      "domain": "strings",
+      "defect_type": "wrong_logic",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 1.0
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.004858
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.004858,
+        "episode_id": "T004_ep",
+        "task_id": "T004"
+      }
+    ]
+  },
+  {
+    "task_id": "T005",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T005",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.005385,
+      "total_input_tokens": 92,
+      "total_output_tokens": 51,
+      "status": "solved",
+      "domain": "strings",
+      "defect_type": "wrong_return",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.005385
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.005385,
+        "episode_id": "T005_ep",
+        "task_id": "T005"
+      }
+    ]
+  },
+  {
+    "task_id": "T006",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T006",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.013645,
+      "total_input_tokens": 182,
+      "total_output_tokens": 142,
+      "status": "solved",
+      "domain": "data_structures",
+      "defect_type": "wrong_condition",
+      "structure": "class",
+      "reasoning_type": "stateful",
+      "min_tier": "strong",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.013645
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.013645,
+        "episode_id": "T006_ep",
+        "task_id": "T006"
+      }
+    ]
+  },
+  {
+    "task_id": "T007",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T007",
+      "difficulty": "medium",
+      "solved": false,
+      "total_iterations": 5,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 0.0,
+      "cost_score": 7.5,
+      "cost_usd": 0.054763,
+      "total_input_tokens": 730,
+      "total_output_tokens": 570,
+      "status": "test_failed",
+      "domain": "dicts",
+      "defect_type": "missing_update",
+      "structure": "single_function",
+      "reasoning_type": "multi_step",
+      "min_tier": "strong",
+      "utility": -0.0005
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.010298
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.010298,
+        "episode_id": "T007_ep",
+        "task_id": "T007"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "weak",
+          "iteration": 2,
+          "cost_so_far": 0.021469
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.011171,
+        "episode_id": "T007_ep",
+        "task_id": "T007"
+      },
+      {
+        "step": 3,
+        "state": {
+          "tier": "weak",
+          "iteration": 3,
+          "cost_so_far": 0.032567
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.011098,
+        "episode_id": "T007_ep",
+        "task_id": "T007"
+      },
+      {
+        "step": 4,
+        "state": {
+          "tier": "weak",
+          "iteration": 4,
+          "cost_so_far": 0.043665
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.011098,
+        "episode_id": "T007_ep",
+        "task_id": "T007"
+      },
+      {
+        "step": 5,
+        "state": {
+          "tier": "weak",
+          "iteration": 5,
+          "cost_so_far": 0.054763
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": true,
+        "step_cost_usd": 0.011098,
+        "episode_id": "T007_ep",
+        "task_id": "T007"
+      }
+    ]
+  },
+  {
+    "task_id": "T008",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T008",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.007714,
+      "total_input_tokens": 120,
+      "total_output_tokens": 76,
+      "status": "solved",
+      "domain": "arrays",
+      "defect_type": "wrong_return",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.007714
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.007714,
+        "episode_id": "T008_ep",
+        "task_id": "T008"
+      }
+    ]
+  },
+  {
+    "task_id": "T009",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T009",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.009097,
+      "total_input_tokens": 136,
+      "total_output_tokens": 91,
+      "status": "solved",
+      "domain": "arrays",
+      "defect_type": "off_by_one",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.009097
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.009097,
+        "episode_id": "T009_ep",
+        "task_id": "T009"
+      }
+    ]
+  },
+  {
+    "task_id": "T010",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T010",
+      "difficulty": "medium",
+      "solved": false,
+      "total_iterations": 5,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 0.0,
+      "cost_score": 7.5,
+      "cost_usd": 0.051325,
+      "total_input_tokens": 665,
+      "total_output_tokens": 539,
+      "status": "test_failed",
+      "domain": "numeric",
+      "defect_type": "specification",
+      "structure": "single_function",
+      "reasoning_type": "specification",
+      "min_tier": "strong",
+      "utility": -0.0005
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.01028
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.01028,
+        "episode_id": "T010_ep",
+        "task_id": "T010"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "weak",
+          "iteration": 2,
+          "cost_so_far": 0.020486
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.010207,
+        "episode_id": "T010_ep",
+        "task_id": "T010"
+      },
+      {
+        "step": 3,
+        "state": {
+          "tier": "weak",
+          "iteration": 3,
+          "cost_so_far": 0.030766
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.01028,
+        "episode_id": "T010_ep",
+        "task_id": "T010"
+      },
+      {
+        "step": 4,
+        "state": {
+          "tier": "weak",
+          "iteration": 4,
+          "cost_so_far": 0.041045
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.01028,
+        "episode_id": "T010_ep",
+        "task_id": "T010"
+      },
+      {
+        "step": 5,
+        "state": {
+          "tier": "weak",
+          "iteration": 5,
+          "cost_so_far": 0.051325
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": true,
+        "step_cost_usd": 0.01028,
+        "episode_id": "T010_ep",
+        "task_id": "T010"
+      }
+    ]
+  },
+  {
+    "task_id": "T011",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T011",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.016793,
+      "total_input_tokens": 215,
+      "total_output_tokens": 177,
+      "status": "solved",
+      "domain": "data_structures",
+      "defect_type": "wrong_logic",
+      "structure": "class",
+      "reasoning_type": "stateful",
+      "min_tier": "human",
+      "utility": 0.9998
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.016793
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.016793,
+        "episode_id": "T011_ep",
+        "task_id": "T011"
+      }
+    ]
+  },
+  {
+    "task_id": "T012",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T012",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.017393,
+      "total_input_tokens": 224,
+      "total_output_tokens": 183,
+      "status": "solved",
+      "domain": "data_structures",
+      "defect_type": "state_mutation",
+      "structure": "class",
+      "reasoning_type": "stateful",
+      "min_tier": "human",
+      "utility": 0.9998
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.017393
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.017393,
+        "episode_id": "T012_ep",
+        "task_id": "T012"
+      }
+    ]
+  },
+  {
+    "task_id": "T013",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T013",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.014228,
+      "total_input_tokens": 174,
+      "total_output_tokens": 152,
+      "status": "solved",
+      "domain": "algorithms",
+      "defect_type": "missing_sort",
+      "structure": "single_function",
+      "reasoning_type": "algorithmic",
+      "min_tier": "human",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.014228
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.014228,
+        "episode_id": "T013_ep",
+        "task_id": "T013"
+      }
+    ]
+  },
+  {
+    "task_id": "T014",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T014",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.019777,
+      "total_input_tokens": 255,
+      "total_output_tokens": 208,
+      "status": "solved",
+      "domain": "algorithms",
+      "defect_type": "wrong_logic",
+      "structure": "single_function",
+      "reasoning_type": "algorithmic",
+      "min_tier": "human",
+      "utility": 0.9998
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.019777
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.019777,
+        "episode_id": "T014_ep",
+        "task_id": "T014"
+      }
+    ]
+  },
+  {
+    "task_id": "T015",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T015",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.014992,
+      "total_input_tokens": 204,
+      "total_output_tokens": 155,
+      "status": "solved",
+      "domain": "algorithms",
+      "defect_type": "wrong_condition",
+      "structure": "single_function",
+      "reasoning_type": "algorithmic",
+      "min_tier": "human",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.014992
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.014992,
+        "episode_id": "T015_ep",
+        "task_id": "T015"
+      }
+    ]
+  },
+  {
+    "task_id": "T016",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T016",
+      "difficulty": "easy",
+      "solved": false,
+      "total_iterations": 5,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 0.0,
+      "cost_score": 7.5,
+      "cost_usd": 0.035059,
+      "total_input_tokens": 515,
+      "total_output_tokens": 353,
+      "status": "test_failed",
+      "domain": "strings",
+      "defect_type": "wrong_condition",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": -0.0004
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.006968
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.006968,
+        "episode_id": "T016_ep",
+        "task_id": "T016"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "weak",
+          "iteration": 2,
+          "cost_so_far": 0.014009
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.007041,
+        "episode_id": "T016_ep",
+        "task_id": "T016"
+      },
+      {
+        "step": 3,
+        "state": {
+          "tier": "weak",
+          "iteration": 3,
+          "cost_so_far": 0.02105
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.007041,
+        "episode_id": "T016_ep",
+        "task_id": "T016"
+      },
+      {
+        "step": 4,
+        "state": {
+          "tier": "weak",
+          "iteration": 4,
+          "cost_so_far": 0.028091
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.007041,
+        "episode_id": "T016_ep",
+        "task_id": "T016"
+      },
+      {
+        "step": 5,
+        "state": {
+          "tier": "weak",
+          "iteration": 5,
+          "cost_so_far": 0.035059
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": true,
+        "step_cost_usd": 0.006968,
+        "episode_id": "T016_ep",
+        "task_id": "T016"
+      }
+    ]
+  },
+  {
+    "task_id": "T017",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T017",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.007387,
+      "total_input_tokens": 106,
+      "total_output_tokens": 75,
+      "status": "solved",
+      "domain": "arrays",
+      "defect_type": "off_by_one",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.007387
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.007387,
+        "episode_id": "T017_ep",
+        "task_id": "T017"
+      }
+    ]
+  },
+  {
+    "task_id": "T018",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T018",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.005494,
+      "total_input_tokens": 102,
+      "total_output_tokens": 50,
+      "status": "solved",
+      "domain": "strings",
+      "defect_type": "wrong_return",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.005494
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.005494,
+        "episode_id": "T018_ep",
+        "task_id": "T018"
+      }
+    ]
+  },
+  {
+    "task_id": "T019",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T019",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.007387,
+      "total_input_tokens": 122,
+      "total_output_tokens": 71,
+      "status": "solved",
+      "domain": "numeric",
+      "defect_type": "wrong_operator",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.007387
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.007387,
+        "episode_id": "T019_ep",
+        "task_id": "T019"
+      }
+    ]
+  },
+  {
+    "task_id": "T020",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T020",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.007405,
+      "total_input_tokens": 99,
+      "total_output_tokens": 77,
+      "status": "solved",
+      "domain": "dicts",
+      "defect_type": "wrong_logic",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.007405
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.007405,
+        "episode_id": "T020_ep",
+        "task_id": "T020"
+      }
+    ]
+  },
+  {
+    "task_id": "T021",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T021",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.005167,
+      "total_input_tokens": 96,
+      "total_output_tokens": 47,
+      "status": "solved",
+      "domain": "arrays",
+      "defect_type": "wrong_condition",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.005167
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.005167,
+        "episode_id": "T021_ep",
+        "task_id": "T021"
+      }
+    ]
+  },
+  {
+    "task_id": "T022",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T022",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.004093,
+      "total_input_tokens": 85,
+      "total_output_tokens": 35,
+      "status": "solved",
+      "domain": "strings",
+      "defect_type": "off_by_one",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 1.0
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.004093
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.004093,
+        "episode_id": "T022_ep",
+        "task_id": "T022"
+      }
+    ]
+  },
+  {
+    "task_id": "T023",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T023",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.007987,
+      "total_input_tokens": 119,
+      "total_output_tokens": 80,
+      "status": "solved",
+      "domain": "numeric",
+      "defect_type": "wrong_condition",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.007987
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.007987,
+        "episode_id": "T023_ep",
+        "task_id": "T023"
+      }
+    ]
+  },
+  {
+    "task_id": "T024",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T024",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.00715,
+      "total_input_tokens": 109,
+      "total_output_tokens": 71,
+      "status": "solved",
+      "domain": "dicts",
+      "defect_type": "missing_update",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.00715
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.00715,
+        "episode_id": "T024_ep",
+        "task_id": "T024"
+      }
+    ]
+  },
+  {
+    "task_id": "T025",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T025",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.005276,
+      "total_input_tokens": 98,
+      "total_output_tokens": 48,
+      "status": "solved",
+      "domain": "arrays",
+      "defect_type": "wrong_return",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.005276
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.005276,
+        "episode_id": "T025_ep",
+        "task_id": "T025"
+      }
+    ]
+  },
+  {
+    "task_id": "T026",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T026",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 5,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 7.5,
+      "cost_usd": 0.028418,
+      "total_input_tokens": 510,
+      "total_output_tokens": 263,
+      "status": "solved",
+      "domain": "strings",
+      "defect_type": "wrong_logic",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 0.9997
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.00564
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.00564,
+        "episode_id": "T026_ep",
+        "task_id": "T026"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "weak",
+          "iteration": 2,
+          "cost_so_far": 0.01128
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.00564,
+        "episode_id": "T026_ep",
+        "task_id": "T026"
+      },
+      {
+        "step": 3,
+        "state": {
+          "tier": "weak",
+          "iteration": 3,
+          "cost_so_far": 0.01692
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.00564,
+        "episode_id": "T026_ep",
+        "task_id": "T026"
+      },
+      {
+        "step": 4,
+        "state": {
+          "tier": "weak",
+          "iteration": 4,
+          "cost_so_far": 0.02256
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.00564,
+        "episode_id": "T026_ep",
+        "task_id": "T026"
+      },
+      {
+        "step": 5,
+        "state": {
+          "tier": "weak",
+          "iteration": 5,
+          "cost_so_far": 0.028418
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.005858,
+        "episode_id": "T026_ep",
+        "task_id": "T026"
+      }
+    ]
+  },
+  {
+    "task_id": "T027",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T027",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.004839,
+      "total_input_tokens": 94,
+      "total_output_tokens": 43,
+      "status": "solved",
+      "domain": "arrays",
+      "defect_type": "off_by_one",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 1.0
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.004839
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.004839,
+        "episode_id": "T027_ep",
+        "task_id": "T027"
+      }
+    ]
+  },
+  {
+    "task_id": "T028",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T028",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.004348,
+      "total_input_tokens": 87,
+      "total_output_tokens": 38,
+      "status": "solved",
+      "domain": "numeric",
+      "defect_type": "wrong_operator",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 1.0
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.004348
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.004348,
+        "episode_id": "T028_ep",
+        "task_id": "T028"
+      }
+    ]
+  },
+  {
+    "task_id": "T029",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T029",
+      "difficulty": "easy",
+      "solved": false,
+      "total_iterations": 5,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 0.0,
+      "cost_score": 7.5,
+      "cost_usd": 0.036897,
+      "total_input_tokens": 580,
+      "total_output_tokens": 362,
+      "status": "test_failed",
+      "domain": "dicts",
+      "defect_type": "wrong_condition",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": -0.0004
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.007277
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.007277,
+        "episode_id": "T029_ep",
+        "task_id": "T029"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "weak",
+          "iteration": 2,
+          "cost_so_far": 0.014628
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.00735,
+        "episode_id": "T029_ep",
+        "task_id": "T029"
+      },
+      {
+        "step": 3,
+        "state": {
+          "tier": "weak",
+          "iteration": 3,
+          "cost_so_far": 0.022196
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.007569,
+        "episode_id": "T029_ep",
+        "task_id": "T029"
+      },
+      {
+        "step": 4,
+        "state": {
+          "tier": "weak",
+          "iteration": 4,
+          "cost_so_far": 0.029546
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.00735,
+        "episode_id": "T029_ep",
+        "task_id": "T029"
+      },
+      {
+        "step": 5,
+        "state": {
+          "tier": "weak",
+          "iteration": 5,
+          "cost_so_far": 0.036897
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": true,
+        "step_cost_usd": 0.00735,
+        "episode_id": "T029_ep",
+        "task_id": "T029"
+      }
+    ]
+  },
+  {
+    "task_id": "T030",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T030",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.005221,
+      "total_input_tokens": 95,
+      "total_output_tokens": 48,
+      "status": "solved",
+      "domain": "strings",
+      "defect_type": "boundary_case",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.005221
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.005221,
+        "episode_id": "T030_ep",
+        "task_id": "T030"
+      }
+    ]
+  },
+  {
+    "task_id": "T031",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T031",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.007478,
+      "total_input_tokens": 87,
+      "total_output_tokens": 81,
+      "status": "solved",
+      "domain": "arrays",
+      "defect_type": "wrong_logic",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.007478
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.007478,
+        "episode_id": "T031_ep",
+        "task_id": "T031"
+      }
+    ]
+  },
+  {
+    "task_id": "T032",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T032",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.004767,
+      "total_input_tokens": 94,
+      "total_output_tokens": 42,
+      "status": "solved",
+      "domain": "numeric",
+      "defect_type": "off_by_one",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 1.0
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.004767
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.004767,
+        "episode_id": "T032_ep",
+        "task_id": "T032"
+      }
+    ]
+  },
+  {
+    "task_id": "T033",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T033",
+      "difficulty": "easy",
+      "solved": false,
+      "total_iterations": 5,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 0.0,
+      "cost_score": 7.5,
+      "cost_usd": 0.028873,
+      "total_input_tokens": 515,
+      "total_output_tokens": 268,
+      "status": "test_failed",
+      "domain": "strings",
+      "defect_type": "wrong_operator",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": -0.0003
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.00544
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.00544,
+        "episode_id": "T033_ep",
+        "task_id": "T033"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "weak",
+          "iteration": 2,
+          "cost_so_far": 0.011462
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.006022,
+        "episode_id": "T033_ep",
+        "task_id": "T033"
+      },
+      {
+        "step": 3,
+        "state": {
+          "tier": "weak",
+          "iteration": 3,
+          "cost_so_far": 0.017484
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.006022,
+        "episode_id": "T033_ep",
+        "task_id": "T033"
+      },
+      {
+        "step": 4,
+        "state": {
+          "tier": "weak",
+          "iteration": 4,
+          "cost_so_far": 0.023433
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.005949,
+        "episode_id": "T033_ep",
+        "task_id": "T033"
+      },
+      {
+        "step": 5,
+        "state": {
+          "tier": "weak",
+          "iteration": 5,
+          "cost_so_far": 0.028873
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": true,
+        "step_cost_usd": 0.00544,
+        "episode_id": "T033_ep",
+        "task_id": "T033"
+      }
+    ]
+  },
+  {
+    "task_id": "T034",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T034",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.006568,
+      "total_input_tokens": 113,
+      "total_output_tokens": 62,
+      "status": "solved",
+      "domain": "arrays",
+      "defect_type": "missing_update",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.006568
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.006568,
+        "episode_id": "T034_ep",
+        "task_id": "T034"
+      }
+    ]
+  },
+  {
+    "task_id": "T035",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T035",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.00655,
+      "total_input_tokens": 112,
+      "total_output_tokens": 62,
+      "status": "solved",
+      "domain": "dicts",
+      "defect_type": "wrong_return",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.00655
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.00655,
+        "episode_id": "T035_ep",
+        "task_id": "T035"
+      }
+    ]
+  },
+  {
+    "task_id": "T036",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T036",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.004476,
+      "total_input_tokens": 90,
+      "total_output_tokens": 39,
+      "status": "solved",
+      "domain": "numeric",
+      "defect_type": "wrong_logic",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 1.0
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.004476
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.004476,
+        "episode_id": "T036_ep",
+        "task_id": "T036"
+      }
+    ]
+  },
+  {
+    "task_id": "T037",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T037",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.006441,
+      "total_input_tokens": 102,
+      "total_output_tokens": 63,
+      "status": "solved",
+      "domain": "strings",
+      "defect_type": "missing_update",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.006441
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.006441,
+        "episode_id": "T037_ep",
+        "task_id": "T037"
+      }
+    ]
+  },
+  {
+    "task_id": "T038",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T038",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.008024,
+      "total_input_tokens": 93,
+      "total_output_tokens": 87,
+      "status": "solved",
+      "domain": "arrays",
+      "defect_type": "boundary_case",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.008024
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.008024,
+        "episode_id": "T038_ep",
+        "task_id": "T038"
+      }
+    ]
+  },
+  {
+    "task_id": "T039",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T039",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.00604,
+      "total_input_tokens": 112,
+      "total_output_tokens": 55,
+      "status": "solved",
+      "domain": "dicts",
+      "defect_type": "off_by_one",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.00604
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.00604,
+        "episode_id": "T039_ep",
+        "task_id": "T039"
+      }
+    ]
+  },
+  {
+    "task_id": "T040",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T040",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.006058,
+      "total_input_tokens": 93,
+      "total_output_tokens": 60,
+      "status": "solved",
+      "domain": "numeric",
+      "defect_type": "exception_handling",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.006058
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.006058,
+        "episode_id": "T040_ep",
+        "task_id": "T040"
+      }
+    ]
+  },
+  {
+    "task_id": "T041",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T041",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.005494,
+      "total_input_tokens": 102,
+      "total_output_tokens": 50,
+      "status": "solved",
+      "domain": "arrays",
+      "defect_type": "wrong_operator",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.005494
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.005494,
+        "episode_id": "T041_ep",
+        "task_id": "T041"
+      }
+    ]
+  },
+  {
+    "task_id": "T042",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T042",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.005476,
+      "total_input_tokens": 93,
+      "total_output_tokens": 52,
+      "status": "solved",
+      "domain": "strings",
+      "defect_type": "wrong_condition",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.005476
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.005476,
+        "episode_id": "T042_ep",
+        "task_id": "T042"
+      }
+    ]
+  },
+  {
+    "task_id": "T043",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T043",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.005458,
+      "total_input_tokens": 92,
+      "total_output_tokens": 52,
+      "status": "solved",
+      "domain": "dicts",
+      "defect_type": "boundary_case",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.005458
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.005458,
+        "episode_id": "T043_ep",
+        "task_id": "T043"
+      }
+    ]
+  },
+  {
+    "task_id": "T044",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T044",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.010625,
+      "total_input_tokens": 116,
+      "total_output_tokens": 117,
+      "status": "solved",
+      "domain": "numeric",
+      "defect_type": "off_by_one",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.010625
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.010625,
+        "episode_id": "T044_ep",
+        "task_id": "T044"
+      }
+    ]
+  },
+  {
+    "task_id": "T045",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T045",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.004057,
+      "total_input_tokens": 91,
+      "total_output_tokens": 33,
+      "status": "solved",
+      "domain": "arrays",
+      "defect_type": "state_mutation",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 1.0
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.004057
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.004057,
+        "episode_id": "T045_ep",
+        "task_id": "T045"
+      }
+    ]
+  },
+  {
+    "task_id": "T046",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T046",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.004912,
+      "total_input_tokens": 94,
+      "total_output_tokens": 44,
+      "status": "solved",
+      "domain": "strings",
+      "defect_type": "off_by_one",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 1.0
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.004912
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.004912,
+        "episode_id": "T046_ep",
+        "task_id": "T046"
+      }
+    ]
+  },
+  {
+    "task_id": "T047",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T047",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.005858,
+      "total_input_tokens": 110,
+      "total_output_tokens": 53,
+      "status": "solved",
+      "domain": "dicts",
+      "defect_type": "wrong_logic",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.005858
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.005858,
+        "episode_id": "T047_ep",
+        "task_id": "T047"
+      }
+    ]
+  },
+  {
+    "task_id": "T048",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T048",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.00544,
+      "total_input_tokens": 99,
+      "total_output_tokens": 50,
+      "status": "solved",
+      "domain": "numeric",
+      "defect_type": "wrong_return",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.00544
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.00544,
+        "episode_id": "T048_ep",
+        "task_id": "T048"
+      }
+    ]
+  },
+  {
+    "task_id": "T049",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T049",
+      "difficulty": "easy",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.005585,
+      "total_input_tokens": 103,
+      "total_output_tokens": 51,
+      "status": "solved",
+      "domain": "arrays",
+      "defect_type": "wrong_condition",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.005585
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.005585,
+        "episode_id": "T049_ep",
+        "task_id": "T049"
+      }
+    ]
+  },
+  {
+    "task_id": "T050",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T050",
+      "difficulty": "easy",
+      "solved": false,
+      "total_iterations": 5,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 0.0,
+      "cost_score": 7.5,
+      "cost_usd": 0.024634,
+      "total_input_tokens": 470,
+      "total_output_tokens": 221,
+      "status": "test_failed",
+      "domain": "strings",
+      "defect_type": "exception_handling",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "weak",
+      "utility": -0.0002
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.004912
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.004912,
+        "episode_id": "T050_ep",
+        "task_id": "T050"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "weak",
+          "iteration": 2,
+          "cost_so_far": 0.009824
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.004912,
+        "episode_id": "T050_ep",
+        "task_id": "T050"
+      },
+      {
+        "step": 3,
+        "state": {
+          "tier": "weak",
+          "iteration": 3,
+          "cost_so_far": 0.014809
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.004985,
+        "episode_id": "T050_ep",
+        "task_id": "T050"
+      },
+      {
+        "step": 4,
+        "state": {
+          "tier": "weak",
+          "iteration": 4,
+          "cost_so_far": 0.019722
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.004912,
+        "episode_id": "T050_ep",
+        "task_id": "T050"
+      },
+      {
+        "step": 5,
+        "state": {
+          "tier": "weak",
+          "iteration": 5,
+          "cost_so_far": 0.024634
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": true,
+        "step_cost_usd": 0.004912,
+        "episode_id": "T050_ep",
+        "task_id": "T050"
+      }
+    ]
+  },
+  {
+    "task_id": "T051",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T051",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.008023,
+      "total_input_tokens": 125,
+      "total_output_tokens": 79,
+      "status": "solved",
+      "domain": "dicts",
+      "defect_type": "wrong_logic",
+      "structure": "single_function",
+      "reasoning_type": "multi_step",
+      "min_tier": "strong",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.008023
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.008023,
+        "episode_id": "T051_ep",
+        "task_id": "T051"
+      }
+    ]
+  },
+  {
+    "task_id": "T052",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T052",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.010953,
+      "total_input_tokens": 150,
+      "total_output_tokens": 113,
+      "status": "solved",
+      "domain": "algorithms",
+      "defect_type": "wrong_condition",
+      "structure": "single_function",
+      "reasoning_type": "algorithmic",
+      "min_tier": "strong",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.010953
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.010953,
+        "episode_id": "T052_ep",
+        "task_id": "T052"
+      }
+    ]
+  },
+  {
+    "task_id": "T053",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T053",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.015192,
+      "total_input_tokens": 171,
+      "total_output_tokens": 166,
+      "status": "solved",
+      "domain": "data_structures",
+      "defect_type": "wrong_logic",
+      "structure": "class",
+      "reasoning_type": "stateful",
+      "min_tier": "strong",
+      "utility": 0.9998
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.015192
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.015192,
+        "episode_id": "T053_ep",
+        "task_id": "T053"
+      }
+    ]
+  },
+  {
+    "task_id": "T054",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T054",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.009079,
+      "total_input_tokens": 127,
+      "total_output_tokens": 93,
+      "status": "solved",
+      "domain": "parsing",
+      "defect_type": "wrong_logic",
+      "structure": "single_function",
+      "reasoning_type": "multi_step",
+      "min_tier": "strong",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.009079
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.009079,
+        "episode_id": "T054_ep",
+        "task_id": "T054"
+      }
+    ]
+  },
+  {
+    "task_id": "T055",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T055",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.012936,
+      "total_input_tokens": 175,
+      "total_output_tokens": 134,
+      "status": "solved",
+      "domain": "algorithms",
+      "defect_type": "off_by_one",
+      "structure": "single_function",
+      "reasoning_type": "algorithmic",
+      "min_tier": "strong",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.012936
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.012936,
+        "episode_id": "T055_ep",
+        "task_id": "T055"
+      }
+    ]
+  },
+  {
+    "task_id": "T056",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T056",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.006058,
+      "total_input_tokens": 101,
+      "total_output_tokens": 58,
+      "status": "solved",
+      "domain": "strings",
+      "defect_type": "wrong_logic",
+      "structure": "single_function",
+      "reasoning_type": "multi_step",
+      "min_tier": "strong",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.006058
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.006058,
+        "episode_id": "T056_ep",
+        "task_id": "T056"
+      }
+    ]
+  },
+  {
+    "task_id": "T057",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T057",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.007405,
+      "total_input_tokens": 115,
+      "total_output_tokens": 73,
+      "status": "solved",
+      "domain": "dicts",
+      "defect_type": "state_mutation",
+      "structure": "single_function",
+      "reasoning_type": "multi_step",
+      "min_tier": "strong",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.007405
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.007405,
+        "episode_id": "T057_ep",
+        "task_id": "T057"
+      }
+    ]
+  },
+  {
+    "task_id": "T058",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T058",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.005585,
+      "total_input_tokens": 87,
+      "total_output_tokens": 55,
+      "status": "solved",
+      "domain": "parsing",
+      "defect_type": "exception_handling",
+      "structure": "single_function",
+      "reasoning_type": "multi_step",
+      "min_tier": "strong",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.005585
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.005585,
+        "episode_id": "T058_ep",
+        "task_id": "T058"
+      }
+    ]
+  },
+  {
+    "task_id": "T059",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T059",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.005185,
+      "total_input_tokens": 97,
+      "total_output_tokens": 47,
+      "status": "solved",
+      "domain": "arrays",
+      "defect_type": "wrong_logic",
+      "structure": "single_function",
+      "reasoning_type": "algorithmic",
+      "min_tier": "strong",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.005185
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.005185,
+        "episode_id": "T059_ep",
+        "task_id": "T059"
+      }
+    ]
+  },
+  {
+    "task_id": "T060",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T060",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.013645,
+      "total_input_tokens": 154,
+      "total_output_tokens": 149,
+      "status": "solved",
+      "domain": "data_structures",
+      "defect_type": "wrong_condition",
+      "structure": "class",
+      "reasoning_type": "stateful",
+      "min_tier": "strong",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.013645
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.013645,
+        "episode_id": "T060_ep",
+        "task_id": "T060"
+      }
+    ]
+  },
+  {
+    "task_id": "T061",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T061",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.005458,
+      "total_input_tokens": 92,
+      "total_output_tokens": 52,
+      "status": "solved",
+      "domain": "numeric",
+      "defect_type": "wrong_logic",
+      "structure": "single_function",
+      "reasoning_type": "specification",
+      "min_tier": "strong",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.005458
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.005458,
+        "episode_id": "T061_ep",
+        "task_id": "T061"
+      }
+    ]
+  },
+  {
+    "task_id": "T062",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T062",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.009715,
+      "total_input_tokens": 134,
+      "total_output_tokens": 100,
+      "status": "solved",
+      "domain": "strings",
+      "defect_type": "off_by_one",
+      "structure": "single_function",
+      "reasoning_type": "multi_step",
+      "min_tier": "strong",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.009715
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.009715,
+        "episode_id": "T062_ep",
+        "task_id": "T062"
+      }
+    ]
+  },
+  {
+    "task_id": "T063",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T063",
+      "difficulty": "medium",
+      "solved": false,
+      "total_iterations": 5,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 0.0,
+      "cost_score": 7.5,
+      "cost_usd": 0.027126,
+      "total_input_tokens": 495,
+      "total_output_tokens": 249,
+      "status": "test_failed",
+      "domain": "algorithms",
+      "defect_type": "missing_sort",
+      "structure": "single_function",
+      "reasoning_type": "algorithmic",
+      "min_tier": "strong",
+      "utility": -0.0003
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.005513
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.005513,
+        "episode_id": "T063_ep",
+        "task_id": "T063"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "weak",
+          "iteration": 2,
+          "cost_so_far": 0.011025
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.005513,
+        "episode_id": "T063_ep",
+        "task_id": "T063"
+      },
+      {
+        "step": 3,
+        "state": {
+          "tier": "weak",
+          "iteration": 3,
+          "cost_so_far": 0.016247
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.005221,
+        "episode_id": "T063_ep",
+        "task_id": "T063"
+      },
+      {
+        "step": 4,
+        "state": {
+          "tier": "weak",
+          "iteration": 4,
+          "cost_so_far": 0.021686
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.00544,
+        "episode_id": "T063_ep",
+        "task_id": "T063"
+      },
+      {
+        "step": 5,
+        "state": {
+          "tier": "weak",
+          "iteration": 5,
+          "cost_so_far": 0.027126
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": true,
+        "step_cost_usd": 0.00544,
+        "episode_id": "T063_ep",
+        "task_id": "T063"
+      }
+    ]
+  },
+  {
+    "task_id": "T064",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T064",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.011044,
+      "total_input_tokens": 139,
+      "total_output_tokens": 117,
+      "status": "solved",
+      "domain": "oop",
+      "defect_type": "wrong_logic",
+      "structure": "class",
+      "reasoning_type": "stateful",
+      "min_tier": "strong",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.011044
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.011044,
+        "episode_id": "T064_ep",
+        "task_id": "T064"
+      }
+    ]
+  },
+  {
+    "task_id": "T065",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T065",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.005021,
+      "total_input_tokens": 96,
+      "total_output_tokens": 45,
+      "status": "solved",
+      "domain": "parsing",
+      "defect_type": "off_by_one",
+      "structure": "single_function",
+      "reasoning_type": "multi_step",
+      "min_tier": "strong",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.005021
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.005021,
+        "episode_id": "T065_ep",
+        "task_id": "T065"
+      }
+    ]
+  },
+  {
+    "task_id": "T066",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T066",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.005403,
+      "total_input_tokens": 101,
+      "total_output_tokens": 49,
+      "status": "solved",
+      "domain": "dicts",
+      "defect_type": "wrong_condition",
+      "structure": "single_function",
+      "reasoning_type": "multi_step",
+      "min_tier": "strong",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.005403
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.005403,
+        "episode_id": "T066_ep",
+        "task_id": "T066"
+      }
+    ]
+  },
+  {
+    "task_id": "T067",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T067",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.006531,
+      "total_input_tokens": 111,
+      "total_output_tokens": 62,
+      "status": "solved",
+      "domain": "arrays",
+      "defect_type": "wrong_logic",
+      "structure": "single_function",
+      "reasoning_type": "algorithmic",
+      "min_tier": "strong",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.006531
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.006531,
+        "episode_id": "T067_ep",
+        "task_id": "T067"
+      }
+    ]
+  },
+  {
+    "task_id": "T068",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T068",
+      "difficulty": "medium",
+      "solved": false,
+      "total_iterations": 5,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 0.0,
+      "cost_score": 7.5,
+      "cost_usd": 0.032476,
+      "total_input_tokens": 505,
+      "total_output_tokens": 320,
+      "status": "test_failed",
+      "domain": "numeric",
+      "defect_type": "exception_handling",
+      "structure": "single_function",
+      "reasoning_type": "specification",
+      "min_tier": "strong",
+      "utility": -0.0003
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.006495
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.006495,
+        "episode_id": "T068_ep",
+        "task_id": "T068"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "weak",
+          "iteration": 2,
+          "cost_so_far": 0.01299
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.006495,
+        "episode_id": "T068_ep",
+        "task_id": "T068"
+      },
+      {
+        "step": 3,
+        "state": {
+          "tier": "weak",
+          "iteration": 3,
+          "cost_so_far": 0.019485
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.006495,
+        "episode_id": "T068_ep",
+        "task_id": "T068"
+      },
+      {
+        "step": 4,
+        "state": {
+          "tier": "weak",
+          "iteration": 4,
+          "cost_so_far": 0.02598
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.006495,
+        "episode_id": "T068_ep",
+        "task_id": "T068"
+      },
+      {
+        "step": 5,
+        "state": {
+          "tier": "weak",
+          "iteration": 5,
+          "cost_so_far": 0.032476
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": true,
+        "step_cost_usd": 0.006495,
+        "episode_id": "T068_ep",
+        "task_id": "T068"
+      }
+    ]
+  },
+  {
+    "task_id": "T069",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T069",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.010625,
+      "total_input_tokens": 152,
+      "total_output_tokens": 108,
+      "status": "solved",
+      "domain": "oop",
+      "defect_type": "state_mutation",
+      "structure": "class",
+      "reasoning_type": "stateful",
+      "min_tier": "strong",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.010625
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.010625,
+        "episode_id": "T069_ep",
+        "task_id": "T069"
+      }
+    ]
+  },
+  {
+    "task_id": "T070",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T070",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.00715,
+      "total_input_tokens": 101,
+      "total_output_tokens": 73,
+      "status": "solved",
+      "domain": "parsing",
+      "defect_type": "wrong_logic",
+      "structure": "single_function",
+      "reasoning_type": "multi_step",
+      "min_tier": "strong",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.00715
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.00715,
+        "episode_id": "T070_ep",
+        "task_id": "T070"
+      }
+    ]
+  },
+  {
+    "task_id": "T071",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T071",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.011407,
+      "total_input_tokens": 159,
+      "total_output_tokens": 117,
+      "status": "solved",
+      "domain": "algorithms",
+      "defect_type": "wrong_logic",
+      "structure": "single_function",
+      "reasoning_type": "algorithmic",
+      "min_tier": "strong",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.011407
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.011407,
+        "episode_id": "T071_ep",
+        "task_id": "T071"
+      }
+    ]
+  },
+  {
+    "task_id": "T072",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T072",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.006641,
+      "total_input_tokens": 117,
+      "total_output_tokens": 62,
+      "status": "solved",
+      "domain": "strings",
+      "defect_type": "wrong_operator",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "strong",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.006641
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.006641,
+        "episode_id": "T072_ep",
+        "task_id": "T072"
+      }
+    ]
+  },
+  {
+    "task_id": "T073",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T073",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.013955,
+      "total_input_tokens": 167,
+      "total_output_tokens": 150,
+      "status": "solved",
+      "domain": "data_structures",
+      "defect_type": "missing_update",
+      "structure": "class",
+      "reasoning_type": "stateful",
+      "min_tier": "strong",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.013955
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.013955,
+        "episode_id": "T073_ep",
+        "task_id": "T073"
+      }
+    ]
+  },
+  {
+    "task_id": "T074",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T074",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.006277,
+      "total_input_tokens": 101,
+      "total_output_tokens": 61,
+      "status": "solved",
+      "domain": "parsing",
+      "defect_type": "wrong_logic",
+      "structure": "single_function",
+      "reasoning_type": "multi_step",
+      "min_tier": "strong",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.006277
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.006277,
+        "episode_id": "T074_ep",
+        "task_id": "T074"
+      }
+    ]
+  },
+  {
+    "task_id": "T075",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T075",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.005221,
+      "total_input_tokens": 99,
+      "total_output_tokens": 47,
+      "status": "solved",
+      "domain": "numeric",
+      "defect_type": "off_by_one",
+      "structure": "single_function",
+      "reasoning_type": "specification",
+      "min_tier": "strong",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.005221
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.005221,
+        "episode_id": "T075_ep",
+        "task_id": "T075"
+      }
+    ]
+  },
+  {
+    "task_id": "T076",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T076",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.008678,
+      "total_input_tokens": 129,
+      "total_output_tokens": 87,
+      "status": "solved",
+      "domain": "oop",
+      "defect_type": "wrong_logic",
+      "structure": "class",
+      "reasoning_type": "stateful",
+      "min_tier": "strong",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.008678
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.008678,
+        "episode_id": "T076_ep",
+        "task_id": "T076"
+      }
+    ]
+  },
+  {
+    "task_id": "T077",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T077",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.005622,
+      "total_input_tokens": 101,
+      "total_output_tokens": 52,
+      "status": "solved",
+      "domain": "arrays",
+      "defect_type": "wrong_logic",
+      "structure": "single_function",
+      "reasoning_type": "algorithmic",
+      "min_tier": "strong",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.005622
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.005622,
+        "episode_id": "T077_ep",
+        "task_id": "T077"
+      }
+    ]
+  },
+  {
+    "task_id": "T078",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T078",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.006659,
+      "total_input_tokens": 114,
+      "total_output_tokens": 63,
+      "status": "solved",
+      "domain": "strings",
+      "defect_type": "boundary_case",
+      "structure": "single_function",
+      "reasoning_type": "local_edit",
+      "min_tier": "strong",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.006659
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.006659,
+        "episode_id": "T078_ep",
+        "task_id": "T078"
+      }
+    ]
+  },
+  {
+    "task_id": "T079",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T079",
+      "difficulty": "medium",
+      "solved": false,
+      "total_iterations": 5,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 0.0,
+      "cost_score": 7.5,
+      "cost_usd": 0.037188,
+      "total_input_tokens": 600,
+      "total_output_tokens": 361,
+      "status": "test_failed",
+      "domain": "dicts",
+      "defect_type": "wrong_return",
+      "structure": "single_function",
+      "reasoning_type": "multi_step",
+      "min_tier": "strong",
+      "utility": -0.0004
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.007423
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.007423,
+        "episode_id": "T079_ep",
+        "task_id": "T079"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "weak",
+          "iteration": 2,
+          "cost_so_far": 0.014846
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.007423,
+        "episode_id": "T079_ep",
+        "task_id": "T079"
+      },
+      {
+        "step": 3,
+        "state": {
+          "tier": "weak",
+          "iteration": 3,
+          "cost_so_far": 0.022269
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.007423,
+        "episode_id": "T079_ep",
+        "task_id": "T079"
+      },
+      {
+        "step": 4,
+        "state": {
+          "tier": "weak",
+          "iteration": 4,
+          "cost_so_far": 0.029765
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.007496,
+        "episode_id": "T079_ep",
+        "task_id": "T079"
+      },
+      {
+        "step": 5,
+        "state": {
+          "tier": "weak",
+          "iteration": 5,
+          "cost_so_far": 0.037188
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": true,
+        "step_cost_usd": 0.007423,
+        "episode_id": "T079_ep",
+        "task_id": "T079"
+      }
+    ]
+  },
+  {
+    "task_id": "T080",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T080",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.012335,
+      "total_input_tokens": 158,
+      "total_output_tokens": 130,
+      "status": "solved",
+      "domain": "algorithms",
+      "defect_type": "wrong_logic",
+      "structure": "single_function",
+      "reasoning_type": "algorithmic",
+      "min_tier": "strong",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.012335
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.012335,
+        "episode_id": "T080_ep",
+        "task_id": "T080"
+      }
+    ]
+  },
+  {
+    "task_id": "T081",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T081",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.00675,
+      "total_input_tokens": 115,
+      "total_output_tokens": 64,
+      "status": "solved",
+      "domain": "oop",
+      "defect_type": "wrong_condition",
+      "structure": "class",
+      "reasoning_type": "stateful",
+      "min_tier": "strong",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.00675
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.00675,
+        "episode_id": "T081_ep",
+        "task_id": "T081"
+      }
+    ]
+  },
+  {
+    "task_id": "T082",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T082",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.007605,
+      "total_input_tokens": 114,
+      "total_output_tokens": 76,
+      "status": "solved",
+      "domain": "parsing",
+      "defect_type": "wrong_logic",
+      "structure": "single_function",
+      "reasoning_type": "multi_step",
+      "min_tier": "strong",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.007605
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.007605,
+        "episode_id": "T082_ep",
+        "task_id": "T082"
+      }
+    ]
+  },
+  {
+    "task_id": "T083",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T083",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.00866,
+      "total_input_tokens": 112,
+      "total_output_tokens": 91,
+      "status": "solved",
+      "domain": "numeric",
+      "defect_type": "wrong_logic",
+      "structure": "single_function",
+      "reasoning_type": "specification",
+      "min_tier": "strong",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.00866
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.00866,
+        "episode_id": "T083_ep",
+        "task_id": "T083"
+      }
+    ]
+  },
+  {
+    "task_id": "T084",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T084",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.009843,
+      "total_input_tokens": 145,
+      "total_output_tokens": 99,
+      "status": "solved",
+      "domain": "data_structures",
+      "defect_type": "off_by_one",
+      "structure": "class",
+      "reasoning_type": "stateful",
+      "min_tier": "strong",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.009843
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.009843,
+        "episode_id": "T084_ep",
+        "task_id": "T084"
+      }
+    ]
+  },
+  {
+    "task_id": "T085",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T085",
+      "difficulty": "medium",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.009261,
+      "total_input_tokens": 129,
+      "total_output_tokens": 95,
+      "status": "solved",
+      "domain": "strings",
+      "defect_type": "wrong_logic",
+      "structure": "single_function",
+      "reasoning_type": "multi_step",
+      "min_tier": "strong",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.009261
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.009261,
+        "episode_id": "T085_ep",
+        "task_id": "T085"
+      }
+    ]
+  },
+  {
+    "task_id": "T086",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T086",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.015246,
+      "total_input_tokens": 198,
+      "total_output_tokens": 160,
+      "status": "solved",
+      "domain": "algorithms",
+      "defect_type": "wrong_logic",
+      "structure": "single_function",
+      "reasoning_type": "algorithmic",
+      "min_tier": "human",
+      "utility": 0.9998
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.015246
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.015246,
+        "episode_id": "T086_ep",
+        "task_id": "T086"
+      }
+    ]
+  },
+  {
+    "task_id": "T087",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T087",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.015865,
+      "total_input_tokens": 208,
+      "total_output_tokens": 166,
+      "status": "solved",
+      "domain": "data_structures",
+      "defect_type": "wrong_logic",
+      "structure": "class",
+      "reasoning_type": "stateful",
+      "min_tier": "human",
+      "utility": 0.9998
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.015865
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.015865,
+        "episode_id": "T087_ep",
+        "task_id": "T087"
+      }
+    ]
+  },
+  {
+    "task_id": "T088",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T088",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.010971,
+      "total_input_tokens": 147,
+      "total_output_tokens": 114,
+      "status": "solved",
+      "domain": "algorithms",
+      "defect_type": "wrong_logic",
+      "structure": "single_function",
+      "reasoning_type": "algorithmic",
+      "min_tier": "human",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.010971
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.010971,
+        "episode_id": "T088_ep",
+        "task_id": "T088"
+      }
+    ]
+  },
+  {
+    "task_id": "T089",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T089",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.010279,
+      "total_input_tokens": 145,
+      "total_output_tokens": 105,
+      "status": "solved",
+      "domain": "data_structures",
+      "defect_type": "state_mutation",
+      "structure": "class",
+      "reasoning_type": "stateful",
+      "min_tier": "human",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.010279
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.010279,
+        "episode_id": "T089_ep",
+        "task_id": "T089"
+      }
+    ]
+  },
+  {
+    "task_id": "T090",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T090",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.012426,
+      "total_input_tokens": 175,
+      "total_output_tokens": 127,
+      "status": "solved",
+      "domain": "algorithms",
+      "defect_type": "wrong_condition",
+      "structure": "single_function",
+      "reasoning_type": "algorithmic",
+      "min_tier": "human",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.012426
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.012426,
+        "episode_id": "T090_ep",
+        "task_id": "T090"
+      }
+    ]
+  },
+  {
+    "task_id": "T091",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T091",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.012608,
+      "total_input_tokens": 169,
+      "total_output_tokens": 131,
+      "status": "solved",
+      "domain": "oop",
+      "defect_type": "wrong_logic",
+      "structure": "class",
+      "reasoning_type": "stateful",
+      "min_tier": "human",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.012608
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.012608,
+        "episode_id": "T091_ep",
+        "task_id": "T091"
+      }
+    ]
+  },
+  {
+    "task_id": "T092",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T092",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.011589,
+      "total_input_tokens": 145,
+      "total_output_tokens": 123,
+      "status": "solved",
+      "domain": "parsing",
+      "defect_type": "wrong_logic",
+      "structure": "single_function",
+      "reasoning_type": "algorithmic",
+      "min_tier": "human",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.011589
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.011589,
+        "episode_id": "T092_ep",
+        "task_id": "T092"
+      }
+    ]
+  },
+  {
+    "task_id": "T093",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T093",
+      "difficulty": "hard",
+      "solved": false,
+      "total_iterations": 0,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 0.0,
+      "cost_score": 0.0,
+      "cost_usd": 0.0,
+      "total_input_tokens": 0,
+      "total_output_tokens": 0,
+      "status": "api_error",
+      "domain": "algorithms",
+      "defect_type": "wrong_logic",
+      "structure": "single_function",
+      "reasoning_type": "algorithmic",
+      "min_tier": "human",
+      "utility": 0.0
+    },
+    "trace": []
+  },
+  {
+    "task_id": "T094",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T094",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.024544,
+      "total_input_tokens": 281,
+      "total_output_tokens": 267,
+      "status": "solved",
+      "domain": "data_structures",
+      "defect_type": "wrong_logic",
+      "structure": "class",
+      "reasoning_type": "stateful",
+      "min_tier": "human",
+      "utility": 0.9998
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.024544
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.024544,
+        "episode_id": "T094_ep",
+        "task_id": "T094"
+      }
+    ]
+  },
+  {
+    "task_id": "T095",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T095",
+      "difficulty": "hard",
+      "solved": false,
+      "total_iterations": 0,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 0.0,
+      "cost_score": 0.0,
+      "cost_usd": 0.0,
+      "total_input_tokens": 0,
+      "total_output_tokens": 0,
+      "status": "api_error",
+      "domain": "algorithms",
+      "defect_type": "wrong_logic",
+      "structure": "single_function",
+      "reasoning_type": "algorithmic",
+      "min_tier": "human",
+      "utility": 0.0
+    },
+    "trace": []
+  },
+  {
+    "task_id": "T096",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T096",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.008187,
+      "total_input_tokens": 118,
+      "total_output_tokens": 83,
+      "status": "solved",
+      "domain": "oop",
+      "defect_type": "state_mutation",
+      "structure": "class",
+      "reasoning_type": "stateful",
+      "min_tier": "human",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.008187
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.008187,
+        "episode_id": "T096_ep",
+        "task_id": "T096"
+      }
+    ]
+  },
+  {
+    "task_id": "T097",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T097",
+      "difficulty": "hard",
+      "solved": false,
+      "total_iterations": 0,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 0.0,
+      "cost_score": 0.0,
+      "cost_usd": 0.0,
+      "total_input_tokens": 0,
+      "total_output_tokens": 0,
+      "status": "api_error",
+      "domain": "parsing",
+      "defect_type": "wrong_logic",
+      "structure": "single_function",
+      "reasoning_type": "algorithmic",
+      "min_tier": "human",
+      "utility": 0.0
+    },
+    "trace": []
+  },
+  {
+    "task_id": "T098",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T098",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.019977,
+      "total_input_tokens": 246,
+      "total_output_tokens": 213,
+      "status": "solved",
+      "domain": "data_structures",
+      "defect_type": "wrong_logic",
+      "structure": "class",
+      "reasoning_type": "stateful",
+      "min_tier": "human",
+      "utility": 0.9998
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.019977
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.019977,
+        "episode_id": "T098_ep",
+        "task_id": "T098"
+      }
+    ]
+  },
+  {
+    "task_id": "T099",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T099",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.021669,
+      "total_input_tokens": 267,
+      "total_output_tokens": 231,
+      "status": "solved",
+      "domain": "algorithms",
+      "defect_type": "wrong_logic",
+      "structure": "multiple_functions",
+      "reasoning_type": "algorithmic",
+      "min_tier": "human",
+      "utility": 0.9998
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.021669
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.021669,
+        "episode_id": "T099_ep",
+        "task_id": "T099"
+      }
+    ]
+  },
+  {
+    "task_id": "T100",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T100",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.010516,
+      "total_input_tokens": 154,
+      "total_output_tokens": 106,
+      "status": "solved",
+      "domain": "oop",
+      "defect_type": "wrong_logic",
+      "structure": "class",
+      "reasoning_type": "stateful",
+      "min_tier": "human",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.010516
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.010516,
+        "episode_id": "T100_ep",
+        "task_id": "T100"
+      }
+    ]
+  },
+  {
+    "task_id": "T101",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T101",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.025417,
+      "total_input_tokens": 265,
+      "total_output_tokens": 283,
+      "status": "solved",
+      "domain": "algorithms",
+      "defect_type": "wrong_logic",
+      "structure": "single_function",
+      "reasoning_type": "algorithmic",
+      "min_tier": "human",
+      "utility": 0.9997
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.025417
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.025417,
+        "episode_id": "T101_ep",
+        "task_id": "T101"
+      }
+    ]
+  },
+  {
+    "task_id": "T102",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T102",
+      "difficulty": "hard",
+      "solved": false,
+      "total_iterations": 5,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 0.0,
+      "cost_score": 7.5,
+      "cost_usd": 0.077324,
+      "total_input_tokens": 990,
+      "total_output_tokens": 815,
+      "status": "test_failed",
+      "domain": "parsing",
+      "defect_type": "wrong_logic",
+      "structure": "single_function",
+      "reasoning_type": "algorithmic",
+      "min_tier": "human",
+      "utility": -0.0008
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.01561
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.01561,
+        "episode_id": "T102_ep",
+        "task_id": "T102"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "weak",
+          "iteration": 2,
+          "cost_so_far": 0.031148
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.015538,
+        "episode_id": "T102_ep",
+        "task_id": "T102"
+      },
+      {
+        "step": 3,
+        "state": {
+          "tier": "weak",
+          "iteration": 3,
+          "cost_so_far": 0.04654
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.015392,
+        "episode_id": "T102_ep",
+        "task_id": "T102"
+      },
+      {
+        "step": 4,
+        "state": {
+          "tier": "weak",
+          "iteration": 4,
+          "cost_so_far": 0.061932
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.015392,
+        "episode_id": "T102_ep",
+        "task_id": "T102"
+      },
+      {
+        "step": 5,
+        "state": {
+          "tier": "weak",
+          "iteration": 5,
+          "cost_so_far": 0.077324
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": true,
+        "step_cost_usd": 0.015392,
+        "episode_id": "T102_ep",
+        "task_id": "T102"
+      }
+    ]
+  },
+  {
+    "task_id": "T103",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T103",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.005913,
+      "total_input_tokens": 113,
+      "total_output_tokens": 53,
+      "status": "solved",
+      "domain": "numeric",
+      "defect_type": "wrong_logic",
+      "structure": "single_function",
+      "reasoning_type": "algorithmic",
+      "min_tier": "human",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.005913
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.005913,
+        "episode_id": "T103_ep",
+        "task_id": "T103"
+      }
+    ]
+  },
+  {
+    "task_id": "T104",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T104",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.027582,
+      "total_input_tokens": 340,
+      "total_output_tokens": 294,
+      "status": "solved",
+      "domain": "data_structures",
+      "defect_type": "wrong_logic",
+      "structure": "class",
+      "reasoning_type": "stateful",
+      "min_tier": "human",
+      "utility": 0.9997
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.027582
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.027582,
+        "episode_id": "T104_ep",
+        "task_id": "T104"
+      }
+    ]
+  },
+  {
+    "task_id": "T105",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T105",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.011972,
+      "total_input_tokens": 154,
+      "total_output_tokens": 126,
+      "status": "solved",
+      "domain": "algorithms",
+      "defect_type": "missing_sort",
+      "structure": "single_function",
+      "reasoning_type": "algorithmic",
+      "min_tier": "human",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.011972
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.011972,
+        "episode_id": "T105_ep",
+        "task_id": "T105"
+      }
+    ]
+  },
+  {
+    "task_id": "T106",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T106",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.010061,
+      "total_input_tokens": 153,
+      "total_output_tokens": 100,
+      "status": "solved",
+      "domain": "oop",
+      "defect_type": "wrong_logic",
+      "structure": "class",
+      "reasoning_type": "stateful",
+      "min_tier": "human",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.010061
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.010061,
+        "episode_id": "T106_ep",
+        "task_id": "T106"
+      }
+    ]
+  },
+  {
+    "task_id": "T107",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T107",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.01461,
+      "total_input_tokens": 175,
+      "total_output_tokens": 157,
+      "status": "solved",
+      "domain": "data_structures",
+      "defect_type": "wrong_condition",
+      "structure": "class",
+      "reasoning_type": "stateful",
+      "min_tier": "human",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.01461
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.01461,
+        "episode_id": "T107_ep",
+        "task_id": "T107"
+      }
+    ]
+  },
+  {
+    "task_id": "T108",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T108",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.011462,
+      "total_input_tokens": 178,
+      "total_output_tokens": 113,
+      "status": "solved",
+      "domain": "algorithms",
+      "defect_type": "wrong_logic",
+      "structure": "single_function",
+      "reasoning_type": "algorithmic",
+      "min_tier": "human",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.011462
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.011462,
+        "episode_id": "T108_ep",
+        "task_id": "T108"
+      }
+    ]
+  },
+  {
+    "task_id": "T109",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T109",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.025035,
+      "total_input_tokens": 252,
+      "total_output_tokens": 281,
+      "status": "solved",
+      "domain": "parsing",
+      "defect_type": "wrong_logic",
+      "structure": "single_function",
+      "reasoning_type": "algorithmic",
+      "min_tier": "human",
+      "utility": 0.9997
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.025035
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.025035,
+        "episode_id": "T109_ep",
+        "task_id": "T109"
+      }
+    ]
+  },
+  {
+    "task_id": "T110",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T110",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.013791,
+      "total_input_tokens": 178,
+      "total_output_tokens": 145,
+      "status": "solved",
+      "domain": "oop",
+      "defect_type": "state_mutation",
+      "structure": "class",
+      "reasoning_type": "stateful",
+      "min_tier": "human",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.013791
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.013791,
+        "episode_id": "T110_ep",
+        "task_id": "T110"
+      }
+    ]
+  },
+  {
+    "task_id": "T111",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T111",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.008879,
+      "total_input_tokens": 128,
+      "total_output_tokens": 90,
+      "status": "solved",
+      "domain": "dicts",
+      "defect_type": "wrong_logic",
+      "structure": "single_function",
+      "reasoning_type": "algorithmic",
+      "min_tier": "human",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.008879
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.008879,
+        "episode_id": "T111_ep",
+        "task_id": "T111"
+      }
+    ]
+  },
+  {
+    "task_id": "T112",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T112",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.03344,
+      "total_input_tokens": 382,
+      "total_output_tokens": 364,
+      "status": "solved",
+      "domain": "data_structures",
+      "defect_type": "wrong_condition",
+      "structure": "class",
+      "reasoning_type": "stateful",
+      "min_tier": "human",
+      "utility": 0.9997
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.03344
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.03344,
+        "episode_id": "T112_ep",
+        "task_id": "T112"
+      }
+    ]
+  },
+  {
+    "task_id": "T113",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T113",
+      "difficulty": "hard",
+      "solved": false,
+      "total_iterations": 5,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 0.0,
+      "cost_score": 7.5,
+      "cost_usd": 0.0824,
+      "total_input_tokens": 965,
+      "total_output_tokens": 891,
+      "status": "test_failed",
+      "domain": "oop",
+      "defect_type": "wrong_logic",
+      "structure": "class",
+      "reasoning_type": "stateful",
+      "min_tier": "human",
+      "utility": -0.0008
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.016538
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.016538,
+        "episode_id": "T113_ep",
+        "task_id": "T113"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "weak",
+          "iteration": 2,
+          "cost_so_far": 0.033004
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.016466,
+        "episode_id": "T113_ep",
+        "task_id": "T113"
+      },
+      {
+        "step": 3,
+        "state": {
+          "tier": "weak",
+          "iteration": 3,
+          "cost_so_far": 0.049469
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.016466,
+        "episode_id": "T113_ep",
+        "task_id": "T113"
+      },
+      {
+        "step": 4,
+        "state": {
+          "tier": "weak",
+          "iteration": 4,
+          "cost_so_far": 0.066008
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.016538,
+        "episode_id": "T113_ep",
+        "task_id": "T113"
+      },
+      {
+        "step": 5,
+        "state": {
+          "tier": "weak",
+          "iteration": 5,
+          "cost_so_far": 0.0824
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.0
+        },
+        "reward": -0.5,
+        "done": true,
+        "step_cost_usd": 0.016393,
+        "episode_id": "T113_ep",
+        "task_id": "T113"
+      }
+    ]
+  },
+  {
+    "task_id": "T114",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T114",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.025199,
+      "total_input_tokens": 253,
+      "total_output_tokens": 283,
+      "status": "solved",
+      "domain": "parsing",
+      "defect_type": "boundary_case",
+      "structure": "single_function",
+      "reasoning_type": "algorithmic",
+      "min_tier": "human",
+      "utility": 0.9997
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.025199
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.025199,
+        "episode_id": "T114_ep",
+        "task_id": "T114"
+      }
+    ]
+  },
+  {
+    "task_id": "T115",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T115",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.024125,
+      "total_input_tokens": 230,
+      "total_output_tokens": 274,
+      "status": "solved",
+      "domain": "oop",
+      "defect_type": "wrong_logic",
+      "structure": "class",
+      "reasoning_type": "stateful",
+      "min_tier": "human",
+      "utility": 0.9998
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.024125
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.024125,
+        "episode_id": "T115_ep",
+        "task_id": "T115"
+      }
+    ]
+  },
+  {
+    "task_id": "T116",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T116",
+      "difficulty": "hard",
+      "solved": false,
+      "total_iterations": 5,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 0.0,
+      "cost_score": 7.5,
+      "cost_usd": 0.061204,
+      "total_input_tokens": 880,
+      "total_output_tokens": 621,
+      "status": "test_failed",
+      "domain": "dicts",
+      "defect_type": "missing_update",
+      "structure": "multiple_functions",
+      "reasoning_type": "multi_step",
+      "min_tier": "human",
+      "utility": -0.0006
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.012226
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.012226,
+        "episode_id": "T116_ep",
+        "task_id": "T116"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "weak",
+          "iteration": 2,
+          "cost_so_far": 0.024452
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.012226,
+        "episode_id": "T116_ep",
+        "task_id": "T116"
+      },
+      {
+        "step": 3,
+        "state": {
+          "tier": "weak",
+          "iteration": 3,
+          "cost_so_far": 0.036678
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.012226,
+        "episode_id": "T116_ep",
+        "task_id": "T116"
+      },
+      {
+        "step": 4,
+        "state": {
+          "tier": "weak",
+          "iteration": 4,
+          "cost_so_far": 0.048977
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.012299,
+        "episode_id": "T116_ep",
+        "task_id": "T116"
+      },
+      {
+        "step": 5,
+        "state": {
+          "tier": "weak",
+          "iteration": 5,
+          "cost_so_far": 0.061204
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": true,
+        "step_cost_usd": 0.012226,
+        "episode_id": "T116_ep",
+        "task_id": "T116"
+      }
+    ]
+  },
+  {
+    "task_id": "T117",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T117",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.020141,
+      "total_input_tokens": 239,
+      "total_output_tokens": 217,
+      "status": "solved",
+      "domain": "data_structures",
+      "defect_type": "wrong_logic",
+      "structure": "class",
+      "reasoning_type": "stateful",
+      "min_tier": "human",
+      "utility": 0.9998
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.020141
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.020141,
+        "episode_id": "T117_ep",
+        "task_id": "T117"
+      }
+    ]
+  },
+  {
+    "task_id": "T118",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T118",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.013573,
+      "total_input_tokens": 178,
+      "total_output_tokens": 142,
+      "status": "solved",
+      "domain": "parsing",
+      "defect_type": "wrong_condition",
+      "structure": "single_function",
+      "reasoning_type": "algorithmic",
+      "min_tier": "human",
+      "utility": 0.9999
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.013573
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.013573,
+        "episode_id": "T118_ep",
+        "task_id": "T118"
+      }
+    ]
+  },
+  {
+    "task_id": "T119",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T119",
+      "difficulty": "hard",
+      "solved": false,
+      "total_iterations": 5,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 0.0,
+      "cost_score": 7.5,
+      "cost_usd": 0.062987,
+      "total_input_tokens": 830,
+      "total_output_tokens": 658,
+      "status": "test_failed",
+      "domain": "oop",
+      "defect_type": "exception_handling",
+      "structure": "class",
+      "reasoning_type": "stateful",
+      "min_tier": "human",
+      "utility": -0.0006
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.012554
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.012554,
+        "episode_id": "T119_ep",
+        "task_id": "T119"
+      },
+      {
+        "step": 2,
+        "state": {
+          "tier": "weak",
+          "iteration": 2,
+          "cost_so_far": 0.02518
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.012627,
+        "episode_id": "T119_ep",
+        "task_id": "T119"
+      },
+      {
+        "step": 3,
+        "state": {
+          "tier": "weak",
+          "iteration": 3,
+          "cost_so_far": 0.037807
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.012627,
+        "episode_id": "T119_ep",
+        "task_id": "T119"
+      },
+      {
+        "step": 4,
+        "state": {
+          "tier": "weak",
+          "iteration": 4,
+          "cost_so_far": 0.050433
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": false,
+        "step_cost_usd": 0.012627,
+        "episode_id": "T119_ep",
+        "task_id": "T119"
+      },
+      {
+        "step": 5,
+        "state": {
+          "tier": "weak",
+          "iteration": 5,
+          "cost_so_far": 0.062987
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 0.5
+        },
+        "reward": -0.5,
+        "done": true,
+        "step_cost_usd": 0.012554,
+        "episode_id": "T119_ep",
+        "task_id": "T119"
+      }
+    ]
+  },
+  {
+    "task_id": "T120",
+    "policy": "FixedWeakPolicy",
+    "metrics": {
+      "task_id": "T120",
+      "difficulty": "hard",
+      "solved": true,
+      "total_iterations": 1,
+      "escalated_to_strong": false,
+      "escalated_to_human": false,
+      "final_pass_rate": 1.0,
+      "cost_score": 1.5,
+      "cost_usd": 0.016684,
+      "total_input_tokens": 217,
+      "total_output_tokens": 175,
+      "status": "solved",
+      "domain": "algorithms",
+      "defect_type": "wrong_logic",
+      "structure": "single_function",
+      "reasoning_type": "algorithmic",
+      "min_tier": "human",
+      "utility": 0.9998
+    },
+    "trace": [
+      {
+        "step": 1,
+        "state": {
+          "tier": "weak",
+          "iteration": 1,
+          "cost_so_far": 0.016684
+        },
+        "action": "retry_weak",
+        "next_state": {
+          "pass_rate": 1.0
+        },
+        "reward": 1.0,
+        "done": true,
+        "step_cost_usd": 0.016684,
+        "episode_id": "T120_ep",
+        "task_id": "T120"
+      }
+    ]
+  }
+]
