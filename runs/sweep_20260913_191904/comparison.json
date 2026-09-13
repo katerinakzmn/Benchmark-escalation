@@ -1,0 +1,1013 @@
+{
+  "sweep_id": "20260913_191904",
+  "git_commit": "f20e694",
+  "backend": "polza",
+  "timestamp": "2026-09-13T20:09:49.447363",
+  "policies": [
+    "fixed_weak",
+    "fixed_strong",
+    "retry_then_escalate",
+    "confidence_threshold",
+    "progress_heuristic",
+    "oracle"
+  ],
+  "summaries": {
+    "fixed_weak": {
+      "total_tasks": 120,
+      "solved_count": 104,
+      "solved_rate": 0.867,
+      "avg_final_pass_rate": 0.866667,
+      "avg_pass_rate_solved": 1.0,
+      "avg_cost": 2.1625,
+      "avg_cost_solved": 1.557692,
+      "total_cost": 259.5,
+      "avg_cost_usd": 0.014177,
+      "total_cost_usd": 1.701258,
+      "currency_symbol": "₽",
+      "utility": 0.866525,
+      "avg_iterations": 1.441667,
+      "avg_iterations_solved": 1.038462,
+      "escalation_to_strong_rate": 0.0,
+      "escalation_to_human_rate": 0.0,
+      "status_counts": {
+        "solved": 104,
+        "test_failed": 13,
+        "api_error": 3
+      },
+      "by_difficulty": {
+        "easy": {
+          "count": 40,
+          "solved": 36,
+          "solved_rate": 0.9,
+          "avg_cost": 2.25,
+          "avg_cost_usd": 0.009128575,
+          "avg_iters": 1.5
+        },
+        "medium": {
+          "count": 40,
+          "solved": 35,
+          "solved_rate": 0.875,
+          "avg_cost": 2.25,
+          "avg_cost_usd": 0.0126814,
+          "avg_iters": 1.5
+        },
+        "hard": {
+          "count": 40,
+          "solved": 33,
+          "solved_rate": 0.825,
+          "avg_cost": 1.99,
+          "avg_cost_usd": 0.020721475,
+          "avg_iters": 1.3
+        }
+      },
+      "by_domain": {
+        "algorithms": {
+          "count": 18,
+          "solved": 15,
+          "solved_rate": 0.833,
+          "avg_iters": 1.1
+        },
+        "arrays": {
+          "count": 15,
+          "solved": 15,
+          "solved_rate": 1.0,
+          "avg_iters": 1.0
+        },
+        "data_structures": {
+          "count": 15,
+          "solved": 15,
+          "solved_rate": 1.0,
+          "avg_iters": 1.0
+        },
+        "dicts": {
+          "count": 14,
+          "solved": 10,
+          "solved_rate": 0.714,
+          "avg_iters": 2.1
+        },
+        "numeric": {
+          "count": 14,
+          "solved": 12,
+          "solved_rate": 0.857,
+          "avg_iters": 1.6
+        },
+        "oop": {
+          "count": 12,
+          "solved": 10,
+          "solved_rate": 0.833,
+          "avg_iters": 1.7
+        },
+        "parsing": {
+          "count": 12,
+          "solved": 10,
+          "solved_rate": 0.833,
+          "avg_iters": 1.2
+        },
+        "strings": {
+          "count": 20,
+          "solved": 17,
+          "solved_rate": 0.85,
+          "avg_iters": 1.8
+        }
+      },
+      "by_defect_type": {
+        "boundary_case": {
+          "count": 5,
+          "solved": 5,
+          "solved_rate": 1.0,
+          "avg_iters": 1.0
+        },
+        "exception_handling": {
+          "count": 5,
+          "solved": 2,
+          "solved_rate": 0.4,
+          "avg_iters": 3.4
+        },
+        "missing_sort": {
+          "count": 3,
+          "solved": 2,
+          "solved_rate": 0.667,
+          "avg_iters": 2.3
+        },
+        "missing_update": {
+          "count": 6,
+          "solved": 4,
+          "solved_rate": 0.667,
+          "avg_iters": 2.3
+        },
+        "off_by_one": {
+          "count": 14,
+          "solved": 14,
+          "solved_rate": 1.0,
+          "avg_iters": 1.0
+        },
+        "specification": {
+          "count": 2,
+          "solved": 1,
+          "solved_rate": 0.5,
+          "avg_iters": 3.0
+        },
+        "state_mutation": {
+          "count": 7,
+          "solved": 7,
+          "solved_rate": 1.0,
+          "avg_iters": 1.0
+        },
+        "wrong_condition": {
+          "count": 17,
+          "solved": 15,
+          "solved_rate": 0.882,
+          "avg_iters": 1.5
+        },
+        "wrong_logic": {
+          "count": 49,
+          "solved": 44,
+          "solved_rate": 0.898,
+          "avg_iters": 1.2
+        },
+        "wrong_operator": {
+          "count": 5,
+          "solved": 4,
+          "solved_rate": 0.8,
+          "avg_iters": 1.8
+        },
+        "wrong_return": {
+          "count": 7,
+          "solved": 6,
+          "solved_rate": 0.857,
+          "avg_iters": 1.6
+        }
+      }
+    },
+    "fixed_strong": {
+      "total_tasks": 120,
+      "solved_count": 109,
+      "solved_rate": 0.908,
+      "avg_final_pass_rate": 0.929167,
+      "avg_pass_rate_solved": 1.0,
+      "avg_cost": 3.5,
+      "avg_cost_solved": 3.5,
+      "total_cost": 420.0,
+      "avg_cost_usd": 0.17385,
+      "total_cost_usd": 20.862007,
+      "currency_symbol": "₽",
+      "utility": 0.906595,
+      "avg_iterations": 1.0,
+      "avg_iterations_solved": 1.0,
+      "escalation_to_strong_rate": 1.0,
+      "escalation_to_human_rate": 0.0,
+      "status_counts": {
+        "solved": 109,
+        "test_failed": 11
+      },
+      "by_difficulty": {
+        "easy": {
+          "count": 40,
+          "solved": 35,
+          "solved_rate": 0.875,
+          "avg_cost": 3.5,
+          "avg_cost_usd": 0.101903825,
+          "avg_iters": 1.0
+        },
+        "medium": {
+          "count": 40,
+          "solved": 34,
+          "solved_rate": 0.85,
+          "avg_cost": 3.5,
+          "avg_cost_usd": 0.145411225,
+          "avg_iters": 1.0
+        },
+        "hard": {
+          "count": 40,
+          "solved": 40,
+          "solved_rate": 1.0,
+          "avg_cost": 3.5,
+          "avg_cost_usd": 0.274235125,
+          "avg_iters": 1.0
+        }
+      },
+      "by_domain": {
+        "algorithms": {
+          "count": 18,
+          "solved": 17,
+          "solved_rate": 0.944,
+          "avg_iters": 1.0
+        },
+        "arrays": {
+          "count": 15,
+          "solved": 14,
+          "solved_rate": 0.933,
+          "avg_iters": 1.0
+        },
+        "data_structures": {
+          "count": 15,
+          "solved": 14,
+          "solved_rate": 0.933,
+          "avg_iters": 1.0
+        },
+        "dicts": {
+          "count": 14,
+          "solved": 12,
+          "solved_rate": 0.857,
+          "avg_iters": 1.0
+        },
+        "numeric": {
+          "count": 14,
+          "solved": 12,
+          "solved_rate": 0.857,
+          "avg_iters": 1.0
+        },
+        "oop": {
+          "count": 12,
+          "solved": 12,
+          "solved_rate": 1.0,
+          "avg_iters": 1.0
+        },
+        "parsing": {
+          "count": 12,
+          "solved": 12,
+          "solved_rate": 1.0,
+          "avg_iters": 1.0
+        },
+        "strings": {
+          "count": 20,
+          "solved": 16,
+          "solved_rate": 0.8,
+          "avg_iters": 1.0
+        }
+      },
+      "by_defect_type": {
+        "boundary_case": {
+          "count": 5,
+          "solved": 4,
+          "solved_rate": 0.8,
+          "avg_iters": 1.0
+        },
+        "exception_handling": {
+          "count": 5,
+          "solved": 3,
+          "solved_rate": 0.6,
+          "avg_iters": 1.0
+        },
+        "missing_sort": {
+          "count": 3,
+          "solved": 2,
+          "solved_rate": 0.667,
+          "avg_iters": 1.0
+        },
+        "missing_update": {
+          "count": 6,
+          "solved": 5,
+          "solved_rate": 0.833,
+          "avg_iters": 1.0
+        },
+        "off_by_one": {
+          "count": 14,
+          "solved": 14,
+          "solved_rate": 1.0,
+          "avg_iters": 1.0
+        },
+        "specification": {
+          "count": 2,
+          "solved": 2,
+          "solved_rate": 1.0,
+          "avg_iters": 1.0
+        },
+        "state_mutation": {
+          "count": 7,
+          "solved": 7,
+          "solved_rate": 1.0,
+          "avg_iters": 1.0
+        },
+        "wrong_condition": {
+          "count": 17,
+          "solved": 14,
+          "solved_rate": 0.824,
+          "avg_iters": 1.0
+        },
+        "wrong_logic": {
+          "count": 49,
+          "solved": 47,
+          "solved_rate": 0.959,
+          "avg_iters": 1.0
+        },
+        "wrong_operator": {
+          "count": 5,
+          "solved": 5,
+          "solved_rate": 1.0,
+          "avg_iters": 1.0
+        },
+        "wrong_return": {
+          "count": 7,
+          "solved": 6,
+          "solved_rate": 0.857,
+          "avg_iters": 1.0
+        }
+      }
+    },
+    "retry_then_escalate": {
+      "total_tasks": 120,
+      "solved_count": 115,
+      "solved_rate": 0.958,
+      "avg_final_pass_rate": 0.958333,
+      "avg_pass_rate_solved": 1.0,
+      "avg_cost": 2.708333,
+      "avg_cost_solved": 2.086957,
+      "total_cost": 325.0,
+      "avg_cost_usd": 0.039246,
+      "total_cost_usd": 4.709484,
+      "currency_symbol": "₽",
+      "utility": 0.957941,
+      "avg_iterations": 1.3,
+      "avg_iterations_solved": 1.182609,
+      "escalation_to_strong_rate": 0.117,
+      "escalation_to_human_rate": 0.058,
+      "status_counts": {
+        "solved": 115,
+        "test_failed": 5
+      },
+      "by_difficulty": {
+        "easy": {
+          "count": 40,
+          "solved": 39,
+          "solved_rate": 0.975,
+          "avg_cost": 2.3,
+          "avg_cost_usd": 0.018795175,
+          "avg_iters": 1.2
+        },
+        "medium": {
+          "count": 40,
+          "solved": 36,
+          "solved_rate": 0.9,
+          "avg_cost": 3.56,
+          "avg_cost_usd": 0.051537025,
+          "avg_iters": 1.4
+        },
+        "hard": {
+          "count": 40,
+          "solved": 40,
+          "solved_rate": 1.0,
+          "avg_cost": 2.26,
+          "avg_cost_usd": 0.0474049,
+          "avg_iters": 1.2
+        }
+      },
+      "by_domain": {
+        "algorithms": {
+          "count": 18,
+          "solved": 17,
+          "solved_rate": 0.944,
+          "avg_iters": 1.2
+        },
+        "arrays": {
+          "count": 15,
+          "solved": 15,
+          "solved_rate": 1.0,
+          "avg_iters": 1.0
+        },
+        "data_structures": {
+          "count": 15,
+          "solved": 14,
+          "solved_rate": 0.933,
+          "avg_iters": 1.2
+        },
+        "dicts": {
+          "count": 14,
+          "solved": 13,
+          "solved_rate": 0.929,
+          "avg_iters": 1.7
+        },
+        "numeric": {
+          "count": 14,
+          "solved": 13,
+          "solved_rate": 0.929,
+          "avg_iters": 1.4
+        },
+        "oop": {
+          "count": 12,
+          "solved": 12,
+          "solved_rate": 1.0,
+          "avg_iters": 1.4
+        },
+        "parsing": {
+          "count": 12,
+          "solved": 12,
+          "solved_rate": 1.0,
+          "avg_iters": 1.2
+        },
+        "strings": {
+          "count": 20,
+          "solved": 19,
+          "solved_rate": 0.95,
+          "avg_iters": 1.4
+        }
+      },
+      "by_defect_type": {
+        "boundary_case": {
+          "count": 5,
+          "solved": 5,
+          "solved_rate": 1.0,
+          "avg_iters": 1.0
+        },
+        "exception_handling": {
+          "count": 5,
+          "solved": 3,
+          "solved_rate": 0.6,
+          "avg_iters": 2.8
+        },
+        "missing_sort": {
+          "count": 3,
+          "solved": 2,
+          "solved_rate": 0.667,
+          "avg_iters": 2.0
+        },
+        "missing_update": {
+          "count": 6,
+          "solved": 6,
+          "solved_rate": 1.0,
+          "avg_iters": 1.8
+        },
+        "off_by_one": {
+          "count": 14,
+          "solved": 14,
+          "solved_rate": 1.0,
+          "avg_iters": 1.0
+        },
+        "specification": {
+          "count": 2,
+          "solved": 2,
+          "solved_rate": 1.0,
+          "avg_iters": 2.0
+        },
+        "state_mutation": {
+          "count": 7,
+          "solved": 7,
+          "solved_rate": 1.0,
+          "avg_iters": 1.0
+        },
+        "wrong_condition": {
+          "count": 17,
+          "solved": 16,
+          "solved_rate": 0.941,
+          "avg_iters": 1.5
+        },
+        "wrong_logic": {
+          "count": 49,
+          "solved": 49,
+          "solved_rate": 1.0,
+          "avg_iters": 1.1
+        },
+        "wrong_operator": {
+          "count": 5,
+          "solved": 5,
+          "solved_rate": 1.0,
+          "avg_iters": 1.4
+        },
+        "wrong_return": {
+          "count": 7,
+          "solved": 6,
+          "solved_rate": 0.857,
+          "avg_iters": 1.4
+        }
+      }
+    },
+    "confidence_threshold": {
+      "total_tasks": 120,
+      "solved_count": 106,
+      "solved_rate": 0.883,
+      "avg_final_pass_rate": 0.883333,
+      "avg_pass_rate_solved": 1.0,
+      "avg_cost": 2.2375,
+      "avg_cost_solved": 1.542453,
+      "total_cost": 268.5,
+      "avg_cost_usd": 0.015141,
+      "total_cost_usd": 1.816949,
+      "currency_symbol": "₽",
+      "utility": 0.883182,
+      "avg_iterations": 1.491667,
+      "avg_iterations_solved": 1.028302,
+      "escalation_to_strong_rate": 0.0,
+      "escalation_to_human_rate": 0.0,
+      "status_counts": {
+        "solved": 106,
+        "test_failed": 14
+      },
+      "by_difficulty": {
+        "easy": {
+          "count": 40,
+          "solved": 35,
+          "solved_rate": 0.875,
+          "avg_cost": 2.25,
+          "avg_cost_usd": 0.00907755,
+          "avg_iters": 1.5
+        },
+        "medium": {
+          "count": 40,
+          "solved": 35,
+          "solved_rate": 0.875,
+          "avg_cost": 2.29,
+          "avg_cost_usd": 0.01299525,
+          "avg_iters": 1.5
+        },
+        "hard": {
+          "count": 40,
+          "solved": 36,
+          "solved_rate": 0.9,
+          "avg_cost": 2.17,
+          "avg_cost_usd": 0.023350925,
+          "avg_iters": 1.4
+        }
+      },
+      "by_domain": {
+        "algorithms": {
+          "count": 18,
+          "solved": 17,
+          "solved_rate": 0.944,
+          "avg_iters": 1.2
+        },
+        "arrays": {
+          "count": 15,
+          "solved": 15,
+          "solved_rate": 1.0,
+          "avg_iters": 1.0
+        },
+        "data_structures": {
+          "count": 15,
+          "solved": 15,
+          "solved_rate": 1.0,
+          "avg_iters": 1.1
+        },
+        "dicts": {
+          "count": 14,
+          "solved": 10,
+          "solved_rate": 0.714,
+          "avg_iters": 2.1
+        },
+        "numeric": {
+          "count": 14,
+          "solved": 12,
+          "solved_rate": 0.857,
+          "avg_iters": 1.6
+        },
+        "oop": {
+          "count": 12,
+          "solved": 10,
+          "solved_rate": 0.833,
+          "avg_iters": 1.7
+        },
+        "parsing": {
+          "count": 12,
+          "solved": 11,
+          "solved_rate": 0.917,
+          "avg_iters": 1.5
+        },
+        "strings": {
+          "count": 20,
+          "solved": 16,
+          "solved_rate": 0.8,
+          "avg_iters": 1.8
+        }
+      },
+      "by_defect_type": {
+        "boundary_case": {
+          "count": 5,
+          "solved": 5,
+          "solved_rate": 1.0,
+          "avg_iters": 1.0
+        },
+        "exception_handling": {
+          "count": 5,
+          "solved": 2,
+          "solved_rate": 0.4,
+          "avg_iters": 3.4
+        },
+        "missing_sort": {
+          "count": 3,
+          "solved": 2,
+          "solved_rate": 0.667,
+          "avg_iters": 2.3
+        },
+        "missing_update": {
+          "count": 6,
+          "solved": 4,
+          "solved_rate": 0.667,
+          "avg_iters": 2.3
+        },
+        "off_by_one": {
+          "count": 14,
+          "solved": 14,
+          "solved_rate": 1.0,
+          "avg_iters": 1.0
+        },
+        "specification": {
+          "count": 2,
+          "solved": 1,
+          "solved_rate": 0.5,
+          "avg_iters": 3.0
+        },
+        "state_mutation": {
+          "count": 7,
+          "solved": 7,
+          "solved_rate": 1.0,
+          "avg_iters": 1.0
+        },
+        "wrong_condition": {
+          "count": 17,
+          "solved": 15,
+          "solved_rate": 0.882,
+          "avg_iters": 1.5
+        },
+        "wrong_logic": {
+          "count": 49,
+          "solved": 46,
+          "solved_rate": 0.939,
+          "avg_iters": 1.3
+        },
+        "wrong_operator": {
+          "count": 5,
+          "solved": 4,
+          "solved_rate": 0.8,
+          "avg_iters": 1.8
+        },
+        "wrong_return": {
+          "count": 7,
+          "solved": 6,
+          "solved_rate": 0.857,
+          "avg_iters": 1.6
+        }
+      }
+    },
+    "progress_heuristic": {
+      "total_tasks": 120,
+      "solved_count": 115,
+      "solved_rate": 0.958,
+      "avg_final_pass_rate": 0.958333,
+      "avg_pass_rate_solved": 1.0,
+      "avg_cost": 2.433333,
+      "avg_cost_solved": 2.03913,
+      "total_cost": 292.0,
+      "avg_cost_usd": 0.037765,
+      "total_cost_usd": 4.531764,
+      "currency_symbol": "₽",
+      "utility": 0.957956,
+      "avg_iterations": 1.4,
+      "avg_iterations_solved": 1.243478,
+      "escalation_to_strong_rate": 0.117,
+      "escalation_to_human_rate": 0.042,
+      "status_counts": {
+        "solved": 115,
+        "test_failed": 5
+      },
+      "by_difficulty": {
+        "easy": {
+          "count": 40,
+          "solved": 39,
+          "solved_rate": 0.975,
+          "avg_cost": 2.33,
+          "avg_cost_usd": 0.02248545,
+          "avg_iters": 1.4
+        },
+        "medium": {
+          "count": 40,
+          "solved": 36,
+          "solved_rate": 0.9,
+          "avg_cost": 2.83,
+          "avg_cost_usd": 0.0480939,
+          "avg_iters": 1.6
+        },
+        "hard": {
+          "count": 40,
+          "solved": 40,
+          "solved_rate": 1.0,
+          "avg_cost": 2.15,
+          "avg_cost_usd": 0.04271475,
+          "avg_iters": 1.3
+        }
+      },
+      "by_domain": {
+        "algorithms": {
+          "count": 18,
+          "solved": 17,
+          "solved_rate": 0.944,
+          "avg_iters": 1.2
+        },
+        "arrays": {
+          "count": 15,
+          "solved": 15,
+          "solved_rate": 1.0,
+          "avg_iters": 1.0
+        },
+        "data_structures": {
+          "count": 15,
+          "solved": 14,
+          "solved_rate": 0.933,
+          "avg_iters": 1.3
+        },
+        "dicts": {
+          "count": 14,
+          "solved": 13,
+          "solved_rate": 0.929,
+          "avg_iters": 1.9
+        },
+        "numeric": {
+          "count": 14,
+          "solved": 13,
+          "solved_rate": 0.929,
+          "avg_iters": 1.5
+        },
+        "oop": {
+          "count": 12,
+          "solved": 12,
+          "solved_rate": 1.0,
+          "avg_iters": 1.5
+        },
+        "parsing": {
+          "count": 12,
+          "solved": 12,
+          "solved_rate": 1.0,
+          "avg_iters": 1.2
+        },
+        "strings": {
+          "count": 20,
+          "solved": 19,
+          "solved_rate": 0.95,
+          "avg_iters": 1.6
+        }
+      },
+      "by_defect_type": {
+        "boundary_case": {
+          "count": 5,
+          "solved": 5,
+          "solved_rate": 1.0,
+          "avg_iters": 1.0
+        },
+        "exception_handling": {
+          "count": 5,
+          "solved": 3,
+          "solved_rate": 0.6,
+          "avg_iters": 3.2
+        },
+        "missing_sort": {
+          "count": 3,
+          "solved": 2,
+          "solved_rate": 0.667,
+          "avg_iters": 2.3
+        },
+        "missing_update": {
+          "count": 6,
+          "solved": 6,
+          "solved_rate": 1.0,
+          "avg_iters": 2.0
+        },
+        "off_by_one": {
+          "count": 14,
+          "solved": 14,
+          "solved_rate": 1.0,
+          "avg_iters": 1.0
+        },
+        "specification": {
+          "count": 2,
+          "solved": 2,
+          "solved_rate": 1.0,
+          "avg_iters": 2.5
+        },
+        "state_mutation": {
+          "count": 7,
+          "solved": 7,
+          "solved_rate": 1.0,
+          "avg_iters": 1.0
+        },
+        "wrong_condition": {
+          "count": 17,
+          "solved": 16,
+          "solved_rate": 0.941,
+          "avg_iters": 1.6
+        },
+        "wrong_logic": {
+          "count": 49,
+          "solved": 49,
+          "solved_rate": 1.0,
+          "avg_iters": 1.1
+        },
+        "wrong_operator": {
+          "count": 5,
+          "solved": 5,
+          "solved_rate": 1.0,
+          "avg_iters": 1.6
+        },
+        "wrong_return": {
+          "count": 7,
+          "solved": 6,
+          "solved_rate": 0.857,
+          "avg_iters": 1.6
+        }
+      }
+    },
+    "oracle": {
+      "total_tasks": 120,
+      "solved_count": 113,
+      "solved_rate": 0.942,
+      "avg_final_pass_rate": 0.941667,
+      "avg_pass_rate_solved": 1.0,
+      "avg_cost": 2.666667,
+      "avg_cost_solved": 1.871681,
+      "total_cost": 320.0,
+      "avg_cost_usd": 0.039733,
+      "total_cost_usd": 4.767925,
+      "currency_symbol": "₽",
+      "utility": 0.941269,
+      "avg_iterations": 1.2,
+      "avg_iterations_solved": 1.088496,
+      "escalation_to_strong_rate": 0.133,
+      "escalation_to_human_rate": 0.067,
+      "status_counts": {
+        "solved": 113,
+        "test_failed": 7
+      },
+      "by_difficulty": {
+        "easy": {
+          "count": 40,
+          "solved": 38,
+          "solved_rate": 0.95,
+          "avg_cost": 2.81,
+          "avg_cost_usd": 0.028868425,
+          "avg_iters": 1.2
+        },
+        "medium": {
+          "count": 40,
+          "solved": 35,
+          "solved_rate": 0.875,
+          "avg_cost": 3.34,
+          "avg_cost_usd": 0.0503025,
+          "avg_iters": 1.3
+        },
+        "hard": {
+          "count": 40,
+          "solved": 40,
+          "solved_rate": 1.0,
+          "avg_cost": 1.85,
+          "avg_cost_usd": 0.0400272,
+          "avg_iters": 1.1
+        }
+      },
+      "by_domain": {
+        "algorithms": {
+          "count": 18,
+          "solved": 17,
+          "solved_rate": 0.944,
+          "avg_iters": 1.1
+        },
+        "arrays": {
+          "count": 15,
+          "solved": 14,
+          "solved_rate": 0.933,
+          "avg_iters": 1.1
+        },
+        "data_structures": {
+          "count": 15,
+          "solved": 14,
+          "solved_rate": 0.933,
+          "avg_iters": 1.1
+        },
+        "dicts": {
+          "count": 14,
+          "solved": 12,
+          "solved_rate": 0.857,
+          "avg_iters": 1.4
+        },
+        "numeric": {
+          "count": 14,
+          "solved": 13,
+          "solved_rate": 0.929,
+          "avg_iters": 1.2
+        },
+        "oop": {
+          "count": 12,
+          "solved": 12,
+          "solved_rate": 1.0,
+          "avg_iters": 1.2
+        },
+        "parsing": {
+          "count": 12,
+          "solved": 12,
+          "solved_rate": 1.0,
+          "avg_iters": 1.1
+        },
+        "strings": {
+          "count": 20,
+          "solved": 19,
+          "solved_rate": 0.95,
+          "avg_iters": 1.3
+        }
+      },
+      "by_defect_type": {
+        "boundary_case": {
+          "count": 5,
+          "solved": 4,
+          "solved_rate": 0.8,
+          "avg_iters": 1.4
+        },
+        "exception_handling": {
+          "count": 5,
+          "solved": 3,
+          "solved_rate": 0.6,
+          "avg_iters": 2.0
+        },
+        "missing_sort": {
+          "count": 3,
+          "solved": 2,
+          "solved_rate": 0.667,
+          "avg_iters": 1.7
+        },
+        "missing_update": {
+          "count": 6,
+          "solved": 5,
+          "solved_rate": 0.833,
+          "avg_iters": 1.5
+        },
+        "off_by_one": {
+          "count": 14,
+          "solved": 14,
+          "solved_rate": 1.0,
+          "avg_iters": 1.0
+        },
+        "specification": {
+          "count": 2,
+          "solved": 2,
+          "solved_rate": 1.0,
+          "avg_iters": 1.5
+        },
+        "state_mutation": {
+          "count": 7,
+          "solved": 7,
+          "solved_rate": 1.0,
+          "avg_iters": 1.0
+        },
+        "wrong_condition": {
+          "count": 17,
+          "solved": 16,
+          "solved_rate": 0.941,
+          "avg_iters": 1.2
+        },
+        "wrong_logic": {
+          "count": 49,
+          "solved": 49,
+          "solved_rate": 1.0,
+          "avg_iters": 1.1
+        },
+        "wrong_operator": {
+          "count": 5,
+          "solved": 5,
+          "solved_rate": 1.0,
+          "avg_iters": 1.2
+        },
+        "wrong_return": {
+          "count": 7,
+          "solved": 6,
+          "solved_rate": 0.857,
+          "avg_iters": 1.3
+        }
+      }
+    }
+  }
+}
