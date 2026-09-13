@@ -15,10 +15,6 @@ from agents.manager import ManagerAgent, ManagerPolicy, MANAGER_DECISIONS
 
 
 def run_task(task, verbose=True) -> list[dict]:
-    """
-    Запускает мультиагентный пайплайн для одной задачи.
-    Возвращает трассировку как список событий.
-    """
     trace  = []
     env    = Environment(task)
     policy = ManagerPolicy(
@@ -141,7 +137,7 @@ def run_task(task, verbose=True) -> list[dict]:
         })
 
         _, final_decision, hint_for_dev = _handle_decision(
-            decision, dev_msg, review_msg, hint_for_dev, log
+            decision, dev_msg, review_msg, hint_for_dev, log, test_msg=test_msg
         )
         if final_decision:
             break
@@ -162,13 +158,9 @@ def _handle_decision(
     review_msg: Message | None,
     hint_for_dev: str,
     log,
+    test_msg: Message | None = None,
 ) -> tuple[str, str | None, str]:
-    """
-    Обрабатывает финальные решения Manager.
-    Возвращает (decision, final_decision_or_None, новый_hint).
 
-    final_decision != None означает что пайплайн нужно завершить.
-    """
     if decision == "accept":
         return decision, "success", hint_for_dev
 
@@ -182,14 +174,29 @@ def _handle_decision(
         return decision, "human_escalated", hint_for_dev
 
     if decision == "escalate_strong":
-        # При эскалации на strong - сбрасываем подсказки ревьюера
+        # При эскалации на strong - сбрасываем подсказки
         return decision, None, ""
 
     if decision == "request_changes":
-        # Подсказку берём от ревьюера если он был, иначе пустая строка
-        new_hint = ""
+        parts = []
+
+        # замечание ревьюера (если было)
         if review_msg is not None:
-            new_hint = review_msg.content.get("hint_for_developer", "")
+            rev_hint = review_msg.content.get("hint_for_developer", "")
+            if rev_hint:
+                parts.append(f"Замечание ревьюера: {rev_hint}")
+
+        # какие тесты упали (из Tester)
+        # мы передаём только названия упавших тестов и AssertionError,
+        # но НЕ reference_solution и НЕ исправленный код.
+        if test_msg is not None:
+            failures = test_msg.content.get("failure_reasons", [])
+            if failures:
+                # Берём первые 3 провала
+                fail_summary = "\n".join(f"  - {r}" for r in failures[:3])
+                parts.append(f"Провалившиеся тесты:\n{fail_summary}")
+
+        new_hint = "\n\n".join(parts)
         return decision, None, new_hint
 
     return decision, None, hint_for_dev

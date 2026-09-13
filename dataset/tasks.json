@@ -2,8 +2,14 @@
   {
     "instance_id": "T001",
     "difficulty": "easy",
+    "domain": "strings",
+    "defect_type": "off_by_one",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
     "problem_statement": "sum_positive returns incorrect results for most input lists.",
     "original_code": "def sum_positive(numbers: list[int]) -> int:\n    total = 0\n    for i in range(len(numbers) - 1):\n        if numbers[i] > 0:\n            total += numbers[i]\n    return total\n",
+    "reference_solution": "def sum_positive(numbers: list[int]) -> int:\n    total = 0\n    for i in range(len(numbers)):\n        if numbers[i] > 0:\n            total += numbers[i]\n    return total\n",
     "tests": [
       {
         "name": "test_sum_basic",
@@ -36,8 +42,14 @@
   {
     "instance_id": "T002",
     "difficulty": "easy",
+    "domain": "strings",
+    "defect_type": "wrong_condition",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
     "problem_statement": "count_vowels returns wrong counts for strings containing vowels.",
     "original_code": "def count_vowels(text: str) -> int:\n    vowels = set('aeiouAEIOU')\n    count = 0\n    for char in text:\n        if char not in vowels:\n            count += 1\n    return count\n",
+    "reference_solution": "def count_vowels(text: str) -> int:\n    vowels = set('aeiouAEIOU')\n    count = 0\n    for char in text:\n        if char in vowels:\n            count += 1\n    return count\n",
     "tests": [
       {
         "name": "test_vowels_basic",
@@ -70,8 +82,14 @@
   {
     "instance_id": "T003",
     "difficulty": "easy",
+    "domain": "strings",
+    "defect_type": "specification",
+    "structure": "single_function",
+    "reasoning_type": "specification",
+    "min_tier": "weak",
     "problem_statement": "is_palindrome incorrectly rejects valid palindromes in some cases.",
     "original_code": "def is_palindrome(s: str) -> bool:\n    return s == s[::-1]\n",
+    "reference_solution": "def is_palindrome(s: str) -> bool:\n    s = s.lower()\n    return s == s[::-1]\n",
     "tests": [
       {
         "name": "test_pal_basic",
@@ -104,8 +122,14 @@
   {
     "instance_id": "T004",
     "difficulty": "easy",
+    "domain": "strings",
+    "defect_type": "wrong_logic",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
     "problem_statement": "reverse_words does not produce the expected output.",
     "original_code": "def reverse_words(text: str) -> str:\n    words = text.split()\n    return ' '.join(words)\n",
+    "reference_solution": "def reverse_words(text: str) -> str:\n    words = text.split()\n    return ' '.join(reversed(words))\n",
     "tests": [
       {
         "name": "test_rev_basic",
@@ -130,8 +154,14 @@
   {
     "instance_id": "T005",
     "difficulty": "easy",
+    "domain": "strings",
+    "defect_type": "wrong_return",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
     "problem_statement": "find_max consistently returns an incorrect value.",
     "original_code": "def find_max(numbers: list[int]) -> int:\n    if not numbers:\n        raise ValueError('empty list')\n    return min(numbers)\n",
+    "reference_solution": "def find_max(numbers: list[int]) -> int:\n    if not numbers:\n        raise ValueError('empty list')\n    return max(numbers)\n",
     "tests": [
       {
         "name": "test_max_basic",
@@ -151,8 +181,14 @@
   {
     "instance_id": "T006",
     "difficulty": "medium",
+    "domain": "data_structures",
+    "defect_type": "wrong_condition",
+    "structure": "class",
+    "reasoning_type": "stateful",
+    "min_tier": "strong",
     "problem_statement": "TTLCache does not expire entries correctly: entries with a short TTL are still returned after expiration.",
     "original_code": "import time\nclass TTLCache:\n    def __init__(self, ttl: int):\n        self.ttl = ttl\n        self.store = {}\n    def set(self, key: str, value) -> None:\n        self.store[key] = (value, time.time())\n    def get(self, key: str):\n        if key not in self.store:\n            return None\n        value, ts = self.store[key]\n        if ts < self.ttl:\n            del self.store[key]\n            return None\n        return value\n",
+    "reference_solution": "import time\nclass TTLCache:\n    def __init__(self, ttl: int):\n        self.ttl = ttl\n        self.store = {}\n    def set(self, key: str, value) -> None:\n        self.store[key] = (value, time.time())\n    def get(self, key: str):\n        if key not in self.store:\n            return None\n        value, ts = self.store[key]\n        if time.time() - ts > self.ttl:\n            del self.store[key]\n            return None\n        return value\n",
     "tests": [
       {
         "name": "test_ttl_basic",
@@ -177,8 +213,14 @@
   {
     "instance_id": "T007",
     "difficulty": "medium",
+    "domain": "dicts",
+    "defect_type": "missing_update",
+    "structure": "single_function",
+    "reasoning_type": "multi_step",
+    "min_tier": "strong",
     "problem_statement": "flatten_dict produces keys that do not match the expected format for nested dictionaries.",
     "original_code": "def flatten_dict(d: dict, parent_key: str = '') -> dict:\n    items = {}\n    for k, v in d.items():\n        new_key = parent_key + k if parent_key else k\n        if isinstance(v, dict):\n            items.update(flatten_dict(v, new_key))\n        else:\n            items[new_key] = v\n    return items\n",
+    "reference_solution": "def flatten_dict(d: dict, parent_key: str = '') -> dict:\n    items = {}\n    for k, v in d.items():\n        new_key = parent_key + '_' + k if parent_key else k\n        if isinstance(v, dict):\n            items.update(flatten_dict(v, new_key))\n        else:\n            items[new_key] = v\n    return items\n",
     "tests": [
       {
         "name": "test_flat_basic",
@@ -203,8 +245,14 @@
   {
     "instance_id": "T008",
     "difficulty": "medium",
+    "domain": "arrays",
+    "defect_type": "wrong_return",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
     "problem_statement": "most_frequent returns the wrong element from the list.",
     "original_code": "def most_frequent(items: list):\n    if not items:\n        return None\n    counts = {}\n    for item in items:\n        counts[item] = counts.get(item, 0) + 1\n    return min(counts, key=counts.get)\n",
+    "reference_solution": "def most_frequent(items: list):\n    if not items:\n        return None\n    counts = {}\n    for item in items:\n        counts[item] = counts.get(item, 0) + 1\n    return max(counts, key=counts.get)\n",
     "tests": [
       {
         "name": "test_freq_basic",
@@ -224,8 +272,14 @@
   {
     "instance_id": "T009",
     "difficulty": "medium",
+    "domain": "arrays",
+    "defect_type": "off_by_one",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
     "problem_statement": "chunk_list produces an incomplete result — some elements are missing from the output.",
     "original_code": "def chunk_list(lst: list, size: int) -> list:\n    if size <= 0:\n        raise ValueError('size должен быть > 0')\n    result = []\n    for i in range(0, len(lst) - size, size):\n        result.append(lst[i:i + size])\n    return result\n",
+    "reference_solution": "def chunk_list(lst: list, size: int) -> list:\n    if size <= 0:\n        raise ValueError('size должен быть > 0')\n    result = []\n    for i in range(0, len(lst), size):\n        result.append(lst[i:i + size])\n    return result\n",
     "tests": [
       {
         "name": "test_chunk_basic",
@@ -245,8 +299,14 @@
   {
     "instance_id": "T010",
     "difficulty": "medium",
+    "domain": "numeric",
+    "defect_type": "specification",
+    "structure": "single_function",
+    "reasoning_type": "specification",
+    "min_tier": "strong",
     "problem_statement": "normalize_scores produces incorrect normalized values. When all scores are equal, the result should be all zeros.",
     "original_code": "def normalize_scores(scores: list[float]) -> list[float]:\n    if not scores:\n        return []\n    max_score = max(scores)\n    if max_score == 0:\n        return [0 for _ in scores]\n    return [x / max_score for x in scores]\n",
+    "reference_solution": "def normalize_scores(scores: list[float]) -> list[float]:\n    if not scores:\n        return []\n    min_score = min(scores)\n    max_score = max(scores)\n    rng = max_score - min_score\n    if rng == 0:\n        return [0.0 for _ in scores]\n    return [(x - min_score) / rng for x in scores]\n",
     "tests": [
       {
         "name": "test_norm_basic",
@@ -271,8 +331,14 @@
   {
     "instance_id": "T011",
     "difficulty": "hard",
+    "domain": "data_structures",
+    "defect_type": "wrong_logic",
+    "structure": "class",
+    "reasoning_type": "stateful",
+    "min_tier": "human",
     "problem_statement": "RateLimiter.is_allowed() behaves incorrectly: it either blocks requests that should be allowed or allows requests that should be blocked. The sliding window logic appears to be broken.",
     "original_code": "import time\n\nclass RateLimiter:\n    def __init__(self, max_calls: int, window_seconds: float):\n        self.max_calls = max_calls\n        self.window = window_seconds\n        self.calls = []  # должен быть deque\n\n    def is_allowed(self) -> bool:\n        now = time.time()\n        cutoff = now + self.window  # неверное направление окна\n        self.calls = [t for t in self.calls if t > cutoff]  # неверное условие\n        if len(self.calls) >= self.max_calls:\n            return False\n        self.calls.append(now)\n        return True\n",
+    "reference_solution": "import time\nfrom collections import deque\n\nclass RateLimiter:\n    def __init__(self, max_calls: int, window_seconds: float):\n        self.max_calls = max_calls\n        self.window = window_seconds\n        self.calls = deque()\n\n    def is_allowed(self) -> bool:\n        now = time.time()\n        cutoff = now - self.window\n        while self.calls and self.calls[0] < cutoff:\n            self.calls.popleft()\n        if len(self.calls) >= self.max_calls:\n            return False\n        self.calls.append(now)\n        return True\n",
     "tests": [
       {
         "name": "test_rl_basic",
@@ -297,8 +363,14 @@
   {
     "instance_id": "T012",
     "difficulty": "hard",
+    "domain": "data_structures",
+    "defect_type": "state_mutation",
+    "structure": "class",
+    "reasoning_type": "stateful",
+    "min_tier": "human",
     "problem_statement": "LRUCache eviction policy is incorrect: it evicts the wrong entry when capacity is exceeded.",
     "original_code": "from collections import OrderedDict\n\nclass LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = OrderedDict()\n\n    def get(self, key: int) -> int:\n        if key not in self.cache:\n            return -1\n        # нет move_to_end → LRU-порядок не обновляется\n        return self.cache[key]\n\n    def put(self, key: int, value: int) -> None:\n        if key in self.cache:\n            del self.cache[key]\n        self.cache[key] = value\n        if len(self.cache) > self.capacity:\n            self.cache.popitem(last=True)  # удаляет ПОСЛЕДНИЙ вместо первого\n",
+    "reference_solution": "from collections import OrderedDict\n\nclass LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = OrderedDict()\n\n    def get(self, key: int) -> int:\n        if key not in self.cache:\n            return -1\n        self.cache.move_to_end(key)\n        return self.cache[key]\n\n    def put(self, key: int, value: int) -> None:\n        if key in self.cache:\n            self.cache.move_to_end(key)\n        self.cache[key] = value\n        if len(self.cache) > self.capacity:\n            self.cache.popitem(last=False)\n",
     "tests": [
       {
         "name": "test_lru_basic",
@@ -323,8 +395,14 @@
   {
     "instance_id": "T013",
     "difficulty": "hard",
+    "domain": "algorithms",
+    "defect_type": "missing_sort",
+    "structure": "single_function",
+    "reasoning_type": "algorithmic",
+    "min_tier": "human",
     "problem_statement": "merge_intervals fails when intervals are not given in sorted order.",
     "original_code": "def merge_intervals(intervals: list[list[int]]) -> list[list[int]]:\n    if not intervals:\n        return []\n    # интервалы не сортируются\n    merged = [intervals[0]]\n    for start, end in intervals[1:]:\n        last = merged[-1]\n        if start < last[1]:  # неверное условие: < вместо <=\n            last[1] = max(last[1], end)\n        else:\n            merged.append([start, end])\n    return merged\n",
+    "reference_solution": "def merge_intervals(intervals: list[list[int]]) -> list[list[int]]:\n    if not intervals:\n        return []\n    intervals = sorted(intervals, key=lambda x: x[0])\n    merged = [intervals[0]]\n    for start, end in intervals[1:]:\n        last = merged[-1]\n        if start <= last[1]:\n            last[1] = max(last[1], end)\n        else:\n            merged.append([start, end])\n    return merged\n",
     "tests": [
       {
         "name": "test_merge_sorted",
@@ -349,8 +427,14 @@
   {
     "instance_id": "T014",
     "difficulty": "hard",
+    "domain": "algorithms",
+    "defect_type": "wrong_logic",
+    "structure": "single_function",
+    "reasoning_type": "algorithmic",
+    "min_tier": "human",
     "problem_statement": "topological_sort returns an incorrect ordering — nodes appear in the wrong position or the result is incomplete.",
     "original_code": "from collections import deque\n\ndef topological_sort(graph: dict) -> list:\n    in_degree = {}\n    for node in graph:\n        if node not in in_degree:\n            in_degree[node] = 0\n        for nei in graph[node]:\n            in_degree[nei] = in_degree.get(nei, 0) + 1\n\n    # стартуем с узлов у которых in_degree > 0 — неверно\n    q = deque([n for n, deg in in_degree.items() if deg > 0])\n    order = []\n    while q:\n        node = q.popleft()\n        order.append(node)\n        for nei in graph.get(node, []):\n            in_degree[nei] += 1  # неверно: нужно -= 1\n            if in_degree[nei] == 0:\n                q.append(nei)\n    return order\n",
+    "reference_solution": "from collections import deque\n\ndef topological_sort(graph: dict) -> list:\n    in_degree = {}\n    for node in graph:\n        if node not in in_degree:\n            in_degree[node] = 0\n        for nei in graph[node]:\n            in_degree[nei] = in_degree.get(nei, 0) + 1\n\n    q = deque([n for n, deg in in_degree.items() if deg == 0])\n    order = []\n    while q:\n        node = q.popleft()\n        order.append(node)\n        for nei in graph.get(node, []):\n            in_degree[nei] -= 1\n            if in_degree[nei] == 0:\n                q.append(nei)\n    return order\n",
     "tests": [
       {
         "name": "test_topo_basic",
@@ -375,8 +459,14 @@
   {
     "instance_id": "T015",
     "difficulty": "hard",
+    "domain": "algorithms",
+    "defect_type": "wrong_condition",
+    "structure": "single_function",
+    "reasoning_type": "algorithmic",
+    "min_tier": "human",
     "problem_statement": "shortest_path_bfs returns incorrect distances or enters an infinite loop on certain graphs.",
     "original_code": "from collections import deque\n\ndef shortest_path_bfs(graph: dict, start: str, goal: str) -> int:\n    q = deque([(start, 0)])\n    visited = set()\n    while q:\n        node, dist = q.popleft()\n        if node in visited:  # проверяем после извлечения — слишком поздно\n            continue\n        visited.add(node)\n        if node == goal:\n            return dist\n        for nei in graph.get(node, []):\n            # не проверяем visited перед добавлением → дубли в очереди\n            q.append((nei, dist + 1))\n    return -1\n",
+    "reference_solution": "from collections import deque\n\ndef shortest_path_bfs(graph: dict, start: str, goal: str) -> int:\n    q = deque([(start, 0)])\n    visited = {start}\n    while q:\n        node, dist = q.popleft()\n        if node == goal:\n            return dist\n        for nei in graph.get(node, []):\n            if nei not in visited:\n                visited.add(nei)\n                q.append((nei, dist + 1))\n    return -1\n",
     "tests": [
       {
         "name": "test_bfs_basic",
@@ -393,6 +483,3641 @@
           {
             "custom": true,
             "code": "assert shortest_path_bfs({'A':['B'],'B':[],'C':[]},'A','C') == -1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T016",
+    "difficulty": "easy",
+    "domain": "strings",
+    "defect_type": "wrong_condition",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A function checking if a word starts with a vowel raises an exception for certain inputs.",
+    "original_code": "def starts_with_vowel(word: str) -> bool:\n    vowels = 'aeiouAEIOU'\n    return word[0] in vowels\n",
+    "reference_solution": "def starts_with_vowel(word: str) -> bool:\n    vowels = 'aeiouAEIOU'\n    if not word:\n        return False\n    return word[0] in vowels\n",
+    "tests": [
+      {
+        "name": "test_vowel_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert starts_with_vowel('apple') is True"
+          },
+          {
+            "custom": true,
+            "code": "assert starts_with_vowel('banana') is False"
+          }
+        ]
+      },
+      {
+        "name": "test_vowel_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert starts_with_vowel('') is False"
+          },
+          {
+            "custom": true,
+            "code": "assert starts_with_vowel('Echo') is True"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T017",
+    "difficulty": "easy",
+    "domain": "arrays",
+    "defect_type": "off_by_one",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A function returning the second largest number crashes or returns wrong results when the list has fewer than two distinct values.",
+    "original_code": "def second_largest(nums: list) -> int:\n    sorted_nums = sorted(set(nums), reverse=True)\n    return sorted_nums[1]\n",
+    "reference_solution": "def second_largest(nums: list) -> int:\n    sorted_nums = sorted(set(nums), reverse=True)\n    if len(sorted_nums) < 2:\n        raise ValueError('Need at least two distinct values')\n    return sorted_nums[1]\n",
+    "tests": [
+      {
+        "name": "test_second_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert second_largest([3, 1, 2]) == 2"
+          },
+          {
+            "custom": true,
+            "code": "assert second_largest([5, 5, 3, 1]) == 3"
+          }
+        ]
+      },
+      {
+        "name": "test_second_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "try:\n    second_largest([7, 7])\n    assert False\nexcept ValueError:\n    pass"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T018",
+    "difficulty": "easy",
+    "domain": "strings",
+    "defect_type": "wrong_return",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A function that truncates a string to a given length always returns the full original string.",
+    "original_code": "def truncate(s: str, length: int) -> str:\n    if len(s) <= length:\n        return s\n    return s\n",
+    "reference_solution": "def truncate(s: str, length: int) -> str:\n    if len(s) <= length:\n        return s\n    return s[:length]\n",
+    "tests": [
+      {
+        "name": "test_trunc_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert truncate('hello world', 5) == 'hello'"
+          },
+          {
+            "custom": true,
+            "code": "assert truncate('hi', 5) == 'hi'"
+          }
+        ]
+      },
+      {
+        "name": "test_trunc_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert truncate('', 3) == ''"
+          },
+          {
+            "custom": true,
+            "code": "assert truncate('abc', 0) == ''"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T019",
+    "difficulty": "easy",
+    "domain": "numeric",
+    "defect_type": "wrong_operator",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A function computing the factorial of a number returns wrong values for all inputs except 0.",
+    "original_code": "def factorial(n: int) -> int:\n    if n == 0:\n        return 1\n    result = 1\n    for i in range(1, n + 1):\n        result += i\n    return result\n",
+    "reference_solution": "def factorial(n: int) -> int:\n    if n == 0:\n        return 1\n    result = 1\n    for i in range(1, n + 1):\n        result *= i\n    return result\n",
+    "tests": [
+      {
+        "name": "test_fact_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert factorial(5) == 120"
+          },
+          {
+            "custom": true,
+            "code": "assert factorial(3) == 6"
+          }
+        ]
+      },
+      {
+        "name": "test_fact_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert factorial(0) == 1"
+          },
+          {
+            "custom": true,
+            "code": "assert factorial(1) == 1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T020",
+    "difficulty": "easy",
+    "domain": "dicts",
+    "defect_type": "wrong_logic",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A function inverting a dictionary swaps keys with values incorrectly, overwriting instead of collecting duplicates.",
+    "original_code": "def invert_dict(d: dict) -> dict:\n    return {v: k for k, v in d.items()}\n",
+    "reference_solution": "def invert_dict(d: dict) -> dict:\n    result = {}\n    for k, v in d.items():\n        result.setdefault(v, []).append(k)\n    return result\n",
+    "tests": [
+      {
+        "name": "test_invert_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert invert_dict({'a': 1, 'b': 2}) == {1: ['a'], 2: ['b']}"
+          }
+        ]
+      },
+      {
+        "name": "test_invert_dup",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "result = invert_dict({'a': 1, 'b': 1}); assert set(result[1]) == {'a', 'b'}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T021",
+    "difficulty": "easy",
+    "domain": "arrays",
+    "defect_type": "wrong_condition",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A function filtering even numbers from a list returns odd numbers instead.",
+    "original_code": "def filter_evens(numbers: list) -> list:\n    return [n for n in numbers if n % 2 != 0]\n",
+    "reference_solution": "def filter_evens(numbers: list) -> list:\n    return [n for n in numbers if n % 2 == 0]\n",
+    "tests": [
+      {
+        "name": "test_filter_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert filter_evens([1,2,3,4,5]) == [2,4]"
+          }
+        ]
+      },
+      {
+        "name": "test_filter_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert filter_evens([]) == []"
+          },
+          {
+            "custom": true,
+            "code": "assert filter_evens([1,3,5]) == []"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T022",
+    "difficulty": "easy",
+    "domain": "strings",
+    "defect_type": "off_by_one",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A function removing the last character of a string removes two characters instead.",
+    "original_code": "def remove_last(s: str) -> str:\n    return s[:-2]\n",
+    "reference_solution": "def remove_last(s: str) -> str:\n    return s[:-1] if s else s\n",
+    "tests": [
+      {
+        "name": "test_remove_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert remove_last('hello') == 'hell'"
+          },
+          {
+            "custom": true,
+            "code": "assert remove_last('ab') == 'a'"
+          }
+        ]
+      },
+      {
+        "name": "test_remove_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert remove_last('') == ''"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T023",
+    "difficulty": "easy",
+    "domain": "numeric",
+    "defect_type": "wrong_condition",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A function checking whether a number is prime incorrectly classifies composite numbers as prime.",
+    "original_code": "def is_prime(n: int) -> bool:\n    if n < 2:\n        return False\n    for i in range(2, n):\n        if n % i == 0:\n            return True\n    return False\n",
+    "reference_solution": "def is_prime(n: int) -> bool:\n    if n < 2:\n        return False\n    for i in range(2, n):\n        if n % i == 0:\n            return False\n    return True\n",
+    "tests": [
+      {
+        "name": "test_prime_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert is_prime(7) is True"
+          },
+          {
+            "custom": true,
+            "code": "assert is_prime(4) is False"
+          }
+        ]
+      },
+      {
+        "name": "test_prime_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert is_prime(2) is True"
+          },
+          {
+            "custom": true,
+            "code": "assert is_prime(1) is False"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T024",
+    "difficulty": "easy",
+    "domain": "dicts",
+    "defect_type": "missing_update",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A word-frequency counter returns empty results because counts are never incremented.",
+    "original_code": "def word_count(text: str) -> dict:\n    counts = {}\n    for word in text.split():\n        if word not in counts:\n            counts[word] = 0\n    return counts\n",
+    "reference_solution": "def word_count(text: str) -> dict:\n    counts = {}\n    for word in text.split():\n        counts[word] = counts.get(word, 0) + 1\n    return counts\n",
+    "tests": [
+      {
+        "name": "test_wc_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert word_count('a b a') == {'a': 2, 'b': 1}"
+          }
+        ]
+      },
+      {
+        "name": "test_wc_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert word_count('') == {}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T025",
+    "difficulty": "easy",
+    "domain": "arrays",
+    "defect_type": "wrong_return",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A function that should return the minimum element of a list returns the maximum instead.",
+    "original_code": "def find_min(numbers: list) -> int:\n    if not numbers:\n        raise ValueError('empty')\n    return max(numbers)\n",
+    "reference_solution": "def find_min(numbers: list) -> int:\n    if not numbers:\n        raise ValueError('empty')\n    return min(numbers)\n",
+    "tests": [
+      {
+        "name": "test_min_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert find_min([3,1,4,1,5]) == 1"
+          },
+          {
+            "custom": true,
+            "code": "assert find_min([-2,-5,0]) == -5"
+          }
+        ]
+      },
+      {
+        "name": "test_min_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert find_min([42]) == 42"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T026",
+    "difficulty": "easy",
+    "domain": "strings",
+    "defect_type": "wrong_logic",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A function converting a string to title case leaves the first letter lowercase.",
+    "original_code": "def to_title_case(s: str) -> str:\n    return ' '.join(word[0].lower() + word[1:] for word in s.split())\n",
+    "reference_solution": "def to_title_case(s: str) -> str:\n    return ' '.join(word.capitalize() for word in s.split())\n",
+    "tests": [
+      {
+        "name": "test_title_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert to_title_case('hello world') == 'Hello World'"
+          }
+        ]
+      },
+      {
+        "name": "test_title_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert to_title_case('') == ''"
+          },
+          {
+            "custom": true,
+            "code": "assert to_title_case('PYTHON') == 'Python'"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T027",
+    "difficulty": "easy",
+    "domain": "arrays",
+    "defect_type": "off_by_one",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A function returning the last element of a list returns the second-to-last element instead.",
+    "original_code": "def last_element(lst: list):\n    if not lst:\n        return None\n    return lst[-2]\n",
+    "reference_solution": "def last_element(lst: list):\n    if not lst:\n        return None\n    return lst[-1]\n",
+    "tests": [
+      {
+        "name": "test_last_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert last_element([1,2,3]) == 3"
+          },
+          {
+            "custom": true,
+            "code": "assert last_element([7]) == 7"
+          }
+        ]
+      },
+      {
+        "name": "test_last_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert last_element([]) is None"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T028",
+    "difficulty": "easy",
+    "domain": "numeric",
+    "defect_type": "wrong_operator",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A power function returns the product instead of the exponentiation result.",
+    "original_code": "def power(base: int, exp: int) -> int:\n    return base * exp\n",
+    "reference_solution": "def power(base: int, exp: int) -> int:\n    return base ** exp\n",
+    "tests": [
+      {
+        "name": "test_power_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert power(2, 10) == 1024"
+          },
+          {
+            "custom": true,
+            "code": "assert power(3, 3) == 27"
+          }
+        ]
+      },
+      {
+        "name": "test_power_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert power(5, 0) == 1"
+          },
+          {
+            "custom": true,
+            "code": "assert power(1, 100) == 1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T029",
+    "difficulty": "easy",
+    "domain": "dicts",
+    "defect_type": "wrong_condition",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A function merging two dictionaries overwrites values from the first dict with those from the second even when the key is absent in the second.",
+    "original_code": "def merge_dicts(d1: dict, d2: dict) -> dict:\n    result = d2.copy()\n    result.update(d1)\n    return result\n",
+    "reference_solution": "def merge_dicts(d1: dict, d2: dict) -> dict:\n    result = d1.copy()\n    result.update(d2)\n    return result\n",
+    "tests": [
+      {
+        "name": "test_merge_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert merge_dicts({'a':1,'b':2},{'b':3,'c':4}) == {'a':1,'b':3,'c':4}"
+          }
+        ]
+      },
+      {
+        "name": "test_merge_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert merge_dicts({},{}) == {}"
+          },
+          {
+            "custom": true,
+            "code": "assert merge_dicts({'x':1},{}) == {'x':1}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T030",
+    "difficulty": "easy",
+    "domain": "strings",
+    "defect_type": "boundary_case",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A function that checks if a string contains only digits returns True for an empty string.",
+    "original_code": "def is_all_digits(s: str) -> bool:\n    return all(c.isdigit() for c in s)\n",
+    "reference_solution": "def is_all_digits(s: str) -> bool:\n    return bool(s) and all(c.isdigit() for c in s)\n",
+    "tests": [
+      {
+        "name": "test_digits_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert is_all_digits('12345') is True"
+          },
+          {
+            "custom": true,
+            "code": "assert is_all_digits('123a5') is False"
+          }
+        ]
+      },
+      {
+        "name": "test_digits_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert is_all_digits('') is False"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T031",
+    "difficulty": "easy",
+    "domain": "arrays",
+    "defect_type": "wrong_logic",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A function deduplicating a list does not preserve the original order of elements.",
+    "original_code": "def deduplicate(lst: list) -> list:\n    return list(set(lst))\n",
+    "reference_solution": "def deduplicate(lst: list) -> list:\n    seen = set()\n    result = []\n    for item in lst:\n        if item not in seen:\n            seen.add(item)\n            result.append(item)\n    return result\n",
+    "tests": [
+      {
+        "name": "test_dedup_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert deduplicate([3,1,2,1,3]) == [3,1,2]"
+          }
+        ]
+      },
+      {
+        "name": "test_dedup_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert deduplicate([]) == []"
+          },
+          {
+            "custom": true,
+            "code": "assert deduplicate([1]) == [1]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T032",
+    "difficulty": "easy",
+    "domain": "numeric",
+    "defect_type": "off_by_one",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A function computing the sum from 1 to n returns the sum up to n-1.",
+    "original_code": "def sum_to_n(n: int) -> int:\n    return sum(range(1, n))\n",
+    "reference_solution": "def sum_to_n(n: int) -> int:\n    return sum(range(1, n + 1))\n",
+    "tests": [
+      {
+        "name": "test_sum_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert sum_to_n(5) == 15"
+          },
+          {
+            "custom": true,
+            "code": "assert sum_to_n(10) == 55"
+          }
+        ]
+      },
+      {
+        "name": "test_sum_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert sum_to_n(1) == 1"
+          },
+          {
+            "custom": true,
+            "code": "assert sum_to_n(0) == 0"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T033",
+    "difficulty": "easy",
+    "domain": "strings",
+    "defect_type": "wrong_operator",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A function repeating a string n times concatenates with a separator between the original and repeat, producing wrong output.",
+    "original_code": "def repeat_string(s: str, n: int) -> str:\n    return s + s * (n - 1)\n",
+    "reference_solution": "def repeat_string(s: str, n: int) -> str:\n    return s * n\n",
+    "tests": [
+      {
+        "name": "test_repeat_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert repeat_string('ab', 3) == 'ababab'"
+          },
+          {
+            "custom": true,
+            "code": "assert repeat_string('x', 1) == 'x'"
+          }
+        ]
+      },
+      {
+        "name": "test_repeat_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert repeat_string('hi', 0) == ''"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T034",
+    "difficulty": "easy",
+    "domain": "arrays",
+    "defect_type": "missing_update",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A running sum function always returns a list of zeros because the accumulator is reset each iteration.",
+    "original_code": "def running_sum(nums: list) -> list:\n    result = []\n    for n in nums:\n        total = 0\n        total += n\n        result.append(total)\n    return result\n",
+    "reference_solution": "def running_sum(nums: list) -> list:\n    result = []\n    total = 0\n    for n in nums:\n        total += n\n        result.append(total)\n    return result\n",
+    "tests": [
+      {
+        "name": "test_running_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert running_sum([1,2,3,4]) == [1,3,6,10]"
+          }
+        ]
+      },
+      {
+        "name": "test_running_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert running_sum([]) == []"
+          },
+          {
+            "custom": true,
+            "code": "assert running_sum([5]) == [5]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T035",
+    "difficulty": "easy",
+    "domain": "dicts",
+    "defect_type": "wrong_return",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A function looking up a key in a nested dict returns the outer dict instead of the inner value.",
+    "original_code": "def nested_get(data: dict, outer: str, inner: str):\n    if outer in data and inner in data[outer]:\n        return data[outer]\n    return None\n",
+    "reference_solution": "def nested_get(data: dict, outer: str, inner: str):\n    if outer in data and inner in data[outer]:\n        return data[outer][inner]\n    return None\n",
+    "tests": [
+      {
+        "name": "test_nested_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert nested_get({'a':{'b':42}}, 'a', 'b') == 42"
+          }
+        ]
+      },
+      {
+        "name": "test_nested_missing",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert nested_get({'a':{'b':1}}, 'a', 'x') is None"
+          },
+          {
+            "custom": true,
+            "code": "assert nested_get({}, 'a', 'b') is None"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T036",
+    "difficulty": "easy",
+    "domain": "numeric",
+    "defect_type": "wrong_logic",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A function computing the absolute difference between two numbers always returns a negative result.",
+    "original_code": "def abs_diff(a: int, b: int) -> int:\n    return b - a\n",
+    "reference_solution": "def abs_diff(a: int, b: int) -> int:\n    return abs(a - b)\n",
+    "tests": [
+      {
+        "name": "test_diff_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert abs_diff(10, 3) == 7"
+          },
+          {
+            "custom": true,
+            "code": "assert abs_diff(3, 10) == 7"
+          }
+        ]
+      },
+      {
+        "name": "test_diff_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert abs_diff(5, 5) == 0"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T037",
+    "difficulty": "easy",
+    "domain": "strings",
+    "defect_type": "missing_update",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A function building a CSV row from a list of values produces an empty string.",
+    "original_code": "def to_csv_row(values: list) -> str:\n    row = ''\n    for v in values:\n        row = str(v)\n    return row\n",
+    "reference_solution": "def to_csv_row(values: list) -> str:\n    return ','.join(str(v) for v in values)\n",
+    "tests": [
+      {
+        "name": "test_csv_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert to_csv_row([1, 2, 3]) == '1,2,3'"
+          },
+          {
+            "custom": true,
+            "code": "assert to_csv_row(['a', 'b']) == 'a,b'"
+          }
+        ]
+      },
+      {
+        "name": "test_csv_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert to_csv_row([]) == ''"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T038",
+    "difficulty": "easy",
+    "domain": "arrays",
+    "defect_type": "boundary_case",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A function returning the middle element of a list crashes on lists of even length.",
+    "original_code": "def middle_element(lst: list):\n    mid = len(lst) // 2\n    return lst[mid]\n",
+    "reference_solution": "def middle_element(lst: list):\n    if not lst:\n        raise ValueError('empty list')\n    mid = (len(lst) - 1) // 2\n    return lst[mid]\n",
+    "tests": [
+      {
+        "name": "test_mid_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert middle_element([1,2,3]) == 2"
+          },
+          {
+            "custom": true,
+            "code": "assert middle_element([1,2,3,4,5]) == 3"
+          }
+        ]
+      },
+      {
+        "name": "test_mid_even",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert middle_element([1,2,3,4]) == 2"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T039",
+    "difficulty": "easy",
+    "domain": "dicts",
+    "defect_type": "off_by_one",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A function returning the top-N keys by value from a dict returns N+1 keys.",
+    "original_code": "def top_n_keys(d: dict, n: int) -> list:\n    sorted_keys = sorted(d, key=d.get, reverse=True)\n    return sorted_keys[:n + 1]\n",
+    "reference_solution": "def top_n_keys(d: dict, n: int) -> list:\n    sorted_keys = sorted(d, key=d.get, reverse=True)\n    return sorted_keys[:n]\n",
+    "tests": [
+      {
+        "name": "test_topn_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert top_n_keys({'a':3,'b':1,'c':2}, 2) == ['a','c']"
+          }
+        ]
+      },
+      {
+        "name": "test_topn_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert top_n_keys({'x':1}, 1) == ['x']"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T040",
+    "difficulty": "easy",
+    "domain": "numeric",
+    "defect_type": "exception_handling",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A safe integer parsing function crashes instead of returning a default value on invalid input.",
+    "original_code": "def safe_int(value: str, default: int = 0) -> int:\n    return int(value)\n",
+    "reference_solution": "def safe_int(value: str, default: int = 0) -> int:\n    try:\n        return int(value)\n    except (ValueError, TypeError):\n        return default\n",
+    "tests": [
+      {
+        "name": "test_safe_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert safe_int('42') == 42"
+          },
+          {
+            "custom": true,
+            "code": "assert safe_int('-7') == -7"
+          }
+        ]
+      },
+      {
+        "name": "test_safe_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert safe_int('abc') == 0"
+          },
+          {
+            "custom": true,
+            "code": "assert safe_int('', 99) == 99"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T041",
+    "difficulty": "easy",
+    "domain": "arrays",
+    "defect_type": "wrong_operator",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A function computing the product of all numbers in a list returns the sum instead.",
+    "original_code": "def list_product(nums: list) -> int:\n    result = 0\n    for n in nums:\n        result += n\n    return result\n",
+    "reference_solution": "def list_product(nums: list) -> int:\n    result = 1\n    for n in nums:\n        result *= n\n    return result\n",
+    "tests": [
+      {
+        "name": "test_product_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert list_product([1,2,3,4]) == 24"
+          },
+          {
+            "custom": true,
+            "code": "assert list_product([5,5]) == 25"
+          }
+        ]
+      },
+      {
+        "name": "test_product_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert list_product([]) == 1"
+          },
+          {
+            "custom": true,
+            "code": "assert list_product([0, 5]) == 0"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T042",
+    "difficulty": "easy",
+    "domain": "strings",
+    "defect_type": "wrong_condition",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A function splitting a sentence into sentences at periods incorrectly includes empty strings when the input ends with a period.",
+    "original_code": "def split_sentences(text: str) -> list:\n    return text.split('.')\n",
+    "reference_solution": "def split_sentences(text: str) -> list:\n    return [s.strip() for s in text.split('.') if s.strip()]\n",
+    "tests": [
+      {
+        "name": "test_split_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert split_sentences('Hello. World.') == ['Hello', 'World']"
+          }
+        ]
+      },
+      {
+        "name": "test_split_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert split_sentences('One.') == ['One']"
+          },
+          {
+            "custom": true,
+            "code": "assert split_sentences('') == []"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T043",
+    "difficulty": "easy",
+    "domain": "dicts",
+    "defect_type": "boundary_case",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A function computing the average of values in a dictionary crashes when the dictionary is empty.",
+    "original_code": "def dict_avg(d: dict) -> float:\n    return sum(d.values()) / len(d)\n",
+    "reference_solution": "def dict_avg(d: dict) -> float:\n    if not d:\n        return 0.0\n    return sum(d.values()) / len(d)\n",
+    "tests": [
+      {
+        "name": "test_avg_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert dict_avg({'a':4,'b':8,'c':6}) == 6.0"
+          }
+        ]
+      },
+      {
+        "name": "test_avg_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert dict_avg({}) == 0.0"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T044",
+    "difficulty": "easy",
+    "domain": "numeric",
+    "defect_type": "off_by_one",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A Fibonacci generator yields one fewer value than requested.",
+    "original_code": "def fibonacci(n: int) -> list:\n    fibs = [0, 1]\n    for _ in range(n - 2):\n        fibs.append(fibs[-1] + fibs[-2])\n    return fibs[:n]\n",
+    "reference_solution": "def fibonacci(n: int) -> list:\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    fibs = [0, 1]\n    for _ in range(n - 2):\n        fibs.append(fibs[-1] + fibs[-2])\n    return fibs\n",
+    "tests": [
+      {
+        "name": "test_fib_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert fibonacci(6) == [0,1,1,2,3,5]"
+          }
+        ]
+      },
+      {
+        "name": "test_fib_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert fibonacci(1) == [0]"
+          },
+          {
+            "custom": true,
+            "code": "assert fibonacci(0) == []"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T045",
+    "difficulty": "easy",
+    "domain": "arrays",
+    "defect_type": "state_mutation",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A function that sorts a list in place also mutates the caller's original list unexpectedly.",
+    "original_code": "def sorted_copy(lst: list) -> list:\n    lst.sort()\n    return lst\n",
+    "reference_solution": "def sorted_copy(lst: list) -> list:\n    return sorted(lst)\n",
+    "tests": [
+      {
+        "name": "test_sort_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "orig = [3,1,2]; result = sorted_copy(orig); assert result == [1,2,3]"
+          }
+        ]
+      },
+      {
+        "name": "test_sort_no_mutate",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "orig = [3,1,2]; sorted_copy(orig); assert orig == [3,1,2]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T046",
+    "difficulty": "easy",
+    "domain": "strings",
+    "defect_type": "off_by_one",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A function extracting a substring between two indices excludes the character at the end index.",
+    "original_code": "def substring(s: str, start: int, end: int) -> str:\n    return s[start:end]\n",
+    "reference_solution": "def substring(s: str, start: int, end: int) -> str:\n    return s[start:end + 1]\n",
+    "tests": [
+      {
+        "name": "test_sub_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert substring('abcdef', 1, 3) == 'bcd'"
+          }
+        ]
+      },
+      {
+        "name": "test_sub_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert substring('hello', 0, 4) == 'hello'"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T047",
+    "difficulty": "easy",
+    "domain": "dicts",
+    "defect_type": "wrong_logic",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A function filtering a dict to keep only entries whose values exceed a threshold keeps entries below the threshold instead.",
+    "original_code": "def filter_above(d: dict, threshold: int) -> dict:\n    return {k: v for k, v in d.items() if v <= threshold}\n",
+    "reference_solution": "def filter_above(d: dict, threshold: int) -> dict:\n    return {k: v for k, v in d.items() if v > threshold}\n",
+    "tests": [
+      {
+        "name": "test_filter_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert filter_above({'a':5,'b':2,'c':8}, 4) == {'a':5,'c':8}"
+          }
+        ]
+      },
+      {
+        "name": "test_filter_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert filter_above({}, 10) == {}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T048",
+    "difficulty": "easy",
+    "domain": "numeric",
+    "defect_type": "wrong_return",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A function computing the average of a list always returns the sum instead of the mean.",
+    "original_code": "def average(nums: list) -> float:\n    if not nums:\n        return 0.0\n    return float(sum(nums))\n",
+    "reference_solution": "def average(nums: list) -> float:\n    if not nums:\n        return 0.0\n    return sum(nums) / len(nums)\n",
+    "tests": [
+      {
+        "name": "test_avg_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert average([1,2,3,4,5]) == 3.0"
+          },
+          {
+            "custom": true,
+            "code": "assert average([10,20]) == 15.0"
+          }
+        ]
+      },
+      {
+        "name": "test_avg_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert average([]) == 0.0"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T049",
+    "difficulty": "easy",
+    "domain": "arrays",
+    "defect_type": "wrong_condition",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A function checking if a list is sorted in ascending order returns True for descending lists.",
+    "original_code": "def is_sorted(lst: list) -> bool:\n    return all(lst[i] >= lst[i+1] for i in range(len(lst)-1))\n",
+    "reference_solution": "def is_sorted(lst: list) -> bool:\n    return all(lst[i] <= lst[i+1] for i in range(len(lst)-1))\n",
+    "tests": [
+      {
+        "name": "test_sorted_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert is_sorted([1,2,3,4]) is True"
+          },
+          {
+            "custom": true,
+            "code": "assert is_sorted([3,1,2]) is False"
+          }
+        ]
+      },
+      {
+        "name": "test_sorted_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert is_sorted([]) is True"
+          },
+          {
+            "custom": true,
+            "code": "assert is_sorted([5,5,5]) is True"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T050",
+    "difficulty": "easy",
+    "domain": "strings",
+    "defect_type": "exception_handling",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "weak",
+    "problem_statement": "A function parsing a comma-separated integer string crashes on whitespace around values.",
+    "original_code": "def parse_ints(s: str) -> list:\n    return [int(x) for x in s.split(',')]\n",
+    "reference_solution": "def parse_ints(s: str) -> list:\n    return [int(x.strip()) for x in s.split(',') if x.strip()]\n",
+    "tests": [
+      {
+        "name": "test_parse_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert parse_ints('1,2,3') == [1,2,3]"
+          },
+          {
+            "custom": true,
+            "code": "assert parse_ints('1, 2, 3') == [1,2,3]"
+          }
+        ]
+      },
+      {
+        "name": "test_parse_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert parse_ints('') == []"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T051",
+    "difficulty": "medium",
+    "domain": "dicts",
+    "defect_type": "wrong_logic",
+    "structure": "single_function",
+    "reasoning_type": "multi_step",
+    "min_tier": "strong",
+    "problem_statement": "A function grouping items by a key function places every item in the wrong group.",
+    "original_code": "def group_by(items: list, key_fn) -> dict:\n    result = {}\n    for item in items:\n        k = key_fn(item)\n        if k not in result:\n            result[item] = []\n        result[item].append(k)\n    return result\n",
+    "reference_solution": "def group_by(items: list, key_fn) -> dict:\n    result = {}\n    for item in items:\n        k = key_fn(item)\n        result.setdefault(k, []).append(item)\n    return result\n",
+    "tests": [
+      {
+        "name": "test_group_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "res = group_by(['cat','car','bar','bat'], lambda x: x[0]); assert res == {'c':['cat','car'],'b':['bar','bat']}"
+          }
+        ]
+      },
+      {
+        "name": "test_group_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert group_by([], len) == {}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T052",
+    "difficulty": "medium",
+    "domain": "algorithms",
+    "defect_type": "wrong_condition",
+    "structure": "single_function",
+    "reasoning_type": "algorithmic",
+    "min_tier": "strong",
+    "problem_statement": "A binary search implementation fails to find elements that exist in the array.",
+    "original_code": "def binary_search(arr: list, target: int) -> int:\n    lo, hi = 0, len(arr)\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if arr[mid] == target:\n            return mid\n        elif arr[mid] < target:\n            lo = mid\n        else:\n            hi = mid\n    return -1\n",
+    "reference_solution": "def binary_search(arr: list, target: int) -> int:\n    lo, hi = 0, len(arr) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if arr[mid] == target:\n            return mid\n        elif arr[mid] < target:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1\n",
+    "tests": [
+      {
+        "name": "test_bs_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert binary_search([1,3,5,7,9], 5) == 2"
+          },
+          {
+            "custom": true,
+            "code": "assert binary_search([1,3,5,7,9], 1) == 0"
+          }
+        ]
+      },
+      {
+        "name": "test_bs_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert binary_search([1,3,5], 4) == -1"
+          },
+          {
+            "custom": true,
+            "code": "assert binary_search([], 1) == -1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T053",
+    "difficulty": "medium",
+    "domain": "data_structures",
+    "defect_type": "wrong_logic",
+    "structure": "class",
+    "reasoning_type": "stateful",
+    "min_tier": "strong",
+    "problem_statement": "A stack implementation's peek method returns incorrect results after multiple push/pop cycles.",
+    "original_code": "class Stack:\n    def __init__(self):\n        self.items = []\n\n    def push(self, item):\n        self.items.append(item)\n\n    def pop(self):\n        if not self.items:\n            raise IndexError('pop from empty stack')\n        return self.items.pop(0)\n\n    def peek(self):\n        if not self.items:\n            raise IndexError('peek from empty stack')\n        return self.items[0]\n\n    def is_empty(self):\n        return len(self.items) == 0\n",
+    "reference_solution": "class Stack:\n    def __init__(self):\n        self.items = []\n\n    def push(self, item):\n        self.items.append(item)\n\n    def pop(self):\n        if not self.items:\n            raise IndexError('pop from empty stack')\n        return self.items.pop()\n\n    def peek(self):\n        if not self.items:\n            raise IndexError('peek from empty stack')\n        return self.items[-1]\n\n    def is_empty(self):\n        return len(self.items) == 0\n",
+    "tests": [
+      {
+        "name": "test_stack_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "s = Stack(); s.push(1); s.push(2); s.push(3); assert s.pop() == 3"
+          },
+          {
+            "custom": true,
+            "code": "s = Stack(); s.push(1); s.push(2); assert s.peek() == 2"
+          }
+        ]
+      },
+      {
+        "name": "test_stack_empty",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "s = Stack(); assert s.is_empty()"
+          },
+          {
+            "custom": true,
+            "code": "s = Stack(); s.push(1); s.pop(); assert s.is_empty()"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T054",
+    "difficulty": "medium",
+    "domain": "parsing",
+    "defect_type": "wrong_logic",
+    "structure": "single_function",
+    "reasoning_type": "multi_step",
+    "min_tier": "strong",
+    "problem_statement": "A function parsing key=value config lines ignores lines with values containing an equals sign.",
+    "original_code": "def parse_config(text: str) -> dict:\n    result = {}\n    for line in text.splitlines():\n        line = line.strip()\n        if '=' in line:\n            key, value = line.split('=')\n            result[key.strip()] = value.strip()\n    return result\n",
+    "reference_solution": "def parse_config(text: str) -> dict:\n    result = {}\n    for line in text.splitlines():\n        line = line.strip()\n        if '=' in line:\n            key, value = line.split('=', 1)\n            result[key.strip()] = value.strip()\n    return result\n",
+    "tests": [
+      {
+        "name": "test_parse_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert parse_config('host=localhost\\nport=8080') == {'host':'localhost','port':'8080'}"
+          }
+        ]
+      },
+      {
+        "name": "test_parse_eq",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert parse_config('expr=a=1') == {'expr':'a=1'}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T055",
+    "difficulty": "medium",
+    "domain": "algorithms",
+    "defect_type": "off_by_one",
+    "structure": "single_function",
+    "reasoning_type": "algorithmic",
+    "min_tier": "strong",
+    "problem_statement": "A sliding window maximum function misses the last window because the loop ends too early.",
+    "original_code": "from collections import deque\ndef sliding_max(nums: list, k: int) -> list:\n    result = []\n    dq = deque()\n    for i in range(len(nums) - 1):\n        while dq and nums[dq[-1]] <= nums[i]:\n            dq.pop()\n        dq.append(i)\n        if dq[0] < i - k + 1:\n            dq.popleft()\n        if i >= k - 1:\n            result.append(nums[dq[0]])\n    return result\n",
+    "reference_solution": "from collections import deque\ndef sliding_max(nums: list, k: int) -> list:\n    result = []\n    dq = deque()\n    for i in range(len(nums)):\n        while dq and nums[dq[-1]] <= nums[i]:\n            dq.pop()\n        dq.append(i)\n        if dq[0] < i - k + 1:\n            dq.popleft()\n        if i >= k - 1:\n            result.append(nums[dq[0]])\n    return result\n",
+    "tests": [
+      {
+        "name": "test_slmax_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert sliding_max([1,3,-1,-3,5,3,6,7], 3) == [3,3,5,5,6,7]"
+          }
+        ]
+      },
+      {
+        "name": "test_slmax_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert sliding_max([4,2,7], 1) == [4,2,7]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T056",
+    "difficulty": "medium",
+    "domain": "strings",
+    "defect_type": "wrong_logic",
+    "structure": "single_function",
+    "reasoning_type": "multi_step",
+    "min_tier": "strong",
+    "problem_statement": "An anagram detection function returns True for strings that are not anagrams of each other.",
+    "original_code": "def are_anagrams(s1: str, s2: str) -> bool:\n    return sorted(s1) == sorted(s2)\n",
+    "reference_solution": "def are_anagrams(s1: str, s2: str) -> bool:\n    s1 = s1.replace(' ', '').lower()\n    s2 = s2.replace(' ', '').lower()\n    return sorted(s1) == sorted(s2)\n",
+    "tests": [
+      {
+        "name": "test_anagram_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert are_anagrams('listen', 'silent') is True"
+          },
+          {
+            "custom": true,
+            "code": "assert are_anagrams('hello', 'world') is False"
+          }
+        ]
+      },
+      {
+        "name": "test_anagram_case",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert are_anagrams('Listen', 'Silent') is True"
+          },
+          {
+            "custom": true,
+            "code": "assert are_anagrams('Astronomer', 'Moon starer') is True"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T057",
+    "difficulty": "medium",
+    "domain": "dicts",
+    "defect_type": "state_mutation",
+    "structure": "single_function",
+    "reasoning_type": "multi_step",
+    "min_tier": "strong",
+    "problem_statement": "A function updating a configuration dict modifies the caller's original dict instead of returning a new one.",
+    "original_code": "def apply_defaults(config: dict, defaults: dict) -> dict:\n    for k, v in defaults.items():\n        if k not in config:\n            config[k] = v\n    return config\n",
+    "reference_solution": "def apply_defaults(config: dict, defaults: dict) -> dict:\n    result = defaults.copy()\n    result.update(config)\n    return result\n",
+    "tests": [
+      {
+        "name": "test_defaults_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert apply_defaults({'a':1}, {'a':99,'b':2}) == {'a':1,'b':2}"
+          }
+        ]
+      },
+      {
+        "name": "test_defaults_no_mutate",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "orig = {'a':1}; apply_defaults(orig, {'b':2}); assert orig == {'a':1}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T058",
+    "difficulty": "medium",
+    "domain": "parsing",
+    "defect_type": "exception_handling",
+    "structure": "single_function",
+    "reasoning_type": "multi_step",
+    "min_tier": "strong",
+    "problem_statement": "A JSON-parsing helper crashes instead of returning None when given malformed JSON.",
+    "original_code": "import json\ndef safe_parse_json(text: str):\n    return json.loads(text)\n",
+    "reference_solution": "import json\ndef safe_parse_json(text: str):\n    try:\n        return json.loads(text)\n    except (json.JSONDecodeError, TypeError):\n        return None\n",
+    "tests": [
+      {
+        "name": "test_json_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert safe_parse_json('{\"a\":1}') == {'a':1}"
+          }
+        ]
+      },
+      {
+        "name": "test_json_bad",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert safe_parse_json('not json') is None"
+          },
+          {
+            "custom": true,
+            "code": "assert safe_parse_json('') is None"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T059",
+    "difficulty": "medium",
+    "domain": "arrays",
+    "defect_type": "wrong_logic",
+    "structure": "single_function",
+    "reasoning_type": "algorithmic",
+    "min_tier": "strong",
+    "problem_statement": "A function finding the intersection of two lists includes duplicate elements from a single list.",
+    "original_code": "def intersection(a: list, b: list) -> list:\n    return [x for x in a if x in b]\n",
+    "reference_solution": "def intersection(a: list, b: list) -> list:\n    return list(set(a) & set(b))\n",
+    "tests": [
+      {
+        "name": "test_intersect_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert sorted(intersection([1,2,3],[2,3,4])) == [2,3]"
+          }
+        ]
+      },
+      {
+        "name": "test_intersect_dup",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert sorted(intersection([1,1,2],[1,2])) == [1,2]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T060",
+    "difficulty": "medium",
+    "domain": "data_structures",
+    "defect_type": "wrong_condition",
+    "structure": "class",
+    "reasoning_type": "stateful",
+    "min_tier": "strong",
+    "problem_statement": "A queue implementation's dequeue method raises an error even when the queue has items.",
+    "original_code": "class Queue:\n    def __init__(self):\n        self.items = []\n\n    def enqueue(self, item):\n        self.items.append(item)\n\n    def dequeue(self):\n        if len(self.items) == 0:\n            raise IndexError('dequeue from empty queue')\n        return self.items.pop()\n\n    def front(self):\n        return self.items[-1]\n\n    def size(self):\n        return len(self.items)\n",
+    "reference_solution": "class Queue:\n    def __init__(self):\n        self.items = []\n\n    def enqueue(self, item):\n        self.items.append(item)\n\n    def dequeue(self):\n        if len(self.items) == 0:\n            raise IndexError('dequeue from empty queue')\n        return self.items.pop(0)\n\n    def front(self):\n        return self.items[0]\n\n    def size(self):\n        return len(self.items)\n",
+    "tests": [
+      {
+        "name": "test_queue_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "q = Queue(); q.enqueue(1); q.enqueue(2); assert q.dequeue() == 1"
+          }
+        ]
+      },
+      {
+        "name": "test_queue_front",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "q = Queue(); q.enqueue('a'); q.enqueue('b'); assert q.front() == 'a'"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T061",
+    "difficulty": "medium",
+    "domain": "numeric",
+    "defect_type": "wrong_logic",
+    "structure": "single_function",
+    "reasoning_type": "specification",
+    "min_tier": "strong",
+    "problem_statement": "A function computing compound interest returns simple interest instead.",
+    "original_code": "def compound_interest(principal: float, rate: float, years: int) -> float:\n    return principal * rate * years\n",
+    "reference_solution": "def compound_interest(principal: float, rate: float, years: int) -> float:\n    return principal * ((1 + rate) ** years) - principal\n",
+    "tests": [
+      {
+        "name": "test_ci_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert abs(compound_interest(1000, 0.05, 2) - 102.5) < 0.01"
+          }
+        ]
+      },
+      {
+        "name": "test_ci_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert compound_interest(1000, 0.0, 5) == 0.0"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T062",
+    "difficulty": "medium",
+    "domain": "strings",
+    "defect_type": "off_by_one",
+    "structure": "single_function",
+    "reasoning_type": "multi_step",
+    "min_tier": "strong",
+    "problem_statement": "A function finding all occurrences of a substring within a string misses overlapping matches.",
+    "original_code": "def find_all(text: str, sub: str) -> list:\n    positions = []\n    start = 0\n    while True:\n        idx = text.find(sub, start)\n        if idx == -1:\n            break\n        positions.append(idx)\n        start = idx + len(sub)\n    return positions\n",
+    "reference_solution": "def find_all(text: str, sub: str) -> list:\n    positions = []\n    start = 0\n    while True:\n        idx = text.find(sub, start)\n        if idx == -1:\n            break\n        positions.append(idx)\n        start = idx + 1\n    return positions\n",
+    "tests": [
+      {
+        "name": "test_findall_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert find_all('abcabc', 'abc') == [0, 3]"
+          }
+        ]
+      },
+      {
+        "name": "test_findall_overlap",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert find_all('aaaa', 'aa') == [0, 1, 2]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T063",
+    "difficulty": "medium",
+    "domain": "algorithms",
+    "defect_type": "missing_sort",
+    "structure": "single_function",
+    "reasoning_type": "algorithmic",
+    "min_tier": "strong",
+    "problem_statement": "A function finding the k-th smallest element in a list gives wrong results because the list is not sorted.",
+    "original_code": "def kth_smallest(nums: list, k: int) -> int:\n    return nums[k - 1]\n",
+    "reference_solution": "def kth_smallest(nums: list, k: int) -> int:\n    return sorted(nums)[k - 1]\n",
+    "tests": [
+      {
+        "name": "test_kth_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert kth_smallest([3,1,4,1,5,9,2,6], 3) == 3"
+          }
+        ]
+      },
+      {
+        "name": "test_kth_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert kth_smallest([5], 1) == 5"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T064",
+    "difficulty": "medium",
+    "domain": "oop",
+    "defect_type": "wrong_logic",
+    "structure": "class",
+    "reasoning_type": "stateful",
+    "min_tier": "strong",
+    "problem_statement": "A BankAccount class allows the balance to go negative when withdrawing, violating the overdraft constraint.",
+    "original_code": "class BankAccount:\n    def __init__(self, balance: float = 0):\n        self.balance = balance\n\n    def deposit(self, amount: float):\n        self.balance += amount\n\n    def withdraw(self, amount: float):\n        self.balance -= amount\n\n    def get_balance(self):\n        return self.balance\n",
+    "reference_solution": "class BankAccount:\n    def __init__(self, balance: float = 0):\n        self.balance = balance\n\n    def deposit(self, amount: float):\n        self.balance += amount\n\n    def withdraw(self, amount: float):\n        if amount > self.balance:\n            raise ValueError('Insufficient funds')\n        self.balance -= amount\n\n    def get_balance(self):\n        return self.balance\n",
+    "tests": [
+      {
+        "name": "test_bank_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "acc = BankAccount(100); acc.withdraw(30); assert acc.get_balance() == 70"
+          }
+        ]
+      },
+      {
+        "name": "test_bank_overdraft",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "acc = BankAccount(50)\ntry:\n    acc.withdraw(100)\n    assert False\nexcept ValueError:\n    pass"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T065",
+    "difficulty": "medium",
+    "domain": "parsing",
+    "defect_type": "off_by_one",
+    "structure": "single_function",
+    "reasoning_type": "multi_step",
+    "min_tier": "strong",
+    "problem_statement": "A function tokenizing a string by a delimiter drops the first token.",
+    "original_code": "def tokenize(s: str, delim: str) -> list:\n    tokens = s.split(delim)\n    return tokens[1:]\n",
+    "reference_solution": "def tokenize(s: str, delim: str) -> list:\n    return s.split(delim)\n",
+    "tests": [
+      {
+        "name": "test_tok_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert tokenize('a:b:c', ':') == ['a','b','c']"
+          }
+        ]
+      },
+      {
+        "name": "test_tok_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert tokenize('only', ':') == ['only']"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T066",
+    "difficulty": "medium",
+    "domain": "dicts",
+    "defect_type": "wrong_condition",
+    "structure": "single_function",
+    "reasoning_type": "multi_step",
+    "min_tier": "strong",
+    "problem_statement": "A function computing the symmetric difference of two dicts includes keys present in both.",
+    "original_code": "def sym_diff_keys(d1: dict, d2: dict) -> set:\n    return set(d1.keys()) | set(d2.keys())\n",
+    "reference_solution": "def sym_diff_keys(d1: dict, d2: dict) -> set:\n    return set(d1.keys()) ^ set(d2.keys())\n",
+    "tests": [
+      {
+        "name": "test_symdiff_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert sym_diff_keys({'a':1,'b':2},{'b':3,'c':4}) == {'a','c'}"
+          }
+        ]
+      },
+      {
+        "name": "test_symdiff_empty",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert sym_diff_keys({'x':1},{'x':2}) == set()"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T067",
+    "difficulty": "medium",
+    "domain": "arrays",
+    "defect_type": "wrong_logic",
+    "structure": "single_function",
+    "reasoning_type": "algorithmic",
+    "min_tier": "strong",
+    "problem_statement": "A function rotating a list left by k positions rotates it right instead.",
+    "original_code": "def rotate_left(lst: list, k: int) -> list:\n    if not lst:\n        return lst\n    k = k % len(lst)\n    return lst[-k:] + lst[:-k]\n",
+    "reference_solution": "def rotate_left(lst: list, k: int) -> list:\n    if not lst:\n        return lst\n    k = k % len(lst)\n    return lst[k:] + lst[:k]\n",
+    "tests": [
+      {
+        "name": "test_rotate_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert rotate_left([1,2,3,4,5], 2) == [3,4,5,1,2]"
+          }
+        ]
+      },
+      {
+        "name": "test_rotate_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert rotate_left([1,2,3], 0) == [1,2,3]"
+          },
+          {
+            "custom": true,
+            "code": "assert rotate_left([1,2,3], 3) == [1,2,3]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T068",
+    "difficulty": "medium",
+    "domain": "numeric",
+    "defect_type": "exception_handling",
+    "structure": "single_function",
+    "reasoning_type": "specification",
+    "min_tier": "strong",
+    "problem_statement": "A safe division function raises a ZeroDivisionError instead of returning a default value.",
+    "original_code": "def safe_divide(a: float, b: float, default: float = 0.0) -> float:\n    return a / b\n",
+    "reference_solution": "def safe_divide(a: float, b: float, default: float = 0.0) -> float:\n    if b == 0:\n        return default\n    return a / b\n",
+    "tests": [
+      {
+        "name": "test_div_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert safe_divide(10, 2) == 5.0"
+          },
+          {
+            "custom": true,
+            "code": "assert safe_divide(7, 0) == 0.0"
+          }
+        ]
+      },
+      {
+        "name": "test_div_custom",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert safe_divide(5, 0, -1) == -1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T069",
+    "difficulty": "medium",
+    "domain": "oop",
+    "defect_type": "state_mutation",
+    "structure": "class",
+    "reasoning_type": "stateful",
+    "min_tier": "strong",
+    "problem_statement": "A Counter class resets its count to zero whenever decrement is called with a value that would make it negative, instead of clamping at zero.",
+    "original_code": "class Counter:\n    def __init__(self, start: int = 0):\n        self.count = start\n\n    def increment(self, by: int = 1):\n        self.count += by\n\n    def decrement(self, by: int = 1):\n        self.count -= by\n\n    def value(self):\n        return self.count\n",
+    "reference_solution": "class Counter:\n    def __init__(self, start: int = 0):\n        self.count = start\n\n    def increment(self, by: int = 1):\n        self.count += by\n\n    def decrement(self, by: int = 1):\n        self.count = max(0, self.count - by)\n\n    def value(self):\n        return self.count\n",
+    "tests": [
+      {
+        "name": "test_counter_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "c = Counter(5); c.decrement(3); assert c.value() == 2"
+          }
+        ]
+      },
+      {
+        "name": "test_counter_clamp",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "c = Counter(2); c.decrement(10); assert c.value() == 0"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T070",
+    "difficulty": "medium",
+    "domain": "parsing",
+    "defect_type": "wrong_logic",
+    "structure": "single_function",
+    "reasoning_type": "multi_step",
+    "min_tier": "strong",
+    "problem_statement": "A function extracting email addresses from text also captures strings that do not have a valid domain extension.",
+    "original_code": "import re\ndef extract_emails(text: str) -> list:\n    return re.findall(r'\\S+@\\S+', text)\n",
+    "reference_solution": "import re\ndef extract_emails(text: str) -> list:\n    return re.findall(r'[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}', text)\n",
+    "tests": [
+      {
+        "name": "test_email_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert extract_emails('contact us at foo@example.com please') == ['foo@example.com']"
+          }
+        ]
+      },
+      {
+        "name": "test_email_invalid",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert extract_emails('bad: user@, good: a@b.com') == ['a@b.com']"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T071",
+    "difficulty": "medium",
+    "domain": "algorithms",
+    "defect_type": "wrong_logic",
+    "structure": "single_function",
+    "reasoning_type": "algorithmic",
+    "min_tier": "strong",
+    "problem_statement": "A depth-first search traversal visits nodes in the wrong order because the neighbor list is processed in reverse.",
+    "original_code": "def dfs(graph: dict, start: str) -> list:\n    visited = []\n    stack = [start]\n    seen = set()\n    while stack:\n        node = stack.pop()\n        if node in seen:\n            continue\n        seen.add(node)\n        visited.append(node)\n        for nei in graph.get(node, []):\n            if nei not in seen:\n                stack.append(nei)\n    return visited\n",
+    "reference_solution": "def dfs(graph: dict, start: str) -> list:\n    visited = []\n    stack = [start]\n    seen = set()\n    while stack:\n        node = stack.pop()\n        if node in seen:\n            continue\n        seen.add(node)\n        visited.append(node)\n        for nei in reversed(graph.get(node, [])):\n            if nei not in seen:\n                stack.append(nei)\n    return visited\n",
+    "tests": [
+      {
+        "name": "test_dfs_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "g={'A':['B','C'],'B':['D'],'C':[],'D':[]}\nassert dfs(g,'A') == ['A','B','D','C']"
+          }
+        ]
+      },
+      {
+        "name": "test_dfs_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert dfs({'X':[]}, 'X') == ['X']"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T072",
+    "difficulty": "medium",
+    "domain": "strings",
+    "defect_type": "wrong_operator",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "strong",
+    "problem_statement": "A function checking if one string is a rotation of another always returns False even for valid rotations.",
+    "original_code": "def is_rotation(s1: str, s2: str) -> bool:\n    if len(s1) != len(s2):\n        return False\n    return s2 not in s1 + s1\n",
+    "reference_solution": "def is_rotation(s1: str, s2: str) -> bool:\n    if len(s1) != len(s2):\n        return False\n    return s2 in s1 + s1\n",
+    "tests": [
+      {
+        "name": "test_rotation_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert is_rotation('abcde', 'cdeab') is True"
+          },
+          {
+            "custom": true,
+            "code": "assert is_rotation('abcde', 'abced') is False"
+          }
+        ]
+      },
+      {
+        "name": "test_rotation_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert is_rotation('', '') is True"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T073",
+    "difficulty": "medium",
+    "domain": "data_structures",
+    "defect_type": "missing_update",
+    "structure": "class",
+    "reasoning_type": "stateful",
+    "min_tier": "strong",
+    "problem_statement": "A min-heap wrapper's decrease-key operation updates the value but forgets to re-heapify.",
+    "original_code": "import heapq\nclass MinHeap:\n    def __init__(self):\n        self.heap = []\n\n    def push(self, val):\n        heapq.heappush(self.heap, val)\n\n    def pop(self):\n        return heapq.heappop(self.heap)\n\n    def replace_min(self, new_val):\n        self.heap[0] = new_val  # пропускает heapify\n\n    def peek(self):\n        return self.heap[0]\n",
+    "reference_solution": "import heapq\nclass MinHeap:\n    def __init__(self):\n        self.heap = []\n\n    def push(self, val):\n        heapq.heappush(self.heap, val)\n\n    def pop(self):\n        return heapq.heappop(self.heap)\n\n    def replace_min(self, new_val):\n        heapq.heapreplace(self.heap, new_val)\n\n    def peek(self):\n        return self.heap[0]\n",
+    "tests": [
+      {
+        "name": "test_heap_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "h = MinHeap(); h.push(5); h.push(2); h.push(8); assert h.pop() == 2"
+          }
+        ]
+      },
+      {
+        "name": "test_heap_replace",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "h = MinHeap(); h.push(1); h.push(3); h.push(5); h.replace_min(4); assert h.peek() == 3"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T074",
+    "difficulty": "medium",
+    "domain": "parsing",
+    "defect_type": "wrong_logic",
+    "structure": "single_function",
+    "reasoning_type": "multi_step",
+    "min_tier": "strong",
+    "problem_statement": "A function converting snake_case identifiers to camelCase leaves the first letter uppercase.",
+    "original_code": "def snake_to_camel(name: str) -> str:\n    parts = name.split('_')\n    return ''.join(p.capitalize() for p in parts)\n",
+    "reference_solution": "def snake_to_camel(name: str) -> str:\n    parts = name.split('_')\n    return parts[0] + ''.join(p.capitalize() for p in parts[1:])\n",
+    "tests": [
+      {
+        "name": "test_snake_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert snake_to_camel('hello_world') == 'helloWorld'"
+          },
+          {
+            "custom": true,
+            "code": "assert snake_to_camel('get_user_name') == 'getUserName'"
+          }
+        ]
+      },
+      {
+        "name": "test_snake_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert snake_to_camel('single') == 'single'"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T075",
+    "difficulty": "medium",
+    "domain": "numeric",
+    "defect_type": "off_by_one",
+    "structure": "single_function",
+    "reasoning_type": "specification",
+    "min_tier": "strong",
+    "problem_statement": "A function generating all multiples of n up to (and including) limit stops one multiple short.",
+    "original_code": "def multiples_up_to(n: int, limit: int) -> list:\n    return list(range(n, limit, n))\n",
+    "reference_solution": "def multiples_up_to(n: int, limit: int) -> list:\n    return list(range(n, limit + 1, n))\n",
+    "tests": [
+      {
+        "name": "test_mult_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert multiples_up_to(3, 12) == [3,6,9,12]"
+          }
+        ]
+      },
+      {
+        "name": "test_mult_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert multiples_up_to(5, 4) == []"
+          },
+          {
+            "custom": true,
+            "code": "assert multiples_up_to(2, 2) == [2]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T076",
+    "difficulty": "medium",
+    "domain": "oop",
+    "defect_type": "wrong_logic",
+    "structure": "class",
+    "reasoning_type": "stateful",
+    "min_tier": "strong",
+    "problem_statement": "A temperature converter class converts Celsius to Fahrenheit using the wrong formula.",
+    "original_code": "class TempConverter:\n    def celsius_to_fahrenheit(self, c: float) -> float:\n        return c * 9 / 5\n\n    def fahrenheit_to_celsius(self, f: float) -> float:\n        return (f - 32) * 5 / 9\n",
+    "reference_solution": "class TempConverter:\n    def celsius_to_fahrenheit(self, c: float) -> float:\n        return c * 9 / 5 + 32\n\n    def fahrenheit_to_celsius(self, f: float) -> float:\n        return (f - 32) * 5 / 9\n",
+    "tests": [
+      {
+        "name": "test_temp_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "tc = TempConverter(); assert tc.celsius_to_fahrenheit(0) == 32.0"
+          },
+          {
+            "custom": true,
+            "code": "tc = TempConverter(); assert tc.celsius_to_fahrenheit(100) == 212.0"
+          }
+        ]
+      },
+      {
+        "name": "test_temp_reverse",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "tc = TempConverter(); assert tc.fahrenheit_to_celsius(32) == 0.0"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T077",
+    "difficulty": "medium",
+    "domain": "arrays",
+    "defect_type": "wrong_logic",
+    "structure": "single_function",
+    "reasoning_type": "algorithmic",
+    "min_tier": "strong",
+    "problem_statement": "A function that returns all permutations of a list produces duplicate permutations when elements are repeated.",
+    "original_code": "from itertools import permutations\ndef unique_permutations(lst: list) -> list:\n    return [list(p) for p in permutations(lst)]\n",
+    "reference_solution": "from itertools import permutations\ndef unique_permutations(lst: list) -> list:\n    return [list(p) for p in set(permutations(lst))]\n",
+    "tests": [
+      {
+        "name": "test_perm_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "res = unique_permutations([1,2,3]); assert len(res) == 6"
+          }
+        ]
+      },
+      {
+        "name": "test_perm_dup",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "res = unique_permutations([1,1,2]); assert len(res) == 3"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T078",
+    "difficulty": "medium",
+    "domain": "strings",
+    "defect_type": "boundary_case",
+    "structure": "single_function",
+    "reasoning_type": "local_edit",
+    "min_tier": "strong",
+    "problem_statement": "A function replacing occurrences of a pattern in a string crashes when the replacement string is empty.",
+    "original_code": "def replace_pattern(text: str, pattern: str, replacement: str) -> str:\n    if not replacement:\n        raise ValueError('replacement cannot be empty')\n    return text.replace(pattern, replacement)\n",
+    "reference_solution": "def replace_pattern(text: str, pattern: str, replacement: str) -> str:\n    return text.replace(pattern, replacement)\n",
+    "tests": [
+      {
+        "name": "test_replace_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert replace_pattern('hello world', 'world', 'Python') == 'hello Python'"
+          }
+        ]
+      },
+      {
+        "name": "test_replace_empty",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert replace_pattern('aXbXc', 'X', '') == 'abc'"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T079",
+    "difficulty": "medium",
+    "domain": "dicts",
+    "defect_type": "wrong_return",
+    "structure": "single_function",
+    "reasoning_type": "multi_step",
+    "min_tier": "strong",
+    "problem_statement": "A function computing the frequency distribution of values in a list returns keys instead of (value, count) pairs.",
+    "original_code": "def frequency_dist(items: list) -> dict:\n    counts = {}\n    for item in items:\n        counts[item] = counts.get(item, 0) + 1\n    return list(counts.keys())\n",
+    "reference_solution": "def frequency_dist(items: list) -> dict:\n    counts = {}\n    for item in items:\n        counts[item] = counts.get(item, 0) + 1\n    return counts\n",
+    "tests": [
+      {
+        "name": "test_freq_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert frequency_dist(['a','b','a','c','b','a']) == {'a':3,'b':2,'c':1}"
+          }
+        ]
+      },
+      {
+        "name": "test_freq_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert frequency_dist([]) == {}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T080",
+    "difficulty": "medium",
+    "domain": "algorithms",
+    "defect_type": "wrong_logic",
+    "structure": "single_function",
+    "reasoning_type": "algorithmic",
+    "min_tier": "strong",
+    "problem_statement": "A function checking if a graph has a cycle using DFS always returns False even for graphs with cycles.",
+    "original_code": "def has_cycle(graph: dict) -> bool:\n    visited = set()\n    def dfs(node, parent):\n        visited.add(node)\n        for nei in graph.get(node, []):\n            if nei not in visited:\n                dfs(nei, node)\n        return False\n    for node in graph:\n        if node not in visited:\n            if dfs(node, None):\n                return True\n    return False\n",
+    "reference_solution": "def has_cycle(graph: dict) -> bool:\n    visited = set()\n    def dfs(node, parent):\n        visited.add(node)\n        for nei in graph.get(node, []):\n            if nei not in visited:\n                if dfs(nei, node):\n                    return True\n            elif nei != parent:\n                return True\n        return False\n    for node in graph:\n        if node not in visited:\n            if dfs(node, None):\n                return True\n    return False\n",
+    "tests": [
+      {
+        "name": "test_cycle_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "g={'A':['B'],'B':['C'],'C':['A']}; assert has_cycle(g) is True"
+          }
+        ]
+      },
+      {
+        "name": "test_no_cycle",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "g={'A':['B'],'B':['C'],'C':[]}; assert has_cycle(g) is False"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T081",
+    "difficulty": "medium",
+    "domain": "oop",
+    "defect_type": "wrong_condition",
+    "structure": "class",
+    "reasoning_type": "stateful",
+    "min_tier": "strong",
+    "problem_statement": "A singleton pattern implementation creates a new instance on every call instead of reusing the existing one.",
+    "original_code": "class Singleton:\n    _instance = None\n\n    @classmethod\n    def get_instance(cls):\n        if cls._instance is not None:\n            cls._instance = cls()\n        return cls._instance\n",
+    "reference_solution": "class Singleton:\n    _instance = None\n\n    @classmethod\n    def get_instance(cls):\n        if cls._instance is None:\n            cls._instance = cls()\n        return cls._instance\n",
+    "tests": [
+      {
+        "name": "test_singleton_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "a = Singleton.get_instance(); b = Singleton.get_instance(); assert a is b"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T082",
+    "difficulty": "medium",
+    "domain": "parsing",
+    "defect_type": "wrong_logic",
+    "structure": "single_function",
+    "reasoning_type": "multi_step",
+    "min_tier": "strong",
+    "problem_statement": "A function validating an IP address accepts strings with octets outside the 0-255 range.",
+    "original_code": "import re\ndef is_valid_ip(ip: str) -> bool:\n    parts = ip.split('.')\n    return len(parts) == 4 and all(p.isdigit() for p in parts)\n",
+    "reference_solution": "def is_valid_ip(ip: str) -> bool:\n    parts = ip.split('.')\n    if len(parts) != 4:\n        return False\n    for p in parts:\n        if not p.isdigit():\n            return False\n        if int(p) > 255:\n            return False\n    return True\n",
+    "tests": [
+      {
+        "name": "test_ip_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert is_valid_ip('192.168.1.1') is True"
+          },
+          {
+            "custom": true,
+            "code": "assert is_valid_ip('255.255.255.255') is True"
+          }
+        ]
+      },
+      {
+        "name": "test_ip_invalid",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert is_valid_ip('999.0.0.1') is False"
+          },
+          {
+            "custom": true,
+            "code": "assert is_valid_ip('1.2.3') is False"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T083",
+    "difficulty": "medium",
+    "domain": "numeric",
+    "defect_type": "wrong_logic",
+    "structure": "single_function",
+    "reasoning_type": "specification",
+    "min_tier": "strong",
+    "problem_statement": "A function computing the median of a list returns the wrong value when the list has an even number of elements.",
+    "original_code": "def median(nums: list) -> float:\n    s = sorted(nums)\n    n = len(s)\n    mid = n // 2\n    return float(s[mid])\n",
+    "reference_solution": "def median(nums: list) -> float:\n    s = sorted(nums)\n    n = len(s)\n    mid = n // 2\n    if n % 2 == 0:\n        return (s[mid - 1] + s[mid]) / 2\n    return float(s[mid])\n",
+    "tests": [
+      {
+        "name": "test_median_odd",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert median([3,1,2]) == 2.0"
+          }
+        ]
+      },
+      {
+        "name": "test_median_even",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert median([1,2,3,4]) == 2.5"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T084",
+    "difficulty": "medium",
+    "domain": "data_structures",
+    "defect_type": "off_by_one",
+    "structure": "class",
+    "reasoning_type": "stateful",
+    "min_tier": "strong",
+    "problem_statement": "A circular buffer overwrites its oldest element one position too late, so stale data is returned.",
+    "original_code": "class CircularBuffer:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.buffer = []\n\n    def write(self, value):\n        if len(self.buffer) >= self.capacity + 1:\n            self.buffer.pop(0)\n        self.buffer.append(value)\n\n    def read_all(self):\n        return list(self.buffer)\n",
+    "reference_solution": "class CircularBuffer:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.buffer = []\n\n    def write(self, value):\n        if len(self.buffer) >= self.capacity:\n            self.buffer.pop(0)\n        self.buffer.append(value)\n\n    def read_all(self):\n        return list(self.buffer)\n",
+    "tests": [
+      {
+        "name": "test_cb_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "cb = CircularBuffer(3); cb.write(1); cb.write(2); cb.write(3); assert cb.read_all() == [1,2,3]"
+          }
+        ]
+      },
+      {
+        "name": "test_cb_overflow",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "cb = CircularBuffer(3); [cb.write(i) for i in range(5)]; assert cb.read_all() == [2,3,4]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T085",
+    "difficulty": "medium",
+    "domain": "strings",
+    "defect_type": "wrong_logic",
+    "structure": "single_function",
+    "reasoning_type": "multi_step",
+    "min_tier": "strong",
+    "problem_statement": "A function computing the longest common prefix of a list of strings returns an empty string for lists where a common prefix exists.",
+    "original_code": "def longest_common_prefix(words: list) -> str:\n    if not words:\n        return ''\n    prefix = words[0]\n    for word in words:\n        while not word.startswith(prefix):\n            prefix = prefix[1:]\n    return prefix\n",
+    "reference_solution": "def longest_common_prefix(words: list) -> str:\n    if not words:\n        return ''\n    prefix = words[0]\n    for word in words[1:]:\n        while not word.startswith(prefix):\n            prefix = prefix[:-1]\n            if not prefix:\n                return ''\n    return prefix\n",
+    "tests": [
+      {
+        "name": "test_lcp_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert longest_common_prefix(['flower','flow','flight']) == 'fl'"
+          }
+        ]
+      },
+      {
+        "name": "test_lcp_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert longest_common_prefix(['dog','car']) == ''"
+          },
+          {
+            "custom": true,
+            "code": "assert longest_common_prefix([]) == ''"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T086",
+    "difficulty": "hard",
+    "domain": "algorithms",
+    "defect_type": "wrong_logic",
+    "structure": "single_function",
+    "reasoning_type": "algorithmic",
+    "min_tier": "human",
+    "problem_statement": "A Dijkstra shortest-path implementation returns wrong distances because relaxation uses an incorrect comparison.",
+    "original_code": "import heapq\n\ndef dijkstra(graph: dict, start: str) -> dict:\n    dist = {start: 0}\n    pq = [(0, start)]\n    while pq:\n        d, u = heapq.heappop(pq)\n        if d > dist.get(u, float('inf')):\n            continue\n        for v, w in graph.get(u, []):\n            new_d = d + w\n            if new_d >= dist.get(v, float('inf')):\n                dist[v] = new_d\n                heapq.heappush(pq, (new_d, v))\n    return dist\n",
+    "reference_solution": "import heapq\n\ndef dijkstra(graph: dict, start: str) -> dict:\n    dist = {start: 0}\n    pq = [(0, start)]\n    while pq:\n        d, u = heapq.heappop(pq)\n        if d > dist.get(u, float('inf')):\n            continue\n        for v, w in graph.get(u, []):\n            new_d = d + w\n            if new_d < dist.get(v, float('inf')):\n                dist[v] = new_d\n                heapq.heappush(pq, (new_d, v))\n    return dist\n",
+    "tests": [
+      {
+        "name": "test_dijk_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "g={'A':[('B',1),('C',4)],'B':[('C',2),('D',5)],'C':[('D',1)],'D':[]}\ndist=dijkstra(g,'A')\nassert dist['D']==4"
+          }
+        ]
+      },
+      {
+        "name": "test_dijk_single",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert dijkstra({'X':[]},'X') == {'X':0}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T087",
+    "difficulty": "hard",
+    "domain": "data_structures",
+    "defect_type": "wrong_logic",
+    "structure": "class",
+    "reasoning_type": "stateful",
+    "min_tier": "human",
+    "problem_statement": "A trie's search method incorrectly reports words as present when only a prefix of that word was inserted.",
+    "original_code": "class TrieNode:\n    def __init__(self):\n        self.children = {}\n        self.is_end = False\n\nclass Trie:\n    def __init__(self):\n        self.root = TrieNode()\n\n    def insert(self, word: str):\n        node = self.root\n        for ch in word:\n            node = node.children.setdefault(ch, TrieNode())\n        node.is_end = True\n\n    def search(self, word: str) -> bool:\n        node = self.root\n        for ch in word:\n            if ch not in node.children:\n                return False\n            node = node.children[ch]\n        return True  # не проверяет is_end\n",
+    "reference_solution": "class TrieNode:\n    def __init__(self):\n        self.children = {}\n        self.is_end = False\n\nclass Trie:\n    def __init__(self):\n        self.root = TrieNode()\n\n    def insert(self, word: str):\n        node = self.root\n        for ch in word:\n            node = node.children.setdefault(ch, TrieNode())\n        node.is_end = True\n\n    def search(self, word: str) -> bool:\n        node = self.root\n        for ch in word:\n            if ch not in node.children:\n                return False\n            node = node.children[ch]\n        return node.is_end\n",
+    "tests": [
+      {
+        "name": "test_trie_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "t = Trie(); t.insert('apple'); assert t.search('apple') is True"
+          }
+        ]
+      },
+      {
+        "name": "test_trie_prefix",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "t = Trie(); t.insert('apple'); assert t.search('app') is False"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T088",
+    "difficulty": "hard",
+    "domain": "algorithms",
+    "defect_type": "wrong_logic",
+    "structure": "single_function",
+    "reasoning_type": "algorithmic",
+    "min_tier": "human",
+    "problem_statement": "A dynamic programming solution for the longest increasing subsequence returns the wrong length for certain inputs.",
+    "original_code": "def lis_length(nums: list) -> int:\n    if not nums:\n        return 0\n    dp = [1] * len(nums)\n    for i in range(1, len(nums)):\n        for j in range(i):\n            if nums[j] < nums[i]:\n                dp[i] = max(dp[i], dp[j])\n    return max(dp)\n",
+    "reference_solution": "def lis_length(nums: list) -> int:\n    if not nums:\n        return 0\n    dp = [1] * len(nums)\n    for i in range(1, len(nums)):\n        for j in range(i):\n            if nums[j] < nums[i]:\n                dp[i] = max(dp[i], dp[j] + 1)\n    return max(dp)\n",
+    "tests": [
+      {
+        "name": "test_lis_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert lis_length([10,9,2,5,3,7,101,18]) == 4"
+          }
+        ]
+      },
+      {
+        "name": "test_lis_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert lis_length([1]) == 1"
+          },
+          {
+            "custom": true,
+            "code": "assert lis_length([5,4,3,2,1]) == 1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T089",
+    "difficulty": "hard",
+    "domain": "data_structures",
+    "defect_type": "state_mutation",
+    "structure": "class",
+    "reasoning_type": "stateful",
+    "min_tier": "human",
+    "problem_statement": "A graph class's adjacency list is shared across instances because a mutable default was used in __init__.",
+    "original_code": "class Graph:\n    def __init__(self, adj=None):\n        self.adj = adj or {}\n\n    def add_edge(self, u, v):\n        self.adj.setdefault(u, []).append(v)\n        self.adj.setdefault(v, []).append(u)\n\n    def neighbors(self, u):\n        return self.adj.get(u, [])\n",
+    "reference_solution": "class Graph:\n    def __init__(self):\n        self.adj = {}\n\n    def add_edge(self, u, v):\n        self.adj.setdefault(u, []).append(v)\n        self.adj.setdefault(v, []).append(u)\n\n    def neighbors(self, u):\n        return self.adj.get(u, [])\n",
+    "tests": [
+      {
+        "name": "test_graph_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "g = Graph(); g.add_edge('A','B'); assert 'B' in g.neighbors('A')"
+          }
+        ]
+      },
+      {
+        "name": "test_graph_independent",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "g1 = Graph(); g2 = Graph(); g1.add_edge('X','Y'); assert g2.neighbors('X') == []"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T090",
+    "difficulty": "hard",
+    "domain": "algorithms",
+    "defect_type": "wrong_condition",
+    "structure": "single_function",
+    "reasoning_type": "algorithmic",
+    "min_tier": "human",
+    "problem_statement": "A function solving the coin-change problem returns wrong results because the DP table initialization is off.",
+    "original_code": "def coin_change(coins: list, amount: int) -> int:\n    dp = [float('inf')] * (amount + 1)\n    dp[0] = 1\n    for i in range(1, amount + 1):\n        for c in coins:\n            if c <= i:\n                dp[i] = min(dp[i], dp[i - c] + 1)\n    return dp[amount] if dp[amount] != float('inf') else -1\n",
+    "reference_solution": "def coin_change(coins: list, amount: int) -> int:\n    dp = [float('inf')] * (amount + 1)\n    dp[0] = 0\n    for i in range(1, amount + 1):\n        for c in coins:\n            if c <= i:\n                dp[i] = min(dp[i], dp[i - c] + 1)\n    return dp[amount] if dp[amount] != float('inf') else -1\n",
+    "tests": [
+      {
+        "name": "test_coins_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert coin_change([1,5,6,9], 11) == 2"
+          },
+          {
+            "custom": true,
+            "code": "assert coin_change([2], 3) == -1"
+          }
+        ]
+      },
+      {
+        "name": "test_coins_zero",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert coin_change([1,2,5], 0) == 0"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T091",
+    "difficulty": "hard",
+    "domain": "oop",
+    "defect_type": "wrong_logic",
+    "structure": "class",
+    "reasoning_type": "stateful",
+    "min_tier": "human",
+    "problem_statement": "An observer pattern implementation notifies removed observers because the unsubscribe method appends instead of removing.",
+    "original_code": "class EventBus:\n    def __init__(self):\n        self.subscribers = {}\n\n    def subscribe(self, event: str, handler):\n        self.subscribers.setdefault(event, []).append(handler)\n\n    def unsubscribe(self, event: str, handler):\n        if event in self.subscribers:\n            self.subscribers[event].append(handler)\n\n    def emit(self, event: str, *args):\n        for handler in self.subscribers.get(event, []):\n            handler(*args)\n",
+    "reference_solution": "class EventBus:\n    def __init__(self):\n        self.subscribers = {}\n\n    def subscribe(self, event: str, handler):\n        self.subscribers.setdefault(event, []).append(handler)\n\n    def unsubscribe(self, event: str, handler):\n        if event in self.subscribers:\n            try:\n                self.subscribers[event].remove(handler)\n            except ValueError:\n                pass\n\n    def emit(self, event: str, *args):\n        for handler in self.subscribers.get(event, []):\n            handler(*args)\n",
+    "tests": [
+      {
+        "name": "test_bus_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "log = []\nbus = EventBus()\nbus.subscribe('click', lambda x: log.append(x))\nbus.emit('click', 42)\nassert log == [42]"
+          }
+        ]
+      },
+      {
+        "name": "test_bus_unsub",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "log = []\nbus = EventBus()\nh = lambda x: log.append(x)\nbus.subscribe('e', h)\nbus.unsubscribe('e', h)\nbus.emit('e', 1)\nassert log == []"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T092",
+    "difficulty": "hard",
+    "domain": "parsing",
+    "defect_type": "wrong_logic",
+    "structure": "single_function",
+    "reasoning_type": "algorithmic",
+    "min_tier": "human",
+    "problem_statement": "A balanced parentheses checker returns True for strings with mismatched bracket types.",
+    "original_code": "def is_balanced(s: str) -> bool:\n    stack = []\n    for ch in s:\n        if ch in '([{':\n            stack.append(ch)\n        elif ch in ')]}':\n            if not stack:\n                return False\n            stack.pop()  # не проверяет совпадение типа скобки\n    return len(stack) == 0\n",
+    "reference_solution": "def is_balanced(s: str) -> bool:\n    stack = []\n    matching = {')': '(', ']': '[', '}': '{'}\n    for ch in s:\n        if ch in '([{':\n            stack.append(ch)\n        elif ch in ')]}':\n            if not stack or stack[-1] != matching[ch]:\n                return False\n            stack.pop()\n    return len(stack) == 0\n",
+    "tests": [
+      {
+        "name": "test_bal_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert is_balanced('({[]})') is True"
+          },
+          {
+            "custom": true,
+            "code": "assert is_balanced('({)}') is False"
+          }
+        ]
+      },
+      {
+        "name": "test_bal_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert is_balanced('') is True"
+          },
+          {
+            "custom": true,
+            "code": "assert is_balanced('[') is False"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T093",
+    "difficulty": "hard",
+    "domain": "algorithms",
+    "defect_type": "wrong_logic",
+    "structure": "single_function",
+    "reasoning_type": "algorithmic",
+    "min_tier": "human",
+    "problem_statement": "A recursive quicksort implementation never terminates on lists containing duplicate elements.",
+    "original_code": "def quicksort(arr: list) -> list:\n    if len(arr) <= 1:\n        return arr\n    pivot = arr[len(arr) // 2]\n    left = [x for x in arr if x < pivot]\n    right = [x for x in arr if x > pivot]\n    return quicksort(left) + [pivot] + quicksort(right)\n",
+    "reference_solution": "def quicksort(arr: list) -> list:\n    if len(arr) <= 1:\n        return arr\n    pivot = arr[len(arr) // 2]\n    left = [x for x in arr if x < pivot]\n    mid = [x for x in arr if x == pivot]\n    right = [x for x in arr if x > pivot]\n    return quicksort(left) + mid + quicksort(right)\n",
+    "tests": [
+      {
+        "name": "test_qs_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert quicksort([3,1,4,1,5,9,2,6]) == [1,1,2,3,4,5,6,9]"
+          }
+        ]
+      },
+      {
+        "name": "test_qs_dups",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert quicksort([2,2,2]) == [2,2,2]"
+          },
+          {
+            "custom": true,
+            "code": "assert quicksort([]) == []"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T094",
+    "difficulty": "hard",
+    "domain": "data_structures",
+    "defect_type": "wrong_logic",
+    "structure": "class",
+    "reasoning_type": "stateful",
+    "min_tier": "human",
+    "problem_statement": "A doubly-linked list's delete method leaves dangling pointers after removing a node from the middle.",
+    "original_code": "class Node:\n    def __init__(self, val):\n        self.val = val\n        self.prev = None\n        self.next = None\n\nclass DoublyLinkedList:\n    def __init__(self):\n        self.head = None\n        self.tail = None\n\n    def append(self, val):\n        node = Node(val)\n        if not self.head:\n            self.head = self.tail = node\n        else:\n            node.prev = self.tail\n            self.tail.next = node\n            self.tail = node\n\n    def delete(self, val):\n        cur = self.head\n        while cur:\n            if cur.val == val:\n                if cur.prev:\n                    cur.prev.next = cur.next\n                else:\n                    self.head = cur.next\n                # не обновляет cur.next.prev\n                return\n            cur = cur.next\n\n    def to_list(self):\n        result = []\n        cur = self.head\n        while cur:\n            result.append(cur.val)\n            cur = cur.next\n        return result\n",
+    "reference_solution": "class Node:\n    def __init__(self, val):\n        self.val = val\n        self.prev = None\n        self.next = None\n\nclass DoublyLinkedList:\n    def __init__(self):\n        self.head = None\n        self.tail = None\n\n    def append(self, val):\n        node = Node(val)\n        if not self.head:\n            self.head = self.tail = node\n        else:\n            node.prev = self.tail\n            self.tail.next = node\n            self.tail = node\n\n    def delete(self, val):\n        cur = self.head\n        while cur:\n            if cur.val == val:\n                if cur.prev:\n                    cur.prev.next = cur.next\n                else:\n                    self.head = cur.next\n                if cur.next:\n                    cur.next.prev = cur.prev\n                else:\n                    self.tail = cur.prev\n                return\n            cur = cur.next\n\n    def to_list(self):\n        result = []\n        cur = self.head\n        while cur:\n            result.append(cur.val)\n            cur = cur.next\n        return result\n",
+    "tests": [
+      {
+        "name": "test_dll_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "dll = DoublyLinkedList(); dll.append(1); dll.append(2); dll.append(3); dll.delete(2); assert dll.to_list() == [1,3]"
+          }
+        ]
+      },
+      {
+        "name": "test_dll_reverse",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "dll = DoublyLinkedList(); dll.append(1); dll.append(2); dll.append(3); dll.delete(2); cur = dll.tail\nresult=[]\nwhile cur: result.append(cur.val); cur=cur.prev\nassert result == [3,1]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T095",
+    "difficulty": "hard",
+    "domain": "algorithms",
+    "defect_type": "wrong_logic",
+    "structure": "single_function",
+    "reasoning_type": "algorithmic",
+    "min_tier": "human",
+    "problem_statement": "A function solving the 0/1 knapsack problem returns sub-optimal capacity usage because items are always added.",
+    "original_code": "def knapsack(weights: list, values: list, capacity: int) -> int:\n    n = len(weights)\n    dp = [[0] * (capacity + 1) for _ in range(n + 1)]\n    for i in range(1, n + 1):\n        for w in range(capacity + 1):\n            dp[i][w] = dp[i-1][w]\n            if weights[i-1] <= w:\n                dp[i][w] = dp[i-1][w-weights[i-1]] + values[i-1]  # не берёт max\n    return dp[n][capacity]\n",
+    "reference_solution": "def knapsack(weights: list, values: list, capacity: int) -> int:\n    n = len(weights)\n    dp = [[0] * (capacity + 1) for _ in range(n + 1)]\n    for i in range(1, n + 1):\n        for w in range(capacity + 1):\n            dp[i][w] = dp[i-1][w]\n            if weights[i-1] <= w:\n                dp[i][w] = max(dp[i-1][w], dp[i-1][w-weights[i-1]] + values[i-1])\n    return dp[n][capacity]\n",
+    "tests": [
+      {
+        "name": "test_ks_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert knapsack([1,3,4,5],[1,4,5,7],7) == 9"
+          }
+        ]
+      },
+      {
+        "name": "test_ks_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert knapsack([],[],10) == 0"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T096",
+    "difficulty": "hard",
+    "domain": "oop",
+    "defect_type": "state_mutation",
+    "structure": "class",
+    "reasoning_type": "stateful",
+    "min_tier": "human",
+    "problem_statement": "A command-pattern invoker executes commands but cannot undo them because the history stack is never updated.",
+    "original_code": "class CommandInvoker:\n    def __init__(self):\n        self.history = []\n\n    def execute(self, command):\n        command.execute()\n\n    def undo(self):\n        if self.history:\n            self.history.pop().undo()\n",
+    "reference_solution": "class CommandInvoker:\n    def __init__(self):\n        self.history = []\n\n    def execute(self, command):\n        command.execute()\n        self.history.append(command)\n\n    def undo(self):\n        if self.history:\n            self.history.pop().undo()\n",
+    "tests": [
+      {
+        "name": "test_invoker_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "log=[]\nclass Cmd:\n    def execute(self): log.append('do')\n    def undo(self): log.append('undo')\ninv=CommandInvoker(); inv.execute(Cmd()); inv.undo(); assert log==['do','undo']"
+          }
+        ]
+      },
+      {
+        "name": "test_invoker_empty",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "inv=CommandInvoker(); inv.undo()  # should not raise"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T097",
+    "difficulty": "hard",
+    "domain": "parsing",
+    "defect_type": "wrong_logic",
+    "structure": "single_function",
+    "reasoning_type": "algorithmic",
+    "min_tier": "human",
+    "problem_statement": "A recursive descent expression evaluator ignores operator precedence, treating addition as higher priority than multiplication.",
+    "original_code": "def evaluate(expr: str) -> int:\n    tokens = expr.split()\n    pos = [0]\n\n    def parse_primary():\n        tok = tokens[pos[0]]; pos[0] += 1\n        return int(tok)\n\n    def parse_mult():\n        left = parse_primary()\n        while pos[0] < len(tokens) and tokens[pos[0]] in ('+', '-'):\n            op = tokens[pos[0]]; pos[0] += 1\n            right = parse_primary()\n            left = (left + right) if op == '+' else (left - right)\n        return left\n\n    def parse_add():\n        left = parse_mult()\n        while pos[0] < len(tokens) and tokens[pos[0]] in ('*', '/'):\n            op = tokens[pos[0]]; pos[0] += 1\n            right = parse_mult()\n            left = (left * right) if op == '*' else (left // right)\n        return left\n\n    return parse_add()\n",
+    "reference_solution": "def evaluate(expr: str) -> int:\n    tokens = expr.split()\n    pos = [0]\n\n    def parse_primary():\n        tok = tokens[pos[0]]; pos[0] += 1\n        return int(tok)\n\n    def parse_mult():\n        left = parse_primary()\n        while pos[0] < len(tokens) and tokens[pos[0]] in ('*', '/'):\n            op = tokens[pos[0]]; pos[0] += 1\n            right = parse_primary()\n            left = (left * right) if op == '*' else (left // right)\n        return left\n\n    def parse_add():\n        left = parse_mult()\n        while pos[0] < len(tokens) and tokens[pos[0]] in ('+', '-'):\n            op = tokens[pos[0]]; pos[0] += 1\n            right = parse_mult()\n            left = (left + right) if op == '+' else (left - right)\n        return left\n\n    return parse_add()\n",
+    "tests": [
+      {
+        "name": "test_eval_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert evaluate('2 + 3 * 4') == 14"
+          },
+          {
+            "custom": true,
+            "code": "assert evaluate('10 - 2 * 3') == 4"
+          }
+        ]
+      },
+      {
+        "name": "test_eval_simple",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert evaluate('5 * 6') == 30"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T098",
+    "difficulty": "hard",
+    "domain": "data_structures",
+    "defect_type": "wrong_logic",
+    "structure": "class",
+    "reasoning_type": "stateful",
+    "min_tier": "human",
+    "problem_statement": "A binary search tree's in-order traversal returns elements in the wrong order because left and right subtrees are swapped.",
+    "original_code": "class BST:\n    def __init__(self, val=None):\n        self.val = val\n        self.left = None\n        self.right = None\n\n    def insert(self, val):\n        if self.val is None:\n            self.val = val\n        elif val < self.val:\n            if self.left:\n                self.left.insert(val)\n            else:\n                self.left = BST(val)\n        else:\n            if self.right:\n                self.right.insert(val)\n            else:\n                self.right = BST(val)\n\n    def inorder(self):\n        result = []\n        if self.right:  # right перед left\n            result += self.right.inorder()\n        if self.val is not None:\n            result.append(self.val)\n        if self.left:  # left после val\n            result += self.left.inorder()\n        return result\n",
+    "reference_solution": "class BST:\n    def __init__(self, val=None):\n        self.val = val\n        self.left = None\n        self.right = None\n\n    def insert(self, val):\n        if self.val is None:\n            self.val = val\n        elif val < self.val:\n            if self.left:\n                self.left.insert(val)\n            else:\n                self.left = BST(val)\n        else:\n            if self.right:\n                self.right.insert(val)\n            else:\n                self.right = BST(val)\n\n    def inorder(self):\n        result = []\n        if self.left:\n            result += self.left.inorder()\n        if self.val is not None:\n            result.append(self.val)\n        if self.right:\n            result += self.right.inorder()\n        return result\n",
+    "tests": [
+      {
+        "name": "test_bst_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "t = BST(); [t.insert(x) for x in [5,3,7,1,4]]; assert t.inorder() == [1,3,4,5,7]"
+          }
+        ]
+      },
+      {
+        "name": "test_bst_single",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "t = BST(10); assert t.inorder() == [10]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T099",
+    "difficulty": "hard",
+    "domain": "algorithms",
+    "defect_type": "wrong_logic",
+    "structure": "multiple_functions",
+    "reasoning_type": "algorithmic",
+    "min_tier": "human",
+    "problem_statement": "A union-find data structure's find operation does not apply path compression, causing O(n) lookup on degenerate trees.",
+    "original_code": "class UnionFind:\n    def __init__(self, n: int):\n        self.parent = list(range(n))\n        self.rank = [0] * n\n\n    def find(self, x: int) -> int:\n        if self.parent[x] != x:\n            return self.find(self.parent[x])  # нет path compression\n        return x\n\n    def union(self, x: int, y: int):\n        px, py = self.find(x), self.find(y)\n        if px == py:\n            return\n        if self.rank[px] < self.rank[py]:\n            px, py = py, px\n        self.parent[py] = px\n        if self.rank[px] == self.rank[py]:\n            self.rank[px] += 1\n\n    def connected(self, x: int, y: int) -> bool:\n        return self.find(x) == self.find(y)\n",
+    "reference_solution": "class UnionFind:\n    def __init__(self, n: int):\n        self.parent = list(range(n))\n        self.rank = [0] * n\n\n    def find(self, x: int) -> int:\n        if self.parent[x] != x:\n            self.parent[x] = self.find(self.parent[x])\n        return self.parent[x]\n\n    def union(self, x: int, y: int):\n        px, py = self.find(x), self.find(y)\n        if px == py:\n            return\n        if self.rank[px] < self.rank[py]:\n            px, py = py, px\n        self.parent[py] = px\n        if self.rank[px] == self.rank[py]:\n            self.rank[px] += 1\n\n    def connected(self, x: int, y: int) -> bool:\n        return self.find(x) == self.find(y)\n",
+    "tests": [
+      {
+        "name": "test_uf_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "uf = UnionFind(5); uf.union(0,1); uf.union(1,2); assert uf.connected(0,2) is True"
+          }
+        ]
+      },
+      {
+        "name": "test_uf_path",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "uf = UnionFind(5); uf.union(0,1); uf.union(1,2); uf.union(2,3); uf.find(3); assert uf.parent[3] == uf.find(3)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T100",
+    "difficulty": "hard",
+    "domain": "oop",
+    "defect_type": "wrong_logic",
+    "structure": "class",
+    "reasoning_type": "stateful",
+    "min_tier": "human",
+    "problem_statement": "A lazy-evaluation proxy class re-computes the cached value on every access instead of caching it once.",
+    "original_code": "class Lazy:\n    def __init__(self, factory):\n        self._factory = factory\n        self._value = None\n        self._computed = False\n\n    @property\n    def value(self):\n        if not self._computed:  # проверяет, но никогда не ставит флаг\n            self._value = self._factory()\n        return self._value\n",
+    "reference_solution": "class Lazy:\n    def __init__(self, factory):\n        self._factory = factory\n        self._value = None\n        self._computed = False\n\n    @property\n    def value(self):\n        if not self._computed:\n            self._value = self._factory()\n            self._computed = True\n        return self._value\n",
+    "tests": [
+      {
+        "name": "test_lazy_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "calls=[0]\ndef f(): calls[0]+=1; return 42\nl=Lazy(f); assert l.value==42; l.value; assert calls[0]==1"
+          }
+        ]
+      },
+      {
+        "name": "test_lazy_result",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "l = Lazy(lambda: 'hello'); assert l.value == 'hello'"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T101",
+    "difficulty": "hard",
+    "domain": "algorithms",
+    "defect_type": "wrong_logic",
+    "structure": "single_function",
+    "reasoning_type": "algorithmic",
+    "min_tier": "human",
+    "problem_statement": "A function finding strongly connected components using Kosaraju's algorithm returns incorrect groupings because the second DFS uses the original graph instead of its transpose.",
+    "original_code": "from collections import defaultdict\n\ndef kosaraju(graph: dict) -> list:\n    visited = set()\n    order = []\n\n    def dfs1(v):\n        visited.add(v)\n        for u in graph.get(v, []):\n            if u not in visited:\n                dfs1(u)\n        order.append(v)\n\n    for v in list(graph):\n        if v not in visited:\n            dfs1(v)\n\n    components = []\n    visited2 = set()\n\n    def dfs2(v, comp):\n        visited2.add(v)\n        comp.append(v)\n        for u in graph.get(v, []):  # должен использовать транспонированный граф\n            if u not in visited2:\n                dfs2(u, comp)\n\n    for v in reversed(order):\n        if v not in visited2:\n            comp = []\n            dfs2(v, comp)\n            components.append(comp)\n\n    return components\n",
+    "reference_solution": "from collections import defaultdict\n\ndef kosaraju(graph: dict) -> list:\n    visited = set()\n    order = []\n\n    def dfs1(v):\n        visited.add(v)\n        for u in graph.get(v, []):\n            if u not in visited:\n                dfs1(u)\n        order.append(v)\n\n    for v in list(graph):\n        if v not in visited:\n            dfs1(v)\n\n    transpose = defaultdict(list)\n    for v in graph:\n        for u in graph[v]:\n            transpose[u].append(v)\n\n    components = []\n    visited2 = set()\n\n    def dfs2(v, comp):\n        visited2.add(v)\n        comp.append(v)\n        for u in transpose[v]:\n            if u not in visited2:\n                dfs2(u, comp)\n\n    for v in reversed(order):\n        if v not in visited2:\n            comp = []\n            dfs2(v, comp)\n            components.append(comp)\n\n    return components\n",
+    "tests": [
+      {
+        "name": "test_kos_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "g={'A':['B'],'B':['C'],'C':['A'],'D':['C']}\ncomps=kosaraju(g)\nflat=[set(c) for c in comps]\nassert {'A','B','C'} in flat and {'D'} in flat"
+          }
+        ]
+      },
+      {
+        "name": "test_kos_no_cycle",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "g={'X':['Y'],'Y':['Z'],'Z':[]}\ncomps=kosaraju(g)\nassert len(comps)==3"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T102",
+    "difficulty": "hard",
+    "domain": "parsing",
+    "defect_type": "wrong_logic",
+    "structure": "single_function",
+    "reasoning_type": "algorithmic",
+    "min_tier": "human",
+    "problem_statement": "A function evaluating arithmetic expressions in Reverse Polish Notation returns wrong results because subtraction operands are applied in reversed order.",
+    "original_code": "def eval_rpn(tokens: list) -> int:\n    stack = []\n    for tok in tokens:\n        if tok in ('+', '-', '*', '/'):\n            b, a = stack.pop(), stack.pop()\n            if tok == '+':\n                stack.append(a + b)\n            elif tok == '-':\n                stack.append(b - a)  # reversed order\n            elif tok == '*':\n                stack.append(a * b)\n            elif tok == '/':\n                stack.append(int(b / a))  # reversed order\n        else:\n            stack.append(int(tok))\n    return stack[0]\n",
+    "reference_solution": "def eval_rpn(tokens: list) -> int:\n    stack = []\n    for tok in tokens:\n        if tok in ('+', '-', '*', '/'):\n            b, a = stack.pop(), stack.pop()\n            if tok == '+':\n                stack.append(a + b)\n            elif tok == '-':\n                stack.append(a - b)\n            elif tok == '*':\n                stack.append(a * b)\n            elif tok == '/':\n                stack.append(int(a / b))\n        else:\n            stack.append(int(tok))\n    return stack[0]\n",
+    "tests": [
+      {
+        "name": "test_rpn_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert eval_rpn(['2','1','+','3','*']) == 9"
+          },
+          {
+            "custom": true,
+            "code": "assert eval_rpn(['4','13','5','/','+']) == 6"
+          }
+        ]
+      },
+      {
+        "name": "test_rpn_sub",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert eval_rpn(['10','3','-']) == 7"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T103",
+    "difficulty": "hard",
+    "domain": "numeric",
+    "defect_type": "wrong_logic",
+    "structure": "single_function",
+    "reasoning_type": "algorithmic",
+    "min_tier": "human",
+    "problem_statement": "A function computing the greatest common divisor using the Euclidean algorithm enters an infinite loop for certain inputs.",
+    "original_code": "def gcd(a: int, b: int) -> int:\n    while b:\n        a, b = b, a % b\n    return b  # должно возвращать a\n",
+    "reference_solution": "def gcd(a: int, b: int) -> int:\n    while b:\n        a, b = b, a % b\n    return a\n",
+    "tests": [
+      {
+        "name": "test_gcd_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert gcd(48, 18) == 6"
+          },
+          {
+            "custom": true,
+            "code": "assert gcd(100, 75) == 25"
+          }
+        ]
+      },
+      {
+        "name": "test_gcd_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert gcd(7, 0) == 7"
+          },
+          {
+            "custom": true,
+            "code": "assert gcd(0, 5) == 5"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T104",
+    "difficulty": "hard",
+    "domain": "data_structures",
+    "defect_type": "wrong_logic",
+    "structure": "class",
+    "reasoning_type": "stateful",
+    "min_tier": "human",
+    "problem_statement": "A segment tree's update operation updates the leaf but propagates the change to the wrong parent.",
+    "original_code": "class SegTree:\n    def __init__(self, nums: list):\n        self.n = len(nums)\n        self.tree = [0] * (2 * self.n)\n        for i, v in enumerate(nums):\n            self.tree[self.n + i] = v\n        for i in range(self.n - 1, 0, -1):\n            self.tree[i] = self.tree[2*i] + self.tree[2*i+1]\n\n    def update(self, idx: int, val: int):\n        pos = idx + self.n\n        self.tree[pos] = val\n        while pos > 1:\n            pos //= 2  # нет обновления родителя перед подъёмом\n            self.tree[pos] = self.tree[2*pos] + self.tree[2*pos+1]\n\n    def query(self, l: int, r: int) -> int:\n        res = 0\n        l += self.n; r += self.n + 1\n        while l < r:\n            if l & 1:\n                res += self.tree[l]; l += 1\n            if r & 1:\n                r -= 1; res += self.tree[r]\n            l >>= 1; r >>= 1\n        return res\n",
+    "reference_solution": "class SegTree:\n    def __init__(self, nums: list):\n        self.n = len(nums)\n        self.tree = [0] * (2 * self.n)\n        for i, v in enumerate(nums):\n            self.tree[self.n + i] = v\n        for i in range(self.n - 1, 0, -1):\n            self.tree[i] = self.tree[2*i] + self.tree[2*i+1]\n\n    def update(self, idx: int, val: int):\n        pos = idx + self.n\n        self.tree[pos] = val\n        pos //= 2\n        while pos >= 1:\n            self.tree[pos] = self.tree[2*pos] + self.tree[2*pos+1]\n            pos //= 2\n\n    def query(self, l: int, r: int) -> int:\n        res = 0\n        l += self.n; r += self.n + 1\n        while l < r:\n            if l & 1:\n                res += self.tree[l]; l += 1\n            if r & 1:\n                r -= 1; res += self.tree[r]\n            l >>= 1; r >>= 1\n        return res\n",
+    "tests": [
+      {
+        "name": "test_seg_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "st = SegTree([1,2,3,4,5]); assert st.query(0,4) == 15"
+          }
+        ]
+      },
+      {
+        "name": "test_seg_update",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "st = SegTree([1,2,3,4,5]); st.update(2,10); assert st.query(0,4) == 22"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T105",
+    "difficulty": "hard",
+    "domain": "algorithms",
+    "defect_type": "missing_sort",
+    "structure": "single_function",
+    "reasoning_type": "algorithmic",
+    "min_tier": "human",
+    "problem_statement": "A function computing the minimum number of meeting rooms required fails for unsorted input.",
+    "original_code": "import heapq\ndef min_meeting_rooms(intervals: list) -> int:\n    if not intervals:\n        return 0\n    heap = []\n    for start, end in intervals:  # не сортирует\n        if heap and heap[0] <= start:\n            heapq.heapreplace(heap, end)\n        else:\n            heapq.heappush(heap, end)\n    return len(heap)\n",
+    "reference_solution": "import heapq\ndef min_meeting_rooms(intervals: list) -> int:\n    if not intervals:\n        return 0\n    intervals.sort(key=lambda x: x[0])\n    heap = []\n    for start, end in intervals:\n        if heap and heap[0] <= start:\n            heapq.heapreplace(heap, end)\n        else:\n            heapq.heappush(heap, end)\n    return len(heap)\n",
+    "tests": [
+      {
+        "name": "test_rooms_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert min_meeting_rooms([[0,30],[5,10],[15,20]]) == 2"
+          }
+        ]
+      },
+      {
+        "name": "test_rooms_unsorted",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert min_meeting_rooms([[15,20],[0,30],[5,10]]) == 2"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T106",
+    "difficulty": "hard",
+    "domain": "oop",
+    "defect_type": "wrong_logic",
+    "structure": "class",
+    "reasoning_type": "stateful",
+    "min_tier": "human",
+    "problem_statement": "A decorator class that memoizes function calls stores results under the wrong key when the function receives multiple arguments.",
+    "original_code": "class Memoize:\n    def __init__(self, fn):\n        self.fn = fn\n        self.cache = {}\n\n    def __call__(self, *args):\n        key = args[0]  # использует только первый аргумент как ключ\n        if key not in self.cache:\n            self.cache[key] = self.fn(*args)\n        return self.cache[key]\n",
+    "reference_solution": "class Memoize:\n    def __init__(self, fn):\n        self.fn = fn\n        self.cache = {}\n\n    def __call__(self, *args):\n        key = args\n        if key not in self.cache:\n            self.cache[key] = self.fn(*args)\n        return self.cache[key]\n",
+    "tests": [
+      {
+        "name": "test_memo_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "calls=[0]\n@Memoize\ndef f(a,b): calls[0]+=1; return a+b\nassert f(1,2)==3; f(1,2); assert calls[0]==1"
+          }
+        ]
+      },
+      {
+        "name": "test_memo_diff_args",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "@Memoize\ndef g(a,b): return a*b\nassert g(2,3)==6; assert g(2,4)==8"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T107",
+    "difficulty": "hard",
+    "domain": "data_structures",
+    "defect_type": "wrong_condition",
+    "structure": "class",
+    "reasoning_type": "stateful",
+    "min_tier": "human",
+    "problem_statement": "A priority queue removes the highest-priority element instead of the lowest when using a min-heap.",
+    "original_code": "import heapq\n\nclass PriorityQueue:\n    def __init__(self):\n        self.heap = []\n\n    def push(self, item, priority: int):\n        heapq.heappush(self.heap, (-priority, item))  # знак инвертирован\n\n    def pop(self):\n        if not self.heap:\n            raise IndexError('pop from empty queue')\n        return heapq.heappop(self.heap)[1]\n\n    def peek(self):\n        return self.heap[0][1]\n",
+    "reference_solution": "import heapq\n\nclass PriorityQueue:\n    def __init__(self):\n        self.heap = []\n\n    def push(self, item, priority: int):\n        heapq.heappush(self.heap, (priority, item))\n\n    def pop(self):\n        if not self.heap:\n            raise IndexError('pop from empty queue')\n        return heapq.heappop(self.heap)[1]\n\n    def peek(self):\n        return self.heap[0][1]\n",
+    "tests": [
+      {
+        "name": "test_pq_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "pq = PriorityQueue(); pq.push('low', 10); pq.push('high', 1); assert pq.pop() == 'high'"
+          }
+        ]
+      },
+      {
+        "name": "test_pq_order",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "pq = PriorityQueue(); pq.push('a',3); pq.push('b',1); pq.push('c',2); assert [pq.pop() for _ in range(3)] == ['b','c','a']"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T108",
+    "difficulty": "hard",
+    "domain": "algorithms",
+    "defect_type": "wrong_logic",
+    "structure": "single_function",
+    "reasoning_type": "algorithmic",
+    "min_tier": "human",
+    "problem_statement": "A function detecting if a linked list has a cycle using Floyd's algorithm always returns False.",
+    "original_code": "class ListNode:\n    def __init__(self, val=0, next=None):\n        self.val = val\n        self.next = next\n\ndef has_cycle(head) -> bool:\n    slow = head\n    fast = head\n    while fast and fast.next:\n        slow = slow.next\n        fast = fast.next.next\n        if slow is fast:  # условие верно, но сравниваем до первого шага\n            return False  # возвращает неверный результат\n    return True\n",
+    "reference_solution": "class ListNode:\n    def __init__(self, val=0, next=None):\n        self.val = val\n        self.next = next\n\ndef has_cycle(head) -> bool:\n    slow = head\n    fast = head\n    while fast and fast.next:\n        slow = slow.next\n        fast = fast.next.next\n        if slow is fast:\n            return True\n    return False\n",
+    "tests": [
+      {
+        "name": "test_cycle_has",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "a=ListNode(1); b=ListNode(2); c=ListNode(3); a.next=b; b.next=c; c.next=b\nassert has_cycle(a) is True"
+          }
+        ]
+      },
+      {
+        "name": "test_cycle_no",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "a=ListNode(1); b=ListNode(2); a.next=b\nassert has_cycle(a) is False"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T109",
+    "difficulty": "hard",
+    "domain": "parsing",
+    "defect_type": "wrong_logic",
+    "structure": "single_function",
+    "reasoning_type": "algorithmic",
+    "min_tier": "human",
+    "problem_statement": "A JSON-like expression parser returns incorrect results for nested structures containing arrays.",
+    "original_code": "def parse_list(s: str) -> list:\n    s = s.strip()\n    if not (s.startswith('[') and s.endswith(']')):\n        raise ValueError('Not a list')\n    inner = s[1:-1].strip()\n    if not inner:\n        return []\n    result = []\n    depth = 0\n    current = ''\n    for ch in inner:\n        if ch == '[': depth += 1\n        elif ch == ']': depth -= 1\n        if ch == ',' and depth == 0:\n            result.append(current.strip())\n            current = ''\n        else:\n            current += ch\n    result.append(current.strip())\n    return result\n\ndef parse_value(s: str):\n    s = s.strip()\n    if s.startswith('['):\n        return parse_list(s)\n    try:\n        return int(s)\n    except ValueError:\n        return s\n",
+    "reference_solution": "def parse_list(s: str) -> list:\n    s = s.strip()\n    if not (s.startswith('[') and s.endswith(']')):\n        raise ValueError('Not a list')\n    inner = s[1:-1].strip()\n    if not inner:\n        return []\n    result = []\n    depth = 0\n    current = ''\n    for ch in inner:\n        if ch == '[': depth += 1\n        elif ch == ']': depth -= 1\n        if ch == ',' and depth == 0:\n            result.append(parse_value(current.strip()))\n            current = ''\n        else:\n            current += ch\n    result.append(parse_value(current.strip()))\n    return result\n\ndef parse_value(s: str):\n    s = s.strip()\n    if s.startswith('['):\n        return parse_list(s)\n    try:\n        return int(s)\n    except ValueError:\n        return s\n",
+    "tests": [
+      {
+        "name": "test_parse_flat",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert parse_list('[1,2,3]') == [1,2,3]"
+          }
+        ]
+      },
+      {
+        "name": "test_parse_nested",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert parse_list('[[1,2],3]') == [[1,2],3]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T110",
+    "difficulty": "hard",
+    "domain": "oop",
+    "defect_type": "state_mutation",
+    "structure": "class",
+    "reasoning_type": "stateful",
+    "min_tier": "human",
+    "problem_statement": "An observable list class notifies listeners with stale data — the notification fires before the state is updated.",
+    "original_code": "class ObservableList:\n    def __init__(self):\n        self._data = []\n        self._listeners = []\n\n    def subscribe(self, fn):\n        self._listeners.append(fn)\n\n    def append(self, item):\n        for fn in self._listeners:  # notifies BEFORE appending\n            fn(self._data)\n        self._data.append(item)\n\n    def __len__(self):\n        return len(self._data)\n\n    def __getitem__(self, idx):\n        return self._data[idx]\n",
+    "reference_solution": "class ObservableList:\n    def __init__(self):\n        self._data = []\n        self._listeners = []\n\n    def subscribe(self, fn):\n        self._listeners.append(fn)\n\n    def append(self, item):\n        self._data.append(item)\n        for fn in self._listeners:\n            fn(self._data)\n\n    def __len__(self):\n        return len(self._data)\n\n    def __getitem__(self, idx):\n        return self._data[idx]\n",
+    "tests": [
+      {
+        "name": "test_observable_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "received = []\nol = ObservableList()\nol.subscribe(lambda d: received.append(list(d)))\nol.append(1)\nol.append(2)\nassert received == [[1], [1, 2]], received"
+          }
+        ]
+      },
+      {
+        "name": "test_observable_len",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "ol = ObservableList()\nol.append(42)\nassert len(ol) == 1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T111",
+    "difficulty": "hard",
+    "domain": "dicts",
+    "defect_type": "wrong_logic",
+    "structure": "single_function",
+    "reasoning_type": "algorithmic",
+    "min_tier": "human",
+    "problem_statement": "A function that groups anagrams together produces incorrect groupings — some anagrams end up in separate groups.",
+    "original_code": "def group_anagrams(words: list) -> list:\n    groups = {}\n    for word in words:\n        key = word\n        if key not in groups:\n            groups[key] = []\n        groups[key].append(word)\n    return list(groups.values())\n",
+    "reference_solution": "def group_anagrams(words: list) -> list:\n    groups = {}\n    for word in words:\n        key = ''.join(sorted(word))\n        if key not in groups:\n            groups[key] = []\n        groups[key].append(word)\n    return list(groups.values())\n",
+    "tests": [
+      {
+        "name": "test_anagram_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "result = group_anagrams(['eat','tea','tan','ate','nat','bat'])\nresult_sets = [sorted(g) for g in sorted(result, key=lambda x: sorted(x))]\nassert sorted(result_sets) == sorted([['ate','eat','tea'],['bat'],['nat','tan']])"
+          }
+        ]
+      },
+      {
+        "name": "test_anagram_single",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert group_anagrams(['abc']) == [['abc']]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T112",
+    "difficulty": "hard",
+    "domain": "data_structures",
+    "defect_type": "wrong_condition",
+    "structure": "class",
+    "reasoning_type": "stateful",
+    "min_tier": "human",
+    "problem_statement": "A min-heap implementation returns incorrect results — the minimum element is not always at the root after insertion.",
+    "original_code": "class MinHeap:\n    def __init__(self):\n        self.heap = []\n\n    def push(self, val):\n        self.heap.append(val)\n        self._sift_up(len(self.heap) - 1)\n\n    def pop(self):\n        if not self.heap:\n            raise IndexError('pop from empty heap')\n        self.heap[0], self.heap[-1] = self.heap[-1], self.heap[0]\n        val = self.heap.pop()\n        self._sift_down(0)\n        return val\n\n    def _sift_up(self, i):\n        while i > 0:\n            parent = (i - 1) // 2\n            if self.heap[parent] > self.heap[i]:  # correct\n                self.heap[parent], self.heap[i] = self.heap[i], self.heap[parent]\n                i = parent\n            else:\n                break\n\n    def _sift_down(self, i):\n        n = len(self.heap)\n        while True:\n            smallest = i\n            left = 2 * i + 1\n            right = 2 * i + 2\n            if left < n and self.heap[left] < self.heap[smallest]:\n                smallest = left\n            if right < n and self.heap[right] < self.heap[right]:\n                smallest = right\n            if smallest == i:\n                break\n            self.heap[i], self.heap[smallest] = self.heap[smallest], self.heap[i]\n            i = smallest\n",
+    "reference_solution": "class MinHeap:\n    def __init__(self):\n        self.heap = []\n\n    def push(self, val):\n        self.heap.append(val)\n        self._sift_up(len(self.heap) - 1)\n\n    def pop(self):\n        if not self.heap:\n            raise IndexError('pop from empty heap')\n        self.heap[0], self.heap[-1] = self.heap[-1], self.heap[0]\n        val = self.heap.pop()\n        self._sift_down(0)\n        return val\n\n    def _sift_up(self, i):\n        while i > 0:\n            parent = (i - 1) // 2\n            if self.heap[parent] > self.heap[i]:\n                self.heap[parent], self.heap[i] = self.heap[i], self.heap[parent]\n                i = parent\n            else:\n                break\n\n    def _sift_down(self, i):\n        n = len(self.heap)\n        while True:\n            smallest = i\n            left = 2 * i + 1\n            right = 2 * i + 2\n            if left < n and self.heap[left] < self.heap[smallest]:\n                smallest = left\n            if right < n and self.heap[right] < self.heap[smallest]:\n                smallest = right\n            if smallest == i:\n                break\n            self.heap[i], self.heap[smallest] = self.heap[smallest], self.heap[i]\n            i = smallest\n",
+    "tests": [
+      {
+        "name": "test_heap_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "h = MinHeap()\nfor v in [5,3,8,1,2]: h.push(v)\nassert h.pop() == 1\nassert h.pop() == 2"
+          }
+        ]
+      },
+      {
+        "name": "test_heap_order",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "import heapq, random\nh = MinHeap()\nvals = [4,7,2,9,1,6,3]\nfor v in vals: h.push(v)\nresult = [h.pop() for _ in range(len(vals))]\nassert result == sorted(vals), result"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T113",
+    "difficulty": "hard",
+    "domain": "oop",
+    "defect_type": "wrong_logic",
+    "structure": "class",
+    "reasoning_type": "stateful",
+    "min_tier": "human",
+    "problem_statement": "A publish-subscribe event bus delivers messages to unsubscribed handlers after they have been removed.",
+    "original_code": "class EventBus:\n    def __init__(self):\n        self._handlers = {}\n\n    def subscribe(self, event: str, handler):\n        if event not in self._handlers:\n            self._handlers[event] = []\n        self._handlers[event].append(handler)\n\n    def unsubscribe(self, event: str, handler):\n        if event in self._handlers:\n            self._handlers[event].remove(handler)\n\n    def publish(self, event: str, data):\n        handlers = self._handlers.get(event, [])\n        for h in handlers:\n            h(data)\n            self.unsubscribe(event, h)\n",
+    "reference_solution": "class EventBus:\n    def __init__(self):\n        self._handlers = {}\n\n    def subscribe(self, event: str, handler):\n        if event not in self._handlers:\n            self._handlers[event] = []\n        self._handlers[event].append(handler)\n\n    def unsubscribe(self, event: str, handler):\n        if event in self._handlers:\n            self._handlers[event].remove(handler)\n\n    def publish(self, event: str, data):\n        handlers = list(self._handlers.get(event, []))\n        for h in handlers:\n            h(data)\n",
+    "tests": [
+      {
+        "name": "test_bus_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "log = []\nbus = EventBus()\nbus.subscribe('click', lambda d: log.append(d))\nbus.publish('click', 1)\nbus.publish('click', 2)\nassert log == [1, 2], log"
+          }
+        ]
+      },
+      {
+        "name": "test_bus_unsub",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "log = []\nbus = EventBus()\nfn = lambda d: log.append(d)\nbus.subscribe('ev', fn)\nbus.publish('ev', 'a')\nbus.unsubscribe('ev', fn)\nbus.publish('ev', 'b')\nassert log == ['a'], log"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T114",
+    "difficulty": "hard",
+    "domain": "parsing",
+    "defect_type": "boundary_case",
+    "structure": "single_function",
+    "reasoning_type": "algorithmic",
+    "min_tier": "human",
+    "problem_statement": "A Roman numeral converter produces wrong output for numbers involving subtractive notation like 4 and 9.",
+    "original_code": "def int_to_roman(num: int) -> str:\n    vals = [1000,900,500,400,100,90,50,40,10,9,5,4,1]\n    syms = ['M','CM','D','CD','C','XC','L','XL','X','IX','V','IV','I']\n    result = ''\n    for i, v in enumerate(vals):\n        while num >= v:\n            result += syms[i]\n            num -= v\n    return result\n\ndef roman_to_int(s: str) -> int:\n    roman = {'I':1,'V':5,'X':10,'L':50,'C':100,'D':500,'M':1000}\n    total = 0\n    for i in range(len(s)):\n        total += roman[s[i]]\n    return total\n",
+    "reference_solution": "def int_to_roman(num: int) -> str:\n    vals = [1000,900,500,400,100,90,50,40,10,9,5,4,1]\n    syms = ['M','CM','D','CD','C','XC','L','XL','X','IX','V','IV','I']\n    result = ''\n    for i, v in enumerate(vals):\n        while num >= v:\n            result += syms[i]\n            num -= v\n    return result\n\ndef roman_to_int(s: str) -> int:\n    roman = {'I':1,'V':5,'X':10,'L':50,'C':100,'D':500,'M':1000}\n    total = 0\n    for i in range(len(s)):\n        if i + 1 < len(s) and roman[s[i]] < roman[s[i+1]]:\n            total -= roman[s[i]]\n        else:\n            total += roman[s[i]]\n    return total\n",
+    "tests": [
+      {
+        "name": "test_roman_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert roman_to_int('III') == 3"
+          },
+          {
+            "custom": true,
+            "code": "assert roman_to_int('IV') == 4"
+          },
+          {
+            "custom": true,
+            "code": "assert roman_to_int('IX') == 9"
+          }
+        ]
+      },
+      {
+        "name": "test_roman_complex",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert roman_to_int('MCMXCIV') == 1994"
+          },
+          {
+            "custom": true,
+            "code": "assert roman_to_int('LVIII') == 58"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T115",
+    "difficulty": "hard",
+    "domain": "oop",
+    "defect_type": "wrong_logic",
+    "structure": "class",
+    "reasoning_type": "stateful",
+    "min_tier": "human",
+    "problem_statement": "A simple stack-based calculator gives wrong results for expressions with mixed operators due to operator precedence being ignored.",
+    "original_code": "class RPNCalculator:\n    def __init__(self):\n        self.stack = []\n\n    def push(self, val: float):\n        self.stack.append(val)\n\n    def apply(self, op: str) -> float:\n        if len(self.stack) < 2:\n            raise ValueError('Not enough operands')\n        b = self.stack.pop()\n        a = self.stack.pop()\n        if op == '+': result = a + b\n        elif op == '-': result = b - a  # reversed\n        elif op == '*': result = a * b\n        elif op == '/': result = b / a  # reversed\n        else: raise ValueError(f'Unknown op: {op}')\n        self.stack.append(result)\n        return result\n",
+    "reference_solution": "class RPNCalculator:\n    def __init__(self):\n        self.stack = []\n\n    def push(self, val: float):\n        self.stack.append(val)\n\n    def apply(self, op: str) -> float:\n        if len(self.stack) < 2:\n            raise ValueError('Not enough operands')\n        b = self.stack.pop()\n        a = self.stack.pop()\n        if op == '+': result = a + b\n        elif op == '-': result = a - b\n        elif op == '*': result = a * b\n        elif op == '/': result = a / b\n        else: raise ValueError(f'Unknown op: {op}')\n        self.stack.append(result)\n        return result\n",
+    "tests": [
+      {
+        "name": "test_rpn_sub",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "c = RPNCalculator()\nc.push(10); c.push(3)\nassert c.apply('-') == 7"
+          }
+        ]
+      },
+      {
+        "name": "test_rpn_div",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "c = RPNCalculator()\nc.push(10); c.push(2)\nassert c.apply('/') == 5.0"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T116",
+    "difficulty": "hard",
+    "domain": "dicts",
+    "defect_type": "missing_update",
+    "structure": "multiple_functions",
+    "reasoning_type": "multi_step",
+    "min_tier": "human",
+    "problem_statement": "A word frequency counter returns incorrect counts when the input contains repeated words across multiple calls.",
+    "original_code": "class WordCounter:\n    def __init__(self):\n        self.counts = {}\n\n    def add_text(self, text: str):\n        words = text.lower().split()\n        new_counts = {}\n        for word in words:\n            new_counts[word] = new_counts.get(word, 0) + 1\n        self.counts = new_counts\n\n    def top_n(self, n: int) -> list:\n        return sorted(self.counts, key=self.counts.get, reverse=True)[:n]\n",
+    "reference_solution": "class WordCounter:\n    def __init__(self):\n        self.counts = {}\n\n    def add_text(self, text: str):\n        words = text.lower().split()\n        for word in words:\n            self.counts[word] = self.counts.get(word, 0) + 1\n\n    def top_n(self, n: int) -> list:\n        return sorted(self.counts, key=self.counts.get, reverse=True)[:n]\n",
+    "tests": [
+      {
+        "name": "test_wc_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "wc = WordCounter()\nwc.add_text('the cat sat')\nwc.add_text('the cat')\nassert wc.counts.get('the') == 2\nassert wc.counts.get('cat') == 2"
+          }
+        ]
+      },
+      {
+        "name": "test_wc_top",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "wc = WordCounter()\nwc.add_text('a b a c a b')\nassert wc.top_n(1) == ['a']"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T117",
+    "difficulty": "hard",
+    "domain": "data_structures",
+    "defect_type": "wrong_logic",
+    "structure": "class",
+    "reasoning_type": "stateful",
+    "min_tier": "human",
+    "problem_statement": "A trie data structure incorrectly reports words as present when only a prefix of the word was inserted.",
+    "original_code": "class Trie:\n    def __init__(self):\n        self.children = {}\n        self.is_end = False\n\n    def insert(self, word: str):\n        node = self\n        for ch in word:\n            if ch not in node.children:\n                node.children[ch] = Trie()\n            node = node.children[ch]\n        node.is_end = True\n\n    def search(self, word: str) -> bool:\n        node = self\n        for ch in word:\n            if ch not in node.children:\n                return False\n            node = node.children[ch]\n        return True\n\n    def starts_with(self, prefix: str) -> bool:\n        node = self\n        for ch in prefix:\n            if ch not in node.children:\n                return False\n            node = node.children[ch]\n        return True\n",
+    "reference_solution": "class Trie:\n    def __init__(self):\n        self.children = {}\n        self.is_end = False\n\n    def insert(self, word: str):\n        node = self\n        for ch in word:\n            if ch not in node.children:\n                node.children[ch] = Trie()\n            node = node.children[ch]\n        node.is_end = True\n\n    def search(self, word: str) -> bool:\n        node = self\n        for ch in word:\n            if ch not in node.children:\n                return False\n            node = node.children[ch]\n        return node.is_end\n\n    def starts_with(self, prefix: str) -> bool:\n        node = self\n        for ch in prefix:\n            if ch not in node.children:\n                return False\n            node = node.children[ch]\n        return True\n",
+    "tests": [
+      {
+        "name": "test_trie_search",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "t = Trie()\nt.insert('apple')\nassert t.search('apple') is True\nassert t.search('app') is False"
+          }
+        ]
+      },
+      {
+        "name": "test_trie_prefix",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "t = Trie()\nt.insert('hello')\nassert t.starts_with('hel') is True\nassert t.search('hel') is False"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T118",
+    "difficulty": "hard",
+    "domain": "parsing",
+    "defect_type": "wrong_condition",
+    "structure": "single_function",
+    "reasoning_type": "algorithmic",
+    "min_tier": "human",
+    "problem_statement": "A balanced parentheses checker incorrectly validates strings with mismatched bracket types.",
+    "original_code": "def is_balanced(s: str) -> bool:\n    stack = []\n    open_chars = '([{'\n    close_chars = ')]}'\n    pairs = {')': '(', ']': '[', '}': '{'}\n    for ch in s:\n        if ch in open_chars:\n            stack.append(ch)\n        elif ch in close_chars:\n            if not stack:\n                return False\n            top = stack.pop()\n            if top != pairs[ch]:  # correct check\n                return False\n    return len(stack) == 0\n",
+    "reference_solution": "def is_balanced(s: str) -> bool:\n    stack = []\n    pairs = {')': '(', ']': '[', '}': '{'}\n    for ch in s:\n        if ch in '([{':\n            stack.append(ch)\n        elif ch in ')]}':\n            if not stack or stack[-1] != pairs[ch]:\n                return False\n            stack.pop()\n    return len(stack) == 0\n",
+    "tests": [
+      {
+        "name": "test_balanced_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert is_balanced('()[]{}') is True"
+          },
+          {
+            "custom": true,
+            "code": "assert is_balanced('([)]') is False"
+          },
+          {
+            "custom": true,
+            "code": "assert is_balanced('{[]}') is True"
+          }
+        ]
+      },
+      {
+        "name": "test_balanced_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert is_balanced('') is True"
+          },
+          {
+            "custom": true,
+            "code": "assert is_balanced('(') is False"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T119",
+    "difficulty": "hard",
+    "domain": "oop",
+    "defect_type": "exception_handling",
+    "structure": "class",
+    "reasoning_type": "stateful",
+    "min_tier": "human",
+    "problem_statement": "A connection pool silently swallows exceptions that occur during resource acquisition, returning None instead of raising.",
+    "original_code": "import threading\n\nclass ConnectionPool:\n    def __init__(self, factory, size: int):\n        self._pool = [factory() for _ in range(size)]\n        self._lock = threading.Lock()\n\n    def acquire(self):\n        with self._lock:\n            try:\n                return self._pool.pop()\n            except IndexError:\n                return None\n\n    def release(self, conn):\n        with self._lock:\n            self._pool.append(conn)\n",
+    "reference_solution": "import threading\n\nclass ConnectionPool:\n    def __init__(self, factory, size: int):\n        self._pool = [factory() for _ in range(size)]\n        self._lock = threading.Lock()\n\n    def acquire(self):\n        with self._lock:\n            if not self._pool:\n                raise RuntimeError('No connections available')\n            return self._pool.pop()\n\n    def release(self, conn):\n        with self._lock:\n            self._pool.append(conn)\n",
+    "tests": [
+      {
+        "name": "test_pool_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "pool = ConnectionPool(lambda: object(), 2)\nc1 = pool.acquire()\nc2 = pool.acquire()\nassert c1 is not None\nassert c2 is not None"
+          }
+        ]
+      },
+      {
+        "name": "test_pool_exhausted",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "pool = ConnectionPool(lambda: object(), 1)\npool.acquire()\ntry:\n    pool.acquire()\n    assert False, 'Should have raised'\nexcept RuntimeError:\n    pass"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "instance_id": "T120",
+    "difficulty": "hard",
+    "domain": "algorithms",
+    "defect_type": "wrong_logic",
+    "structure": "single_function",
+    "reasoning_type": "algorithmic",
+    "min_tier": "human",
+    "problem_statement": "A function computing the longest common subsequence length returns incorrect values for certain string pairs.",
+    "original_code": "def lcs_length(s1: str, s2: str) -> int:\n    m, n = len(s1), len(s2)\n    dp = [[0] * (n + 1) for _ in range(m + 1)]\n    for i in range(1, m + 1):\n        for j in range(1, n + 1):\n            if s1[i-1] == s2[j-1]:\n                dp[i][j] = dp[i-1][j-1] + 1\n            else:\n                dp[i][j] = min(dp[i-1][j], dp[i][j-1])\n    return dp[m][n]\n",
+    "reference_solution": "def lcs_length(s1: str, s2: str) -> int:\n    m, n = len(s1), len(s2)\n    dp = [[0] * (n + 1) for _ in range(m + 1)]\n    for i in range(1, m + 1):\n        for j in range(1, n + 1):\n            if s1[i-1] == s2[j-1]:\n                dp[i][j] = dp[i-1][j-1] + 1\n            else:\n                dp[i][j] = max(dp[i-1][j], dp[i][j-1])\n    return dp[m][n]\n",
+    "tests": [
+      {
+        "name": "test_lcs_basic",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert lcs_length('abcde', 'ace') == 3"
+          },
+          {
+            "custom": true,
+            "code": "assert lcs_length('abc', 'abc') == 3"
+          },
+          {
+            "custom": true,
+            "code": "assert lcs_length('abc', 'def') == 0"
+          }
+        ]
+      },
+      {
+        "name": "test_lcs_edge",
+        "assertions": [
+          {
+            "custom": true,
+            "code": "assert lcs_length('', 'abc') == 0"
+          },
+          {
+            "custom": true,
+            "code": "assert lcs_length('abcba', 'abcbcba') == 5"
           }
         ]
       }

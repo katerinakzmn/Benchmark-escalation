@@ -1,0 +1,26 @@
+backend: polza
+dataset: toy
+seed: 42
+
+policy:
+  name: retry_then_escalate
+  max_weak_attempts: 2
+  max_strong_attempts: 1
+  confidence_threshold: 0.50
+
+budget:
+  max_total_iterations: 5
+  max_cost_per_task: 15.0
+  max_total_cost: 500.0
+
+costs:
+  weak_call: 1
+  strong_call: 3
+  human_call: 10
+  review_call: 1
+  test_run: 0.5
+
+models:
+  weak:   openai/gpt-4o-mini
+  strong: openai/gpt-4o
+  human:  openai/gpt-4o

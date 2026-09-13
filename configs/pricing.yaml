@@ -1,0 +1,44 @@
+pricing_date: "2026-09-09"
+
+currency: "rub"
+
+models:
+  # Polza.ai
+  "openai/gpt-4o-mini":
+    input_per_million: 18.19     # ₽ / 1М
+    output_per_million: 72.78
+    currency: rub
+
+  "openai/gpt-4o":
+    input_per_million: 303.24    # ₽ / 1М
+    output_per_million: 1212.96
+    currency: rub
+
+  # Альтернативные модели на Polza.ai
+  "deepseek/deepseek-chat":
+    input_per_million: 9.05
+    output_per_million: 27.16
+    currency: rub
+
+  "google/gemini-2.0-flash":
+    input_per_million: 9.05
+    output_per_million: 36.19
+    currency: rub
+
+  # OpenAI
+  "gpt-4o-mini":
+    input_per_million: 0.15      # USD / 1М
+    output_per_million: 0.60
+    cached_input_per_million: 0.075
+    currency: usd
+
+  "gpt-4o":
+    input_per_million: 2.50      # USD / 1М
+    output_per_million: 10.00
+    cached_input_per_million: 1.25
+    currency: usd
+
+  weak:
+    alias: "openai/gpt-4o-mini"
+  strong:
+    alias: "openai/gpt-4o"

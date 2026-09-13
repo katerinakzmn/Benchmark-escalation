@@ -146,10 +146,13 @@ Core benchmark metrics include:
 
 - `solved_rate`
 - `final_pass_rate`
-- `total_iterations`
+- `cost_to_green`
+- `time_to_green`
+- `num_iterations`
 - `num_test_runs`
 - `escalation_to_strong_rate`
-- `escalation_to_human_rate`
+- `human_escalation_rate`
+- `policy_regret`
 
 These metrics make it possible to evaluate both result quality and the efficiency of the decision strategy itself.
 

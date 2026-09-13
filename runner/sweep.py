@@ -1,143 +1,179 @@
 """
-runner/sweep.py - run all policies and write reports/baselines.md
+sweep.py  запускает все политики подряд и сохраняет сводную таблицу сравнения.
 
-Пример:
+  # Mock sweep (без API, для проверки логики):
   python -m runner.sweep --backend mock
-  python -m runner.sweep --backend mock --tasks T001 T002 T003
+
+  # Реальный sweep:
+  python -m runner.sweep --backend openai --config configs/real_openai.yaml
+
+  # Pilot: только 20 первых задач, 6 политик:
+  python -m runner.sweep --backend openai --config configs/real_openai.yaml --max-tasks 20
+
+  # Только основные политики без sanity-checks:
+  python -m runner.sweep --backend openai --policies fixed_weak fixed_strong retry_then_escalate
 """
+
 import argparse
 import json
 import os
 import sys
+import yaml
 from datetime import datetime
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from tasks import load_tasks
-from backends import get_backend
-from policies.policies import get_policy
-from evaluation.metrics import compute_summary
+from runner.run_benchmark import run_benchmark, load_config, _git_commit
 
-POLICIES = [
+_ALL_POLICIES = [
     "fixed_weak",
     "fixed_strong",
     "retry_then_escalate",
-    "progress_heuristic",
     "confidence_threshold",
+    "progress_heuristic",
     "human_fallback",
-    "random",
+    "cascade_debate",
     "oracle",
 ]
 
-DEFAULT_BUDGET = {"max_total_iterations": 7}
-DEFAULT_COSTS  = {"weak_call": 1, "strong_call": 3,
-                  "review_call": 1, "test_run": 0.5, "human_call": 10}
-DEFAULT_POLICY_CFG = {
-    "max_weak_attempts": 2,
-    "max_strong_attempts": 1,
-    "confidence_threshold": 0.30,
-    "zero_progress_limit": 2,
-    "seed": 42,
-}
-
-
-def run_sweep(backend_name: str, task_ids: list = None) -> dict:
-    all_tasks = load_tasks()
-    if task_ids:
-        all_tasks = [t for t in all_tasks if t.task_id in task_ids]
-
-    backend = get_backend(backend_name)
-    results = {}
-
-    for policy_name in POLICIES:
-        print(f"  [{policy_name}] ...", end=" ", flush=True)
-        policy = get_policy(policy_name, DEFAULT_POLICY_CFG)
-        metrics_list = []
-
-        for task in all_tasks:
-            result = policy.run_task(task, backend, DEFAULT_BUDGET, DEFAULT_COSTS)
-            metrics_list.append(result["metrics"])
-
-        summary = compute_summary(metrics_list)
-        results[policy_name] = summary
-        solved = summary["solved_count"]
-        total  = summary["total_tasks"]
-        print(f"solved {solved}/{total}  cost={summary['avg_cost']:.1f}")
-
-    return results
-
-
-def build_report(results: dict, backend_name: str) -> str:
-    date = datetime.now().strftime("%Y-%m-%d %H:%M")
-    lines = [
-        "# Baseline Policy Comparison\n",
-        f"**Date:** {date}  ",
-        f"**Backend:** `{backend_name}`  ",
-        f"**Tasks:** {next(iter(results.values()))['total_tasks']}\n",
-        "## Results\n",
-        "| Policy | Solved | Solved% | Avg Cost | Avg Iters | Escal to Strong | Escal to Human |",
-        "|--------|--------|---------|----------|-----------|-------------|------------|",
-    ]
-
-    for policy_name, s in results.items():
-        solved_pct = f"{s['solved_rate']*100:.0f}%"
-        lines.append(
-            f"| `{policy_name}` "
-            f"| {s['solved_count']}/{s['total_tasks']} "
-            f"| {solved_pct} "
-            f"| {s['avg_cost']:.1f} "
-            f"| {s['avg_iterations']:.1f} "
-            f"| {s['escalation_to_strong_rate']*100:.0f}% "
-            f"| {s['escalation_to_human_rate']*100:.0f}% |"
-        )
-
-    # breakdown по сложности для лучшей политики
-    best = max(results, key=lambda k: results[k]["solved_rate"])
-    lines += [
-        f"\n## Best Policy: `{best}`\n",
-        "| Difficulty | Count | Solved | Solved% | Avg Cost | Avg Iters |",
-        "|------------|-------|--------|---------|----------|-----------|",
-    ]
-    for diff, bd in results[best].get("by_difficulty", {}).items():
-        lines.append(
-            f"| {diff} | {bd['count']} | {bd['solved']} "
-            f"| {bd['solved_rate']*100:.0f}% "
-            f"| {bd['avg_cost']:.1f} | {bd['avg_iters']:.1f} |"
-        )
-
-    return "\n".join(lines)
-
 
 def main():
-    parser = argparse.ArgumentParser(description="Sweep all policies")
-    parser.add_argument("--backend", choices=["mock", "openai", "gemini"],
-                        default="mock")
-    parser.add_argument("--tasks", nargs="+",
-                        help="Ограничить задачи, напр. --tasks T001 T002")
+    parser = argparse.ArgumentParser(description="Sweep all escalation policies")
+    parser.add_argument("--backend",    choices=["mock", "openai", "gemini", "polza"], default="mock")
+    parser.add_argument("--config",     default="configs/default.yaml")
+    parser.add_argument("--policies",   nargs="+", choices=_ALL_POLICIES,
+                        default=_ALL_POLICIES,
+                        help="Список политик для прогона (по умолчанию — все 8)")
+    parser.add_argument("--tasks",      nargs="+",
+                        help="Запустить только указанные задачи")
+    parser.add_argument("--max-tasks",  type=int, default=None,
+                        help="Ограничить число задач (pilot mode)")
+    parser.add_argument("--difficulty", choices=["easy", "medium", "hard"],
+                        help="Фильтровать задачи по сложности")
     args = parser.parse_args()
 
-    print(f"\n{'='*50}")
-    print(f"  Sweep: {len(POLICIES)} policies, backend={args.backend}")
-    print(f"{'='*50}\n")
+    config = load_config(args.config)
+    sweep_id = datetime.now().strftime("%Y%m%d_%H%M%S")
+    sweep_dir = os.path.join("runs", f"sweep_{sweep_id}")
+    os.makedirs(sweep_dir, exist_ok=True)
 
-    results = run_sweep(args.backend, args.tasks)
+    print(f"\n{'='*60}")
+    print(f"  SWEEP: {len(args.policies)} policies")
+    print(f"  Backend: {args.backend}")
+    print(f"  Sweep dir: {sweep_dir}")
+    if args.max_tasks:
+        print(f"  [PILOT] max-tasks: {args.max_tasks}")
+    print(f"{'='*60}\n")
 
-    # сохраняем reports/
-    os.makedirs("reports", exist_ok=True)
+    all_summaries = {}
 
-    report_md = build_report(results, args.backend)
-    report_path = os.path.join("reports", "baselines.md")
-    with open(report_path, "w", encoding="utf-8") as f:
-        f.write(report_md)
+    for policy_name in args.policies:
+        print(f"\n{'─'*55}")
+        print(f"  Policy: {policy_name}")
+        print(f"{'─'*55}")
 
-    results_path = os.path.join("reports", "baselines.json")
-    with open(results_path, "w", encoding="utf-8") as f:
-        json.dump(results, f, indent=2, ensure_ascii=False)
+        # Формируем args для run_benchmark
+        sub_args = argparse.Namespace(
+            dataset=None,
+            backend=args.backend,
+            policy=policy_name,
+            config=args.config,
+            tasks=args.tasks,
+            difficulty=args.difficulty,
+        )
+        sub_config = dict(config)
+        sub_config["policy"] = {**config.get("policy", {}), "name": policy_name}
 
-    print(f"\n{'='*50}")
-    print(f"  Report: {report_path}")
-    print(f"  JSON  : {results_path}")
-    print(f"{'='*50}\n")
+        # Ограничиваем задачи для pilot mode
+        if args.max_tasks:
+            from tasks import load_tasks
+            limited = [t.instance_id for t in load_tasks()[:args.max_tasks]]
+            sub_args.tasks = args.tasks or limited
+
+        try:
+            summary = run_benchmark(sub_args, sub_config)
+            all_summaries[policy_name] = summary
+        except Exception as e:
+            print(f"[ERROR] Policy {policy_name} failed: {e}")
+            all_summaries[policy_name] = {"error": str(e)}
+
+    print(f"\n{'='*60}")
+    print("  COMPARATIVE TABLE OF POLICIES")
+    print(f"{'='*60}")
+
+    _print_comparison_table(all_summaries, backend=args.backend)
+
+    # Save
+    comparison_path = os.path.join(sweep_dir, "comparison.json")
+    with open(comparison_path, "w", encoding="utf-8") as f:
+        json.dump({
+            "sweep_id": sweep_id,
+            "git_commit": _git_commit(),
+            "backend": args.backend,
+            "timestamp": datetime.now().isoformat(),
+            "policies": args.policies,
+            "summaries": all_summaries,
+        }, f, indent=2, ensure_ascii=False)
+
+    # Markdown-таблица
+    _write_comparison_md(all_summaries, sweep_dir, args.backend, sweep_id)
+
+    print(f"\n  Results of sweep saved in: {sweep_dir}/")
+    print(f"    - comparison.json")
+    print(f"    - comparison.md")
+
+
+def _print_comparison_table(summaries: dict, backend: str = ""):
+    cur = "₽" if backend == "polza" else "$"
+    hdr_cost = f"AvgCost{cur}"
+    header = f"{'Policy':<25} {'Solved%':>8} {hdr_cost:>10} {'Utility':>9} {'StrongEsc%':>11} {'HumanEsc%':>10}"
+    print(header)
+    print("─" * len(header))
+
+    for policy, s in summaries.items():
+        if "error" in s:
+            print(f"  {policy:<23} ERROR: {s['error'][:40]}")
+            continue
+        solved_pct  = s.get("solved_rate", 0) * 100
+        avg_cost    = s.get("avg_cost_usd", 0.0)
+        utility     = s.get("utility", 0.0)
+        strong_pct  = s.get("escalation_to_strong_rate", 0) * 100
+        human_pct   = s.get("escalation_to_human_rate", 0) * 100
+        print(f"  {policy:<23} {solved_pct:>7.1f}% {avg_cost:>9.4f}{cur} {utility:>9.4f} "
+              f"{strong_pct:>10.1f}% {human_pct:>9.1f}%")
+
+
+def _write_comparison_md(summaries: dict, sweep_dir: str, backend: str, sweep_id: str):
+    lines = [
+        "# Comparing of escalation policies\n",
+        f"**Sweep:** `{sweep_id}`  ",
+        f"**Backend:** `{backend}`  ",
+        f"**Date:** {datetime.now().strftime('%Y-%m-%d %H:%M')}  ",
+        f"**Git:** `{_git_commit()}`\n",
+        "## Main table\n",
+        "| Policy | Solve rate | Avg cost (USD) | Median cost | Avg iter | Strong esc % | Human esc % | Utility |",
+        "|--------|-----------|----------------|-------------|----------|-------------|------------|---------|",
+    ]
+
+    for policy, s in summaries.items():
+        if "error" in s:
+            lines.append(f"| {policy} | ERROR | — | — | — | — | — | — |")
+            continue
+        cur = "₽" if backend == "polza" else "$"
+        lines.append(
+            f"| {policy} "
+            f"| {s.get('solved_rate',0):.1%} "
+            f"| {cur}{s.get('avg_cost_usd',0.0):.4f} "
+            f"| {cur}{s.get('median_cost_usd', s.get('avg_cost_usd',0.0)):.4f} "
+            f"| {s.get('avg_iterations',0.0):.2f} "
+            f"| {s.get('escalation_to_strong_rate',0):.1%} "
+            f"| {s.get('escalation_to_human_rate',0):.1%} "
+            f"| {s.get('utility',0.0):.4f} |"
+        )
+
+
+    with open(os.path.join(sweep_dir, "comparison.md"), "w", encoding="utf-8") as f:
+        f.write("\n".join(lines))
 
 
 if __name__ == "__main__":
