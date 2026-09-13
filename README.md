@@ -37,9 +37,8 @@ Most existing benchmarks focus on the quality of the final code or patch, but pa
 
 The project is designed for:
 
-- Comparing single-agent and multi-agent workflows.
 - Evaluating policy control, not only final outcomes.
-- Running reproducible toy tasks for fast experimentation.
+- Running reproducible tasks for fast experimentation.
 - Logging decision trajectories in a structured format suitable for later analysis.
 
 ***
@@ -48,7 +47,7 @@ The project is designed for:
 
 - Run the benchmark on a set of toy software engineering tasks.
 - Support multiple escalation policies.
-- Support multiple backends: `mock`, `openai`, and `gemini`.
+- Support multiple backends through polza.ai: `openai`,`gemini` etc.
 - Save trajectories in `state/action/next_state/reward/done` format.
 - Compute core benchmark metrics automatically.
 - Store run artifacts in separate `runs/` directories.
@@ -97,14 +96,13 @@ pip install -r requirements.txt
 
 ## Quick Start
 
-Run the benchmark with the mock backend:
+Run the benchmark with the llm backend:
 
 ```bash
 python -m runner.run_benchmark \
-  --dataset toy \
-  --backend mock \
+  --backend polza \
   --policy retry_then_escalate \
-  --config configs/default.yaml
+  --config configs/polza.yaml
 ```
 
 After execution, results are stored in a directory like this:
@@ -124,7 +122,6 @@ runs/run_YYYY_MM_DD_NNN/
 At the first stage, the benchmark uses toy tasks in JSON format. Each task contains:
 
 - `task_id`
-- `task_type`
 - `difficulty`
 - `problem_statement`
 - `original_code`
@@ -132,6 +129,11 @@ At the first stage, the benchmark uses toy tasks in JSON format. Each task conta
 - `tests`
 - `reference_solution`
 - `oracle_label`
+- `domain`
+- `defect_type`
+- `structure`
+- `reasoning_type`
+- `min_tier `
 
 The repository also contains an experimental `cases/TXXX/` layout with
 `issue.md`, `original_code.py`, `test_solution.py`, and `metadata.yaml`.
@@ -145,14 +147,16 @@ source used by the current runner.
 Core benchmark metrics include:
 
 - `solved_rate`
-- `final_pass_rate`
-- `cost_to_green`
-- `time_to_green`
-- `num_iterations`
-- `num_test_runs`
-- `escalation_to_strong_rate`
+- `avg_final_pass_rate`
+- `avg_cost`
+- `total_cost`
+- `avg_iterations`
+- `strong_escalation_rate`
 - `human_escalation_rate`
-- `policy_regret`
+- `by_difficulty`
+- `by_domain`
+- `by_defect_type`
+- `Utility`
 
 These metrics make it possible to evaluate both result quality and the efficiency of the decision strategy itself.
 
@@ -167,8 +171,6 @@ The benchmark is intended to compare the following baseline policies:
 - `retry_then_escalate`
 - `confidence_threshold`
 - `progress_heuristic`
-- `human_fallback`
-- `random`
 - `oracle`
 
 ***
@@ -198,8 +200,3 @@ The benchmark is intended to compare the following baseline policies:
 }
 ```
 
-***
-
-## Current Limitations
-
-The current version is a prototype and is still focused on toy tasks. Support for repository-level tasks, secure execution isolation, Docker-based evaluation, and integration with real bug benchmarks is considered the next stage of development.
