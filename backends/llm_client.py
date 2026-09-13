@@ -15,11 +15,13 @@ from dotenv import load_dotenv
 
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "../.env"))
 
-MODEL_WEAK   = "gpt-4o-mini"
-MODEL_STRONG = "gpt-4o"
-MODEL_REVIEW = "gpt-4o-mini"
+MODEL_WEAK   = os.getenv("LLM_WEAK_MODEL",   "openai/gpt-4o-mini")
+MODEL_STRONG = os.getenv("LLM_STRONG_MODEL", "openai/gpt-4o")
+MODEL_REVIEW = os.getenv("LLM_REVIEW_MODEL", "openai/gpt-4o-mini")
 
-_BACKEND = os.getenv("LLM_BACKEND", "openai").lower()
+# Провайдер: polza | openai | mock
+_BACKEND = os.getenv("LLM_BACKEND", "polza").lower()
+_POLZA_BASE_URL = "https://polza.ai/api/v1"
 
 _client = None
 
@@ -28,13 +30,21 @@ def get_client():
     global _client
     if _client is None:
         from openai import OpenAI
-        api_key = os.getenv("OPENAI_API_KEY")
-        if not api_key:
-            raise RuntimeError(
-                "OPENAI_API_KEY не найден.\n"
-                "Используй mock: LLM_BACKEND=mock python mas_runner.py"
-            )
-        _client = OpenAI(api_key=api_key)
+
+        if _BACKEND == "polza":
+            api_key = os.getenv("POLZA_API_KEY")
+            if not api_key:
+                raise RuntimeError(
+                    "POLZA_API_KEY не найден."
+                )
+            _client = OpenAI(base_url=_POLZA_BASE_URL, api_key=api_key)
+        else:
+            api_key = os.getenv("OPENAI_API_KEY")
+            if not api_key:
+                raise RuntimeError(
+                    "OPENAI_API_KEY не найден."
+                )
+            _client = OpenAI(api_key=api_key)
     return _client
 
 
@@ -99,7 +109,10 @@ def chat(
 ) -> str:
     backend = _BACKEND
 
-    if backend == "openai" and not os.getenv("OPENAI_API_KEY"):
+    if backend == "polza" and not os.getenv("POLZA_API_KEY"):
+        print("[llm_client] POLZA_API_KEY is missing; using mock backend")
+        backend = "mock"
+    elif backend == "openai" and not os.getenv("OPENAI_API_KEY"):
         print("[llm_client] OPENAI_API_KEY is missing; using mock backend")
         backend = "mock"
 

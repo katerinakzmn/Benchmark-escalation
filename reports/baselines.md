@@ -1,6 +1,6 @@
 # Baseline Policy Comparison
 
-**Date:** 2026-06-22 13:10  
+**Date:** 2026-06-26 11:28  
 **Backend:** `mock`  
 **Tasks:** 15
 
@@ -14,7 +14,7 @@
 | `progress_heuristic` | 14/15 | 93% | 13.5 | 4.4 | 80% | 47% |
 | `confidence_threshold` | 3/15 | 20% | 14.5 | 5.8 | 0% | 0% |
 | `human_fallback` | 14/15 | 93% | 9.2 | 2.3 | 80% | 47% |
-| `random` | 13/15 | 87% | 11.5 | 2.9 | 0% | 0% |
+| `random` | 13/15 | 87% | 9.8 | 2.6 | 67% | 40% |
 | `oracle` | 14/15 | 93% | 9.2 | 2.3 | 80% | 47% |
 
 ## Best Policy: `retry_then_escalate`
