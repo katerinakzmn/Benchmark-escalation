@@ -24,8 +24,8 @@ class BasePolicy:
     def run_task(self, task, backend, budget_cfg, costs_cfg) -> dict:
         raise NotImplementedError
 
-    def _base_metrics(self, task_id, difficulty):
-        return {
+    def _base_metrics(self, task_id: str, difficulty: str, task=None) -> dict:
+        m = {
             "task_id":             task_id,
             "difficulty":          difficulty,
             "solved":              False,
@@ -39,6 +39,13 @@ class BasePolicy:
             "total_output_tokens": 0,
             "status":              "test_failed",  # solved | test_failed | invalid_code | timeout | api_error
         }
+        if task is not None:
+            m["domain"]         = getattr(task, "domain",         "")
+            m["defect_type"]    = getattr(task, "defect_type",    "")
+            m["structure"]      = getattr(task, "structure",      "")
+            m["reasoning_type"] = getattr(task, "reasoning_type", "")
+            m["min_tier"]       = getattr(task, "min_tier",       "")
+        return m
 
     def _run_tests(self, task, code: str) -> dict:
         from environments.environment import Environment
@@ -52,11 +59,8 @@ class BasePolicy:
         }
 
     def _extract_generate_result(self, raw) -> tuple:
-        """
-        Извлекает (code, cost_usd, input_tokens, output_tokens, api_status)
-        из результата backend.generate().
-        """
         if isinstance(raw, str):
+            # Старый формат — просто код
             return raw, 0.0, 0, 0, "ok"
         if isinstance(raw, dict):
             code = raw.get("fixed_code", "")
@@ -68,9 +72,6 @@ class BasePolicy:
         return "", 0.0, 0, 0, "invalid_code"
 
     def _make_trace_record(self, task_id: str, steps: list, metrics: dict) -> dict:
-        """
-        done = эпизод завершён, solved = задача решена.
-        """
         for step in steps:
             step["episode_id"] = f"{task_id}_ep"
             step["task_id"] = task_id
@@ -89,10 +90,10 @@ class BasePolicy:
 
 
 class FixedWeakPolicy(BasePolicy):
-    # Всегда использует только weak модель.
+    """Всегда использует только weak модель."""
 
     def run_task(self, task, backend, budget_cfg, costs_cfg) -> dict:
-        metrics  = self._base_metrics(task.instance_id, task.difficulty)
+        metrics  = self._base_metrics(task.instance_id, task.difficulty, task=task)
         max_iter = budget_cfg.get("max_total_iterations", 7)
         max_cost = budget_cfg.get("max_cost_usd_per_task", float("inf"))
         steps    = []
@@ -146,10 +147,10 @@ class FixedWeakPolicy(BasePolicy):
 
 
 class FixedStrongPolicy(BasePolicy):
-    # Всегда использует только strong модель.
+    """Всегда использует только strong модель."""
 
     def run_task(self, task, backend, budget_cfg, costs_cfg) -> dict:
-        metrics = self._base_metrics(task.instance_id, task.difficulty)
+        metrics = self._base_metrics(task.instance_id, task.difficulty, task=task)
         metrics["escalated_to_strong"] = True
 
         raw = backend.generate(task.instance_id, "strong")
@@ -187,10 +188,10 @@ class FixedStrongPolicy(BasePolicy):
 
 
 class RetryThenEscalatePolicy(BasePolicy):
-    """weak N раз → strong M раз → human 1 раз."""
+    """weak N раз - strong M раз - human 1 раз"""
 
     def run_task(self, task, backend, budget_cfg, costs_cfg) -> dict:
-        metrics    = self._base_metrics(task.instance_id, task.difficulty)
+        metrics    = self._base_metrics(task.instance_id, task.difficulty, task=task)
         max_weak   = self.cfg.get("max_weak_attempts", 2)
         max_strong = self.cfg.get("max_strong_attempts", 1)
         max_cost   = budget_cfg.get("max_cost_usd_per_task", float("inf"))
@@ -274,7 +275,7 @@ class ProgressHeuristicPolicy(BasePolicy):
     """Эскалирует если pass_rate не растёт K итераций подряд."""
 
     def run_task(self, task, backend, budget_cfg, costs_cfg) -> dict:
-        metrics        = self._base_metrics(task.instance_id, task.difficulty)
+        metrics        = self._base_metrics(task.instance_id, task.difficulty, task=task)
         k              = self.cfg.get("zero_progress_limit", 2)
         max_iter       = budget_cfg.get("max_total_iterations", 7)
         max_cost       = budget_cfg.get("max_cost_usd_per_task", float("inf"))
@@ -355,10 +356,10 @@ class ProgressHeuristicPolicy(BasePolicy):
 
 
 class ConfidenceThresholdPolicy(BasePolicy):
-    """Эскалирует если confidence модели < порога (0.50 по умолчанию)."""
+    """Эскалирует если confidence модели < порога (0.50 по умолчанию)"""
 
     def run_task(self, task, backend, budget_cfg, costs_cfg) -> dict:
-        metrics    = self._base_metrics(task.instance_id, task.difficulty)
+        metrics    = self._base_metrics(task.instance_id, task.difficulty, task=task)
         threshold  = self.cfg.get("confidence_threshold", 0.50)
         max_iter   = budget_cfg.get("max_total_iterations", 7)
         max_cost   = budget_cfg.get("max_cost_usd_per_task", float("inf"))
@@ -377,7 +378,6 @@ class ConfidenceThresholdPolicy(BasePolicy):
                 metrics["status"] = "api_error"
                 break
 
-            # confidence — всегда в dict-ответе бэкенда (0.85 = уверен, 0.35 = неуверен)
             confidence = 0.5
             if isinstance(raw, dict):
                 confidence = raw.get("confidence") or 0.5
@@ -435,11 +435,12 @@ class ConfidenceThresholdPolicy(BasePolicy):
 
 
 class HumanFallbackPolicy(BasePolicy):
-    """Weak - Strong - Human. По одной попытке на tier."""
+    """Weak - Strong - Human. По одной попытке на tier"""
 
     def run_task(self, task, backend, budget_cfg, costs_cfg) -> dict:
         cfg    = {**self.cfg, "max_weak_attempts": 1, "max_strong_attempts": 1}
         result = RetryThenEscalatePolicy(cfg).run_task(task, backend, budget_cfg, costs_cfg)
+        # Подписываем своим именем
         result["trace_record"]["policy"] = self.__class__.__name__
         return result
 
@@ -449,7 +450,7 @@ class RandomPolicy(BasePolicy):
 
     def run_task(self, task, backend, budget_cfg, costs_cfg) -> dict:
         import random
-        metrics    = self._base_metrics(task.instance_id, task.difficulty)
+        metrics    = self._base_metrics(task.instance_id, task.difficulty, task=task)
         max_iter   = budget_cfg.get("max_total_iterations", 7)
         max_cost   = budget_cfg.get("max_cost_usd_per_task", float("inf"))
         tiers      = ["weak", "strong", "human"]
@@ -516,7 +517,7 @@ class OraclePolicy(BasePolicy):
     """Верхняя граница: использует первый tier, который решает задачу."""
 
     def run_task(self, task, backend, budget_cfg, costs_cfg) -> dict:
-        metrics    = self._base_metrics(task.instance_id, task.difficulty)
+        metrics    = self._base_metrics(task.instance_id, task.difficulty, task=task)
         steps      = []
         cost_score = 0.0
         cost_usd   = 0.0

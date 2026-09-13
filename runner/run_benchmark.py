@@ -62,7 +62,6 @@ def run_benchmark(args, config: dict):
     costs_cfg    = config.get("costs",  {"weak_call": 1, "strong_call": 3,
                                           "review_call": 1, "test_run": 0.5, "human_call": 10})
 
-    # загрузка задач
     all_tasks = load_tasks()
     if args.tasks:
         all_tasks = [t for t in all_tasks if t.instance_id in args.tasks]
@@ -70,7 +69,6 @@ def run_benchmark(args, config: dict):
         print("[ERROR] No tasks found. Check dataset/tasks.json or --tasks filter.")
         sys.exit(1)
 
-    # Фильтр по сложности
     if getattr(args, "difficulty", None):
         all_tasks = [t for t in all_tasks if t.difficulty == args.difficulty]
 
@@ -92,7 +90,7 @@ def run_benchmark(args, config: dict):
         print(f"  Max cost/task : {_cur}{_task_limit:.2f}")
     print(f"{'='*55}\n")
 
-    # --- experiment manifest ---
+    # experiment manifest
     manifest = {
         "timestamp":      datetime.now().isoformat(),
         "git_commit":     _git_commit(),
@@ -119,7 +117,6 @@ def run_benchmark(args, config: dict):
     with open(os.path.join(run_dir, "config.json"), "w", encoding="utf-8") as f:
         json.dump(manifest, f, indent=2, ensure_ascii=False)
 
-    # запуск задач
     all_traces  = []
     all_metrics = []
     total_cost_usd = 0.0
@@ -144,7 +141,6 @@ def run_benchmark(args, config: dict):
             print(f"\n[BUDGET] Достигнут лимит {_cur_b}{max_total:.2f}. Останавливаю прогон.")
             break
 
-    # метрики
     summary = compute_summary(all_metrics)
     summary["currency_symbol"] = "₽" if backend_name == "polza" else "$"
     print_summary(summary, policy_name=policy_name)
@@ -170,7 +166,6 @@ def run_benchmark(args, config: dict):
                 f"{m.get('utility',0.0):.4f}\n"
             )
 
-    # summary.md
     solved      = summary["solved_count"]
     total       = summary["total_tasks"]
     avg_iter    = summary["avg_iterations"]
@@ -223,11 +218,6 @@ def run_benchmark(args, config: dict):
         f.write("\n".join(summary_lines))
 
     print(f"\n  Artifacts saved in: {run_dir}/")
-    print(f"    - config.json / experiment_manifest.json")
-    print(f"    - traces.json")
-    print(f"    - metrics.json  (per_task + summary)")
-    print(f"    - results.csv")
-    print(f"    - summary.md")
     print(f"{'='*55}\n")
 
     return summary
@@ -239,11 +229,14 @@ def main():
     parser.add_argument("--backend",    choices=["mock", "openai", "gemini", "polza"])
     parser.add_argument("--policy",
                         choices=["fixed_weak", "fixed_strong",
-                                 "retry_then_escalate", "progress_heuristic",
-                                 "confidence_threshold", "human_fallback",
-                                 "random", "oracle"])
+                                 "retry_then_escalate", "confidence_threshold",
+                                 "progress_heuristic", "human_fallback",
+                                 "oracle"],
+                        # cascade_debate удалена из sweep; human_fallback доступна для ручного запуска
+                        help="Policy to run",
+                        )
     parser.add_argument("--config",     default="configs/default.yaml")
-    parser.add_argument("--tasks",      nargs="+", help="Run only several tasks (T001 T002 ...)")
+    parser.add_argument("--tasks",      nargs="+", help="Run omly several tasks (T001 T002 ...)")
     parser.add_argument("--difficulty", choices=["easy", "medium", "hard"],
                         help="Filter by difficulty")
     args = parser.parse_args()

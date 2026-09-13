@@ -31,8 +31,6 @@ _ALL_POLICIES = [
     "retry_then_escalate",
     "confidence_threshold",
     "progress_heuristic",
-    "human_fallback",
-    "cascade_debate",
     "oracle",
 ]
 
@@ -72,7 +70,6 @@ def main():
         print(f"  Policy: {policy_name}")
         print(f"{'─'*55}")
 
-        # Формируем args для run_benchmark
         sub_args = argparse.Namespace(
             dataset=None,
             backend=args.backend,
@@ -84,7 +81,6 @@ def main():
         sub_config = dict(config)
         sub_config["policy"] = {**config.get("policy", {}), "name": policy_name}
 
-        # Ограничиваем задачи для pilot mode
         if args.max_tasks:
             from tasks import load_tasks
             limited = [t.instance_id for t in load_tasks()[:args.max_tasks]]
@@ -98,12 +94,11 @@ def main():
             all_summaries[policy_name] = {"error": str(e)}
 
     print(f"\n{'='*60}")
-    print("  COMPARATIVE TABLE OF POLICIES")
+    print("  Comparison table of policies")
     print(f"{'='*60}")
 
     _print_comparison_table(all_summaries, backend=args.backend)
 
-    # Save
     comparison_path = os.path.join(sweep_dir, "comparison.json")
     with open(comparison_path, "w", encoding="utf-8") as f:
         json.dump({
@@ -115,12 +110,7 @@ def main():
             "summaries": all_summaries,
         }, f, indent=2, ensure_ascii=False)
 
-    # Markdown-таблица
     _write_comparison_md(all_summaries, sweep_dir, args.backend, sweep_id)
-
-    print(f"\n  Results of sweep saved in: {sweep_dir}/")
-    print(f"    - comparison.json")
-    print(f"    - comparison.md")
 
 
 def _print_comparison_table(summaries: dict, backend: str = ""):
@@ -145,7 +135,7 @@ def _print_comparison_table(summaries: dict, backend: str = ""):
 
 def _write_comparison_md(summaries: dict, sweep_dir: str, backend: str, sweep_id: str):
     lines = [
-        "# Comparing of escalation policies\n",
+        "# Comparison of policy escalation\n",
         f"**Sweep:** `{sweep_id}`  ",
         f"**Backend:** `{backend}`  ",
         f"**Date:** {datetime.now().strftime('%Y-%m-%d %H:%M')}  ",

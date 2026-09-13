@@ -1,120 +1,105 @@
 # Experiment Protocol: Real-LLM Evaluation of Escalation Policies
 
-## 1. Research question
+## Research Question
 
-Which escalation policy provides the best cost–quality trade-off for
-function- and module-level Python bug-fixing tasks when using real LLMs
-with two capability tiers?
+**Which escalation policy achieves the best quality/cost trade-off when using real LLMs on bug-fixing tasks?**
 
-## 2. Scope
+Sub-questions:
+- **RQ1** — Does the weak-to-strong solve_rate gap vary by defect type and difficulty?
+- **RQ2** — At what confidence threshold does the escalation policy match Oracle utility?
+- **RQ3** — What is the minimum strong-escalation rate to stay within 2 pp of FixedStrong?
 
-This study evaluates escalation decisions in a controlled benchmark
-environment. It does not claim to measure all software-engineering tasks
-or the general coding ability of a particular model.
+---
 
-The benchmark dataset contains original or derived-and-validated Python
-bug-fixing tasks. Each task has buggy code, a task description, unit tests,
-a validated reference solution, and metadata from a predefined taxonomy.
+## Winner Criterion
 
-## 3. Model tiers
+Fixed before the run. The preferred policy is the **cheapest policy whose solve_rate is no more than 2 pp below the maximum**:
 
-- Weak tier: OpenAI GPT-5 Mini
-- Strong tier: OpenAI GPT-5
-- Human tier: a simulated reliable fallback, reported separately and not
-  interpreted as real human-performance evidence.
+```
+S_max = max{ S(π) }
+Admissible = { π : S(π) ≥ S_max − 0.02 }
+π* = argmin{ C(π) : π ∈ Admissible }
+```
 
-The exact model identifiers, API date, and pricing snapshot are stored in
-the experiment manifest.
+Tie-break: lowest `avg_iterations`.
 
-## 4. Policies
+---
 
-Primary policies:
-- FixedWeak
-- FixedStrong
-- RetryThenEscalate
-- ConfidenceThreshold
-- ProgressHeuristic
-- HumanFallback
+## Models
 
-Reference policies:
-- Random
-- Oracle, only for mock-based validation and not as a real-LLM upper bound.
+| Tier   | Model          | In (per 1M tok) | Out (per 1M tok) | Role                        |
+|--------|----------------|-----------------|------------------|-----------------------------|
+| weak   | gpt-4o-mini    | $0.15           | $0.60            | Fast, cheap; handles Easy   |
+| strong | gpt-4o         | $2.50           | $10.00           | High quality; handles Hard  |
+| human  | simulated      | $0.50 / task    | —                | Returns reference solution  |
 
-## 5. Controlled conditions
+The human tier is a deterministic oracle returning the reference solution — it is an upper bound for `HumanFallback`, not a real participant.
 
-All policies use:
-- the same task description and initial buggy code;
-- the same system prompt and test-feedback format;
-- the same maximum number of attempts;
-- the same maximum output-token limit;
-- the same timeout and API-error handling rules;
-- temperature set to 0, where supported.
+---
 
-No reference solution or hidden test content is included in an LLM prompt.
+## Policies
 
-## 6. Dataset construction
+| Policy               | Type        | Logic                                                       |
+|----------------------|-------------|-------------------------------------------------------------|
+| FixedWeak            | baseline    | All tasks go to the weak model; no escalation               |
+| FixedStrong          | baseline    | All tasks go to the strong model; no escalation             |
+| RetryThenEscalate    | adaptive    | Weak tries up to N times; escalates to strong on failure    |
+| ConfidenceThreshold  | adaptive    | Escalates if weak self-reported confidence < θ              |
+| ProgressHeuristic    | adaptive    | Escalates if progress between iterations < ε over k steps  |
+| Oracle               | upper bound | Uses the minimum tier that solves each task (ground truth)  |
 
-Tasks are selected or generated according to a predefined taxonomy covering:
-- defect type;
-- task domain;
-- difficulty;
-- code scope;
-- reasoning requirement;
-- feedback type;
-- context size.
+> `HumanFallback` is available for manual runs but excluded from the main sweep because the simulated human tier gives an inflated upper bound.
 
-The dataset is stratified across these dimensions. It does not claim
-exhaustive coverage of all software-engineering problems.
+**Default parameters:** RetryThenEscalate N=3 · ConfidenceThreshold θ=0.7 · ProgressHeuristic k=2, ε=0.05
 
-Every task must satisfy:
-1. The buggy implementation fails at least one test.
-2. The reference implementation passes all tests.
-3. Required task metadata is present.
-4. The task has no duplicate identifier.
+---
 
-## 7. Primary metrics
+## Metrics
 
-- Solve rate
-- Average and median actual API cost in USD
-- Average input and output tokens
-- Average number of attempts
-- Strong-escalation rate
-- Human-fallback rate
-- Wall-clock latency
-- Failure-type distribution
+**Primary**
 
-## 8. Definition of preferred policy
+| Metric          | Definition                                     |
+|-----------------|------------------------------------------------|
+| `solve_rate`    | Fraction of tasks passing all tests            |
+| `avg_cost_usd`  | Mean cost per task (USD)                       |
 
-The preferred policy is the policy with the lowest mean actual API cost
-among policies whose solve rate is within 2 percentage points of the
-highest observed solve rate.
+**Secondary**
 
-If no policy satisfies this criterion robustly, results will be reported
-as an observed trade-off rather than a single winner.
+| Metric                    | Definition                                     |
+|---------------------------|------------------------------------------------|
+| `avg_iterations`          | Mean agent calls per task                      |
+| `strong_escalation_rate`  | Fraction escalated to strong                   |
+| `utility`                 | `−0.01 · avg_cost_usd + 1.0 · solve_rate`     |
+| `regret`                  | `solve_rate(Oracle) − solve_rate(π)`           |
 
-## 9. Repetitions and uncertainty
+Statistical tests: McNemar (solve_rate), Wilcoxon (avg_cost), α = 0.05.
 
-Each task-policy combination is executed three times. Results are reported
-with the number of episodes and 95% bootstrap confidence intervals for
-solve rate and mean cost.
+---
 
-## 10. Budget and stopping rules
+## Run Configuration
 
-- A maximum total API budget is fixed before the main experiment.
-- Each episode has a maximum number of model attempts.
-- Each episode has a maximum USD cost.
-- A failed API request is logged as an API error and is not silently retried
-  beyond the specified retry policy.
+| Parameter              | Value  | Reason                          |
+|------------------------|--------|---------------------------------|
+| `temperature`          | 0      | Reproducibility                 |
+| `max_tokens`           | 2048   | Sufficient for a typical patch  |
+| `max_cost_usd_per_task`| $0.10  | Hard per-task budget cap        |
 
-## 11. Reproducibility
+All policies share the same system prompt:
 
-Each run saves:
-- git commit hash;
-- timestamp;
-- task dataset version;
-- prompt version;
-- model identifiers;
-- pricing snapshot;
-- random seed;
-- full per-step token usage and cost;
-- per-task outcomes and aggregate metrics.
+```
+You are a software debugging assistant. You will be given a Python function with a single bug.
+Your task is to identify the bug and return the corrected version of the entire function.
+Return only the corrected code, no explanations. Do not change the function signature.
+```
+
+---
+
+## Limitations
+
+| Threat                  | Mitigation                                                        |
+|-------------------------|-------------------------------------------------------------------|
+| Dataset bias (Python only) | Scope results explicitly to Python algorithmic debugging       |
+| Model contamination     | Tasks are authored or mutated; not published before the run      |
+| API price changes       | Token counts logged; costs re-calculable at any price point      |
+| API nondeterminism      | temperature=0; results are single-run (no majority vote)         |
+| Simulated human tier    | Clearly labeled as theoretical upper bound, not real expert data |
